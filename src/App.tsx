@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Moon, Beer, Coffee, Scale, Flame, Target, Timer, TrendingUp, Wallet, Home, Percent, Clock, Heart, Activity, ArrowDownUp, Trophy, Calendar, Plane, Bitcoin } from 'lucide-react';
-import Footer from './components/Footer';
+// import { Moon, Beer, Coffee, Scale, Flame, Target, Timer, TrendingUp, Wallet, Home, Percent, Clock, Heart, Activity, ArrowDownUp, Trophy, Calendar, Plane, Bitcoin } from 'lucide-react';
+import { Scale, Flame, Target, Clock, Heart, Activity } from 'lucide-react';
+// import Footer from './components/Footer';
 import CalculatorCard from './components/CalculatorCard';
 import Layout from './components/Layout';
 import Blog from './pages/Blog';
+import logo from './assets/logo2.svg';
 
 // Calculator imports
 import SleepCalculator from './pages/SleepCalculator';
@@ -54,42 +56,42 @@ function App() {
   const categoryRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const categories: Category[] = [
-    {
-      id: 'economy',
-      title: 'Ekonomi',
-      calculators: [
-        {
-          icon: <TrendingUp className="w-12 h-12 text-indigo-600" />,
-          title: "Ränta på ränta kalkylator",
-          description: "Beräkna hur ditt sparande växer med ränta-på-ränta effekten",
-          path: "/rantakalkylator"
-        },
-        {
-          icon: <Wallet className="w-12 h-12 text-indigo-600" />,
-          title: "Lånekostnadskalkylator",
-          description: "Beräkna månadskostnad och total kostnad för ditt lån",
-          path: "/lanekalkylator"
-        },
-        {
-          icon: <Home className="w-12 h-12 text-indigo-600" />,
-          title: "Bolånekalkylator",
-          description: "Beräkna månadskostnad och amortering för ditt bolån",
-          path: "/bolanekalkylator"
-        },
-        {
-          icon: <Percent className="w-12 h-12 text-indigo-600" />,
-          title: "Momskalkylator",
-          description: "Räkna ut moms enkelt med vår momskalkylator",
-          path: "/momskalkylator"
-        },
-        {
-          icon: <Bitcoin className="w-12 h-12 text-indigo-600" />,
-          title: "Krypto Vinst/Förlust",
-          description: "Beräkna vinst eller förlust på dina kryptoinvesteringar",
-          path: "/kryptokalkylator"
-        }
-      ]
-    },
+    // {
+    //   id: 'economy',
+    //   title: 'Ekonomi',
+    //   calculators: [
+    //     {
+    //       icon: <TrendingUp className="w-12 h-12 text-indigo-600" />,
+    //       title: "Ränta på ränta kalkylator",
+    //       description: "Beräkna hur ditt sparande växer med ränta-på-ränta effekten",
+    //       path: "/rantakalkylator"
+    //     },
+    //     {
+    //       icon: <Wallet className="w-12 h-12 text-indigo-600" />,
+    //       title: "Lånekostnadskalkylator",
+    //       description: "Beräkna månadskostnad och total kostnad för ditt lån",
+    //       path: "/lanekalkylator"
+    //     },
+    //     {
+    //       icon: <Home className="w-12 h-12 text-indigo-600" />,
+    //       title: "Bolånekalkylator",
+    //       description: "Beräkna månadskostnad och amortering för ditt bolån",
+    //       path: "/bolanekalkylator"
+    //     },
+    //     {
+    //       icon: <Percent className="w-12 h-12 text-indigo-600" />,
+    //       title: "Momskalkylator",
+    //       description: "Räkna ut moms enkelt med vår momskalkylator",
+    //       path: "/momskalkylator"
+    //     },
+    //     {
+    //       icon: <Bitcoin className="w-12 h-12 text-indigo-600" />,
+    //       title: "Krypto Vinst/Förlust",
+    //       description: "Beräkna vinst eller förlust på dina kryptoinvesteringar",
+    //       path: "/kryptokalkylator"
+    //     }
+    //   ]
+    // },
     {
       id: 'health',
       title: 'Hälsa',
@@ -132,96 +134,96 @@ function App() {
         }
       ]
     },
-    {
-      id: 'lifestyle',
-      title: 'Livsstil',
-      calculators: [
-        {
-          icon: <Moon className="w-12 h-12 text-indigo-600" />,
-          title: "Sömnkalkylator",
-          description: "Beräkna optimal sänggående och uppvakningstid baserat på sömnperioder",
-          path: "/sovkalkylator"
-        },
-        {
-          icon: <Beer className="w-12 h-12 text-indigo-600" />,
-          title: "Alkoholkalkylator",
-          description: "Beräkna när alkoholen har försvunnit från blodet",
-          path: "/alkoholkalkylator"
-        },
-        {
-          icon: <Calendar className="w-12 h-12 text-indigo-600" />,
-          title: "Nedräkningskalkylator",
-          description: "Räkna ner till viktiga datum och händelser",
-          path: "/nedrakning"
-        },
-        {
-          icon: <Calendar className="w-12 h-12 text-indigo-600" />,
-          title: "Ålderskalkylator",
-          description: "Beräkna din exakta ålder i år, månader och dagar",
-          path: "/alderkalkylator"
-        },
-        {
-          icon: <Plane className="w-12 h-12 text-indigo-600" />,
-          title: "Jet Lag Planerare",
-          description: "Minimera effekterna av jet lag med en personlig anpassningsplan",
-          path: "/jetlagkalkylator"
-        }
-      ]
-    },
-    {
-      id: 'training',
-      title: 'Träning',
-      calculators: [
-        {
-          icon: <Timer className="w-12 h-12 text-indigo-600" />,
-          title: "Tempokalkylator",
-          description: "Beräkna ditt löptempo och hastighet baserat på distans och tid",
-          path: "/tempokalkylator"
-        },
-        {
-          icon: <Trophy className="w-12 h-12 text-indigo-600" />,
-          title: "Måltidsprediktor",
-          description: "Beräkna din förväntade måltid baserat på tempo och distans",
-          path: "/maltidsprediktor"
-        },
-        {
-          icon: <Heart className="w-12 h-12 text-indigo-600" />,
-          title: "Pulszoner Kalkylator",
-          description: "Beräkna dina optimala pulszoner för effektiv träning",
-          path: "/pulszoner"
-        }
-      ]
-    },
-    {
-      id: 'cooking',
-      title: 'Matlagning',
-      calculators: [
-        {
-          icon: <ArrowDownUp className="w-12 h-12 text-indigo-600" />,
-          title: "Måttomvandlare",
-          description: "Konvertera mellan olika svenska mått för vikt och volym",
-          path: "/mattomvandlare"
-        },
-        {
-          icon: <Coffee className="w-12 h-12 text-indigo-600" />,
-          title: "Amerikansk måttomvandlare",
-          description: "Konvertera mellan amerikanska mått och deciliter för exakta matlagningsrecept",
-          path: "/kopparkalkylator"
-        }
-      ]
-    },
-    {
-      id: 'productivity',
-      title: 'Produktivitet',
-      calculators: [
-        {
-          icon: <Calendar className="w-12 h-12 text-indigo-600" />,
-          title: "Deadline Kalkylator",
-          description: "Beräkna slutdatum baserat på startdatum och arbetsdagar",
-          path: "/deadlinekalkylator"
-        }
-      ]
-    }
+    // {
+    //   id: 'lifestyle',
+    //   title: 'Livsstil',
+    //   calculators: [
+    //     {
+    //       icon: <Moon className="w-12 h-12 text-indigo-600" />,
+    //       title: "Sömnkalkylator",
+    //       description: "Beräkna optimal sänggående och uppvakningstid baserat på sömnperioder",
+    //       path: "/sovkalkylator"
+    //     },
+    //     {
+    //       icon: <Beer className="w-12 h-12 text-indigo-600" />,
+    //       title: "Alkoholkalkylator",
+    //       description: "Beräkna när alkoholen har försvunnit från blodet",
+    //       path: "/alkoholkalkylator"
+    //     },
+    //     {
+    //       icon: <Calendar className="w-12 h-12 text-indigo-600" />,
+    //       title: "Nedräkningskalkylator",
+    //       description: "Räkna ner till viktiga datum och händelser",
+    //       path: "/nedrakning"
+    //     },
+    //     {
+    //       icon: <Calendar className="w-12 h-12 text-indigo-600" />,
+    //       title: "Ålderskalkylator",
+    //       description: "Beräkna din exakta ålder i år, månader och dagar",
+    //       path: "/alderkalkylator"
+    //     },
+    //     {
+    //       icon: <Plane className="w-12 h-12 text-indigo-600" />,
+    //       title: "Jet Lag Planerare",
+    //       description: "Minimera effekterna av jet lag med en personlig anpassningsplan",
+    //       path: "/jetlagkalkylator"
+    //     }
+    //   ]
+    // },
+    // {
+    //   id: 'training',
+    //   title: 'Träning',
+    //   calculators: [
+    //     {
+    //       icon: <Timer className="w-12 h-12 text-indigo-600" />,
+    //       title: "Tempokalkylator",
+    //       description: "Beräkna ditt löptempo och hastighet baserat på distans och tid",
+    //       path: "/tempokalkylator"
+    //     },
+    //     {
+    //       icon: <Trophy className="w-12 h-12 text-indigo-600" />,
+    //       title: "Måltidsprediktor",
+    //       description: "Beräkna din förväntade måltid baserat på tempo och distans",
+    //       path: "/maltidsprediktor"
+    //     },
+    //     {
+    //       icon: <Heart className="w-12 h-12 text-indigo-600" />,
+    //       title: "Pulszoner Kalkylator",
+    //       description: "Beräkna dina optimala pulszoner för effektiv träning",
+    //       path: "/pulszoner"
+    //     }
+    //   ]
+    // },
+    // {
+    //   id: 'cooking',
+    //   title: 'Matlagning',
+    //   calculators: [
+    //     {
+    //       icon: <ArrowDownUp className="w-12 h-12 text-indigo-600" />,
+    //       title: "Måttomvandlare",
+    //       description: "Konvertera mellan olika svenska mått för vikt och volym",
+    //       path: "/mattomvandlare"
+    //     },
+    //     {
+    //       icon: <Coffee className="w-12 h-12 text-indigo-600" />,
+    //       title: "Amerikansk måttomvandlare",
+    //       description: "Konvertera mellan amerikanska mått och deciliter för exakta matlagningsrecept",
+    //       path: "/kopparkalkylator"
+    //     }
+    //   ]
+    // },
+    // {
+    //   id: 'productivity',
+    //   title: 'Produktivitet',
+    //   calculators: [
+    //     {
+    //       icon: <Calendar className="w-12 h-12 text-indigo-600" />,
+    //       title: "Deadline Kalkylator",
+    //       description: "Beräkna slutdatum baserat på startdatum och arbetsdagar",
+    //       path: "/deadlinekalkylator"
+    //     }
+    //   ]
+    // }
   ];
 
   const scrollToCategory = (categoryId: string) => {
@@ -235,17 +237,21 @@ function App() {
           <div className="min-h-screen bg-gray-50">
             <header className="bg-white shadow-sm sticky top-0 z-50">
               <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">Kalkulatorn.se</h1>
-                <div className="flex overflow-x-auto pb-2 -mb-2 space-x-4">
-                  {categories.map((category) => (
-                    <button
-                      key={category.id}
-                      onClick={() => scrollToCategory(category.id)}
-                      className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 whitespace-nowrap"
-                    >
-                      {category.title}
-                    </button>
-                  ))}
+                <div className="flex flex-col md:flex-row md:items-center">
+                  <div className="flex justify-center md:justify-start">
+                    <img src={logo} alt="logo" className="w-[15rem]" />
+                  </div>
+                  <div className="flex overflow-x-auto pb-2 -mb-2 space-x-4 mt-4 md:mt-0 md:ml-4">
+                    {categories.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => scrollToCategory(category.id)}
+                        className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 whitespace-nowrap"
+                      >
+                        {category.title}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </header>

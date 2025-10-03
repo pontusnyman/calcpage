@@ -37,6 +37,7 @@ export const calculatorSEO: Record<string, SEOConfig> = {
       }
     }
   },
+  
   '/kalorikalkylator': {
     title: 'Kalorikalkylator - Beräkna ditt dagliga energibehov',
     description: 'Beräkna ditt dagliga kaloribehov baserat på din aktivitetsnivå, ålder, vikt och längd. Få personliga rekommendationer för viktminskning eller viktökning.',
@@ -206,6 +207,22 @@ export const calculatorSEO: Record<string, SEOConfig> = {
       "name": "Deadline Kalkylator",
       "applicationCategory": "BusinessApplication",
       "description": "Beräkna projektdeadlines",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "SEK"
+      }
+    }
+  },
+  '/viktminskningskalkylator': {
+    title: 'Viktminskningskalkylator - Beräkna ditt kaloriintag för viktminskning',
+    description: 'Beräkna ditt optimala kaloriintag för att nå din målvikt. Få personliga rekommendationer för hälsosam viktminskning baserat på din kroppssammansättning och aktivitetsnivå.',
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Viktminskningskalkylator",
+      "applicationCategory": "HealthApplication",
+      "description": "Beräkna kaloriintag för viktminskning",
       "offers": {
         "@type": "Offer",
         "price": "0",

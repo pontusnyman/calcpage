@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import { Moon, Beer, Coffee, Scale, Flame, Target, Timer, TrendingUp, Wallet, Home, Percent, Clock, Heart, Activity, ArrowDownUp, Trophy, Calendar, Plane, Bitcoin } from 'lucide-react';
-import { Scale, Flame, Target, Clock, Heart, Activity } from 'lucide-react';
-// import Footer from './components/Footer';
+import { Moon, Beer, Coffee, Scale, Flame, Target, Timer, TrendingUp, Wallet, Home, Percent, Clock, Heart, Activity, ArrowDownUp, Trophy, Calendar, Plane, Bitcoin, PiggyBank, Car, DollarSign, Zap, Users } from 'lucide-react';
 import CalculatorCard from './components/CalculatorCard';
 import Layout from './components/Layout';
+import TopNav from './components/TopNav';
 import Blog from './pages/Blog';
-import logo from './assets/logo2.svg';
+import { FeatureFlagProvider, useFeatureFlag, useFeatureFlags } from './contexts/FeatureFlagContext';
+import { PremiumProvider, usePremium } from './contexts/PremiumContext';
+import CrownIcon from './components/CrownIcon';
+import PremiumAccessControl from './components/PremiumAccessControl';
+import PremiumToggle from './components/PremiumToggle';
 
 // Calculator imports
 import SleepCalculator from './pages/SleepCalculator';
@@ -46,306 +49,251 @@ interface Category {
 }
 
 interface Calculator {
+  id: string;
   icon: React.ReactNode;
   title: string;
   description: string;
   path: string;
 }
 
-function App() {
-  const categoryRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+// Mapping from calculator ID to the existing calculator structure
+const getCalculatorIcon = (calculatorId: string): React.ReactNode => {
+  const iconMap: { [key: string]: React.ReactNode } = {
+    'compound-interest': <TrendingUp className="w-12 h-12 text-indigo-600" />,
+    'loan': <Wallet className="w-12 h-12 text-indigo-600" />,
+    'mortgage': <Home className="w-12 h-12 text-indigo-600" />,
+    'vat': <Percent className="w-12 h-12 text-indigo-600" />,
+    'crypto-profit': <Bitcoin className="w-12 h-12 text-indigo-600" />,
+    'savings-goal': <PiggyBank className="w-12 h-12 text-indigo-600" />,
+    'car-lease': <Car className="w-12 h-12 text-indigo-600" />,
+    'hourly-rate': <DollarSign className="w-12 h-12 text-indigo-600" />,
+    'discount': <Percent className="w-12 h-12 text-indigo-600" />,
+    'energy-savings': <Zap className="w-12 h-12 text-indigo-600" />,
+    'meeting-cost': <Users className="w-12 h-12 text-indigo-600" />,
+    'bmi': <Scale className="w-12 h-12 text-indigo-600" />,
+    'bmr': <Activity className="w-12 h-12 text-indigo-600" />,
+    'calorie': <Flame className="w-12 h-12 text-indigo-600" />,
+    'weight-reduce': <Target className="w-12 h-12 text-indigo-600" />,
+    'fasting': <Clock className="w-12 h-12 text-indigo-600" />,
+    'ovulation': <Heart className="w-12 h-12 text-indigo-600" />,
+    'sleep': <Moon className="w-12 h-12 text-indigo-600" />,
+    'alcohol': <Beer className="w-12 h-12 text-indigo-600" />,
+    'countdown': <Calendar className="w-12 h-12 text-indigo-600" />,
+    'age': <Calendar className="w-12 h-12 text-indigo-600" />,
+    'jet-lag': <Plane className="w-12 h-12 text-indigo-600" />,
+    'caffeine': <Coffee className="w-12 h-12 text-indigo-600" />,
+    'running-pace': <Timer className="w-12 h-12 text-indigo-600" />,
+    'race-finish': <Trophy className="w-12 h-12 text-indigo-600" />,
+    'heart-rate-zones': <Heart className="w-12 h-12 text-indigo-600" />,
+    'measurement-converter': <ArrowDownUp className="w-12 h-12 text-indigo-600" />,
+    'cup-converter': <Coffee className="w-12 h-12 text-indigo-600" />,
+    'deadline': <Calendar className="w-12 h-12 text-indigo-600" />,
+  };
+  return iconMap[calculatorId] || <Activity className="w-12 h-12 text-indigo-600" />;
+};
 
-  const categories: Category[] = [
-    // {
-    //   id: 'economy',
-    //   title: 'Ekonomi',
-    //   calculators: [
-    //     {
-    //       icon: <TrendingUp className="w-12 h-12 text-indigo-600" />,
-    //       title: "Ränta på ränta kalkylator",
-    //       description: "Beräkna hur ditt sparande växer med ränta-på-ränta effekten",
-    //       path: "/rantakalkylator"
-    //     },
-    //     {
-    //       icon: <Wallet className="w-12 h-12 text-indigo-600" />,
-    //       title: "Lånekostnadskalkylator",
-    //       description: "Beräkna månadskostnad och total kostnad för ditt lån",
-    //       path: "/lanekalkylator"
-    //     },
-    //     {
-    //       icon: <Home className="w-12 h-12 text-indigo-600" />,
-    //       title: "Bolånekalkylator",
-    //       description: "Beräkna månadskostnad och amortering för ditt bolån",
-    //       path: "/bolanekalkylator"
-    //     },
-    //     {
-    //       icon: <Percent className="w-12 h-12 text-indigo-600" />,
-    //       title: "Momskalkylator",
-    //       description: "Räkna ut moms enkelt med vår momskalkylator",
-    //       path: "/momskalkylator"
-    //     },
-    //     {
-    //       icon: <Bitcoin className="w-12 h-12 text-indigo-600" />,
-    //       title: "Krypto Vinst/Förlust",
-    //       description: "Beräkna vinst eller förlust på dina kryptoinvesteringar",
-    //       path: "/kryptokalkylator"
-    //     }
-    //   ]
-    // },
-    {
-      id: 'health',
-      title: 'Hälsa',
-      calculators: [
-        {
-          icon: <Scale className="w-12 h-12 text-indigo-600" />,
-          title: "Beräkna ditt BMI värde",
-          description: "Fyll i din längd, vikt för att ta reda på ditt BMI värde.",
-          path: "/bmikalkylator"
-        },
-        {
-          icon: <Activity className="w-12 h-12 text-indigo-600" />,
-          title: "BMR Kalkylator",
-          description: "Beräkna din basala ämnesomsättning och dagliga kaloriförbrukning",
-          path: "/bmrkalkylator"
-        },
-        {
-          icon: <Flame className="w-12 h-12 text-indigo-600" />,
-          title: "Kaloribehovskalkylator",
-          description: "Beräkna ditt dagliga energibehov baserat på din aktivitetsnivå",
-          path: "/kalorikalkylator"
-        },
-        {
-          icon: <Target className="w-12 h-12 text-indigo-600" />,
-          title: "Viktminskningskalkylator",
-          description: "Beräkna ditt dagliga kaloriintag för att nå din målvikt",
-          path: "/viktminskningskalkylator"
-        },
-        {
-          icon: <Clock className="w-12 h-12 text-indigo-600" />,
-          title: "Fastekalkylator",
-          description: "Håll koll på din fasta och lär dig om kroppens olika faser",
-          path: "/fastekalkylator"
-        },
-        {
-          icon: <Heart className="w-12 h-12 text-indigo-600" />,
-          title: "Ägglossningskalkylator",
-          description: "Beräkna din ägglossning och mest fertila period",
-          path: "/agglossningskalkylator"
-        }
-      ]
-    },
-    // {
-    //   id: 'lifestyle',
-    //   title: 'Livsstil',
-    //   calculators: [
-    //     {
-    //       icon: <Moon className="w-12 h-12 text-indigo-600" />,
-    //       title: "Sömnkalkylator",
-    //       description: "Beräkna optimal sänggående och uppvakningstid baserat på sömnperioder",
-    //       path: "/sovkalkylator"
-    //     },
-    //     {
-    //       icon: <Beer className="w-12 h-12 text-indigo-600" />,
-    //       title: "Alkoholkalkylator",
-    //       description: "Beräkna när alkoholen har försvunnit från blodet",
-    //       path: "/alkoholkalkylator"
-    //     },
-    //     {
-    //       icon: <Calendar className="w-12 h-12 text-indigo-600" />,
-    //       title: "Nedräkningskalkylator",
-    //       description: "Räkna ner till viktiga datum och händelser",
-    //       path: "/nedrakning"
-    //     },
-    //     {
-    //       icon: <Calendar className="w-12 h-12 text-indigo-600" />,
-    //       title: "Ålderskalkylator",
-    //       description: "Beräkna din exakta ålder i år, månader och dagar",
-    //       path: "/alderkalkylator"
-    //     },
-    //     {
-    //       icon: <Plane className="w-12 h-12 text-indigo-600" />,
-    //       title: "Jet Lag Planerare",
-    //       description: "Minimera effekterna av jet lag med en personlig anpassningsplan",
-    //       path: "/jetlagkalkylator"
-    //     }
-    //   ]
-    // },
-    // {
-    //   id: 'training',
-    //   title: 'Träning',
-    //   calculators: [
-    //     {
-    //       icon: <Timer className="w-12 h-12 text-indigo-600" />,
-    //       title: "Tempokalkylator",
-    //       description: "Beräkna ditt löptempo och hastighet baserat på distans och tid",
-    //       path: "/tempokalkylator"
-    //     },
-    //     {
-    //       icon: <Trophy className="w-12 h-12 text-indigo-600" />,
-    //       title: "Måltidsprediktor",
-    //       description: "Beräkna din förväntade måltid baserat på tempo och distans",
-    //       path: "/maltidsprediktor"
-    //     },
-    //     {
-    //       icon: <Heart className="w-12 h-12 text-indigo-600" />,
-    //       title: "Pulszoner Kalkylator",
-    //       description: "Beräkna dina optimala pulszoner för effektiv träning",
-    //       path: "/pulszoner"
-    //     }
-    //   ]
-    // },
-    // {
-    //   id: 'cooking',
-    //   title: 'Matlagning',
-    //   calculators: [
-    //     {
-    //       icon: <ArrowDownUp className="w-12 h-12 text-indigo-600" />,
-    //       title: "Måttomvandlare",
-    //       description: "Konvertera mellan olika svenska mått för vikt och volym",
-    //       path: "/mattomvandlare"
-    //     },
-    //     {
-    //       icon: <Coffee className="w-12 h-12 text-indigo-600" />,
-    //       title: "Amerikansk måttomvandlare",
-    //       description: "Konvertera mellan amerikanska mått och deciliter för exakta matlagningsrecept",
-    //       path: "/kopparkalkylator"
-    //     }
-    //   ]
-    // },
-    // {
-    //   id: 'productivity',
-    //   title: 'Produktivitet',
-    //   calculators: [
-    //     {
-    //       icon: <Calendar className="w-12 h-12 text-indigo-600" />,
-    //       title: "Deadline Kalkylator",
-    //       description: "Beräkna slutdatum baserat på startdatum och arbetsdagar",
-    //       path: "/deadlinekalkylator"
-    //     }
-    //   ]
-    // }
-  ];
+// Main page component that uses feature flags
+const MainPage: React.FC = () => {
+  const categoryRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const showCalculators = useFeatureFlag('showCalculators');
+  const { getVisibleCalculatorsByCategory } = useFeatureFlags();
+  const { isCalculatorPremium } = usePremium();
+
+  // Create categories dynamically based on visible calculators
+  const categoryTitles = ['Ekonomi', 'Hälsa', 'Livsstil', 'Träning', 'Matlagning', 'Produktivitet'];
+  const categories: Category[] = categoryTitles
+    .map(categoryTitle => {
+      const visibleCalculators = getVisibleCalculatorsByCategory(categoryTitle);
+      if (visibleCalculators.length === 0) return null;
+      
+      return {
+        id: categoryTitle.toLowerCase(),
+        title: categoryTitle,
+        calculators: visibleCalculators.map(calc => ({
+          id: calc.id,
+          icon: getCalculatorIcon(calc.id),
+          title: calc.title,
+          description: calc.description,
+          path: calc.path
+        }))
+      };
+    })
+    .filter((category): category is Category => category !== null);
 
   const scrollToCategory = (categoryId: string) => {
     categoryRefs.current[categoryId]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
-    <Routes>
-      <Route path="/" element={
-        <Layout>
-          <div className="min-h-screen bg-gray-50">
-            <header className="bg-white shadow-sm sticky top-0 z-50">
-              <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col md:flex-row md:items-center">
-                  <div className="flex justify-center md:justify-start">
-                    <img src={logo} alt="logo" className="w-[15rem]" />
-                  </div>
-                  <div className="flex overflow-x-auto pb-2 -mb-2 space-x-4 mt-4 md:mt-0 md:ml-4">
-                    {categories.map((category) => (
-                      <button
-                        key={category.id}
-                        onClick={() => scrollToCategory(category.id)}
-                        className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 whitespace-nowrap"
-                      >
-                        {category.title}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </header>
+    <Layout>
+      <div className="min-h-screen bg-gray-50">
+        <TopNav
+          currentPage="home"
+          categories={categories}
+          onCategoryClick={scrollToCategory}
+          showCalculators={showCalculators}
+        />
 
-            <div className="max-w-7xl mx-auto my-4 px-4 sm:px-6 lg:px-8">
-              <div className="bg-gray-200 h-32 rounded-lg flex items-center justify-center sticky top-24 z-40">
-                <p className="text-gray-500">Annonsplats</p>
+        <div className="max-w-7xl mx-auto my-4 px-4 sm:px-6 lg:px-8">
+          <div className="bg-gray-200 h-32 rounded-lg flex items-center justify-center sticky top-24 z-40">
+            <p className="text-gray-500">Annonsplats</p>
+          </div>
+        </div>
+
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+            <div className="hidden lg:block lg:col-span-2">
+              <div className="sticky top-[11rem]">
+                <div className="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
+                  <p className="text-gray-500">Annonsplats</p>
+                </div>
               </div>
             </div>
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-                <div className="hidden lg:block lg:col-span-2">
-                  <div className="sticky top-[11rem]">
-                    <div className="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
-                      <p className="text-gray-500">Annonsplats</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="lg:col-span-8">
-                  <div className="space-y-12 my-8">
-                    {categories.map((category) => (
-                      <div
-                        key={category.id}
-                        ref={el => categoryRefs.current[category.id] = el}
-                        className="space-y-6"
-                      >
-                        <h2 className="text-2xl font-bold text-gray-900">{category.title}</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {category.calculators.map((calc, index) => (
-                            <CalculatorCard
-                              key={index}
-                              icon={calc.icon}
-                              title={calc.title}
-                              description={calc.description}
-                              path={calc.path}
-                            />
-                          ))}
-                        </div>
+            <div className="lg:col-span-8">
+              {showCalculators ? (
+                <div className="space-y-12 my-8">
+                  {categories.map((category) => (
+                    <div
+                      key={category.id}
+                      ref={el => categoryRefs.current[category.id] = el}
+                      className="space-y-6"
+                    >
+                      <h2 className="text-2xl font-bold text-gray-900">{category.title}</h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {category.calculators.map((calc, index) => {
+                          const isPremium = isCalculatorPremium(calc.id);
+                          return (
+                            <div key={index} className="relative">
+                              <CalculatorCard
+                                icon={calc.icon}
+                                title={calc.title}
+                                description={calc.description}
+                                path={calc.path}
+                              />
+                              {isPremium && (
+                                <div className="absolute top-3 right-3">
+                                  <CrownIcon size="md" />
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="hidden lg:block lg:col-span-2">
-                  <div className="sticky top-[11rem]">
-                    <div className="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
-                      <p className="text-gray-500">Annonsplats</p>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              </div>
-            </main>
+              ) : (
+                <div className="my-8 text-center py-12">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    Kalkylatorer är för närvarande inte tillgängliga
+                  </h2>
+                  <p className="text-gray-600">
+                    Vi arbetar på att förbättra våra kalkylatorer. Kom tillbaka snart!
+                  </p>
+                </div>
+              )}
+            </div>
 
-            <div className="lg:hidden max-w-7xl mx-auto my-4 px-4 sm:px-6">
-              <div className="bg-gray-200 h-32 rounded-lg flex items-center justify-center sticky bottom-4">
-                <p className="text-gray-500">Annonsplats</p>
+            <div className="hidden lg:block lg:col-span-2">
+              <div className="sticky top-[11rem]">
+                <div className="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
+                  <p className="text-gray-500">Annonsplats</p>
+                </div>
               </div>
             </div>
           </div>
-        </Layout>
-      } />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/sovkalkylator" element={<SleepCalculator />} />
-      <Route path="/alkoholkalkylator" element={<AlcoholCalculator />} />
-      <Route path="/kopparkalkylator" element={<CupCalculator />} />
-      <Route path="/bmikalkylator" element={<BMICalculator />} />
-      <Route path="/kalorikalkylator" element={<CalorieCalculator />} />
-      <Route path="/viktminskningskalkylator" element={<WeightReduceCalculator />} />
-      <Route path="/tempokalkylator" element={<RunningPaceCalculator />} />
-      <Route path="/rantakalkylator" element={<CompoundInterestCalculator />} />
-      <Route path="/lanekalkylator" element={<LoanCalculator />} />
-      <Route path="/bolanekalkylator" element={<MortgageCalculator />} />
-      <Route path="/momskalkylator" element={<VATCalculator />} />
-      <Route path="/fastekalkylator" element={<FastingCalculator />} />
-      <Route path="/agglossningskalkylator" element={<OvulationCalculator />} />
-      <Route path="/bmrkalkylator" element={<BMRCalculator />} />
-      <Route path="/mattomvandlare" element={<MeasurementConverter />} />
-      <Route path="/maltidsprediktor" element={<RaceFinishPredictor />} />
-      <Route path="/pulszoner" element={<HeartRateZonesCalculator />} />
-      <Route path="/deadlinekalkylator" element={<DeadlineCalculator />} />
-      <Route path="/jetlagkalkylator" element={<JetLagCalculator />} />
-      <Route path="/nedrakning" element={<CountdownCalculator />} />
-      <Route path="/alderkalkylator" element={<AgeCalculator />} />
-      <Route path="/billeasingkalkylator" element={<CarLeaseCalculator />} />
-      <Route path="/rabattkalkylator" element={<DiscountCalculator />} />
-      <Route path="/energikalkylator" element={<EnergySavingsCalculator />} />
-      <Route path="/timtaxekalkylator" element={<HourlyRateCalculator />} />
-      <Route path="/moteskostnadskalkylator" element={<MeetingCostCalculator />} />
-      <Route path="/sparmalskalkylator" element={<SavingsGoalCalculator />} />
-      <Route path="/koffeinkalkylator" element={<CaffeineCalculator />} />
-      <Route path="/kryptokalkylator" element={<CryptoProfitCalculator />} />
-    </Routes>
+        </main>
+
+        <div className="lg:hidden max-w-7xl mx-auto my-4 px-4 sm:px-6">
+          <div className="bg-gray-200 h-32 rounded-lg flex items-center justify-center sticky bottom-4">
+            <p className="text-gray-500">Annonsplats</p>
+          </div>
+        </div>
+      </div>
+      {/* <Footer /> */}
+    </Layout>
+  );
+};
+
+function App() {
+  const initialFeatureFlags = {
+    showCalculators: true,
+    showCalculatorNavigation: true,
+    showFooterCalculators: true,
+    calculatorVisibility: {
+      'compound-interest': true,
+      'blog': true,
+      'loan': false,
+      'mortgage': false,
+      'vat': false,
+      'crypto-profit': false,
+      'savings-goal': false,
+      'car-lease': false,
+      'hourly-rate': false,
+      'discount': false,
+      'energy-savings': false,
+      'meeting-cost': false,
+      'bmi': false,
+      'bmr': false,
+      'calorie': false,
+      'weight-reduce': false,
+      'fasting': false,
+      'ovulation': false,
+      'sleep': false,
+      'alcohol': false,
+      'countdown': false,
+      'age': false,
+      'jet-lag': false,
+      'caffeine': false,
+      'running-pace': false,
+      'race-finish': false,
+      'heart-rate-zones': false,
+      'measurement-converter': false,
+      'cup-converter': false,
+      'deadline': false,
+    }
+  };
+
+  return (
+    <FeatureFlagProvider initialFlags={initialFeatureFlags}>
+      <PremiumProvider>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/sovkalkylator" element={<SleepCalculator />} />
+          <Route path="/alkoholkalkylator" element={<AlcoholCalculator />} />
+          <Route path="/kopparkalkylator" element={<CupCalculator />} />
+          <Route path="/bmikalkylator" element={<BMICalculator />} />
+          <Route path="/kalorikalkylator" element={<CalorieCalculator />} />
+          <Route path="/viktminskningskalkylator" element={<PremiumAccessControl calculatorId="weight-reduce"><WeightReduceCalculator /></PremiumAccessControl>} />
+          <Route path="/tempokalkylator" element={<RunningPaceCalculator />} />
+          <Route path="/rantakalkylator" element={<PremiumAccessControl calculatorId="compound-interest"><CompoundInterestCalculator /></PremiumAccessControl>} />
+          <Route path="/lanekalkylator" element={<LoanCalculator />} />
+          <Route path="/bolanekalkylator" element={<MortgageCalculator />} />
+          <Route path="/momskalkylator" element={<VATCalculator />} />
+          <Route path="/fastekalkylator" element={<PremiumAccessControl calculatorId="fasting"><FastingCalculator /></PremiumAccessControl>} />
+          <Route path="/agglossningskalkylator" element={<PremiumAccessControl calculatorId="ovulation"><OvulationCalculator /></PremiumAccessControl>} />
+          <Route path="/bmrkalkylator" element={<PremiumAccessControl calculatorId="bmr"><BMRCalculator /></PremiumAccessControl>} />
+          <Route path="/mattomvandlare" element={<MeasurementConverter />} />
+          <Route path="/maltidsprediktor" element={<PremiumAccessControl calculatorId="race-finish"><RaceFinishPredictor /></PremiumAccessControl>} />
+          <Route path="/pulszoner" element={<PremiumAccessControl calculatorId="heart-rate-zones"><HeartRateZonesCalculator /></PremiumAccessControl>} />
+          <Route path="/deadlinekalkylator" element={<PremiumAccessControl calculatorId="deadline"><DeadlineCalculator /></PremiumAccessControl>} />
+          <Route path="/jetlagkalkylator" element={<PremiumAccessControl calculatorId="jet-lag"><JetLagCalculator /></PremiumAccessControl>} />
+          <Route path="/nedrakning" element={<CountdownCalculator />} />
+          <Route path="/alderkalkylator" element={<AgeCalculator />} />
+          <Route path="/billeasingkalkylator" element={<PremiumAccessControl calculatorId="car-lease"><CarLeaseCalculator /></PremiumAccessControl>} />
+          <Route path="/rabattkalkylator" element={<DiscountCalculator />} />
+          <Route path="/energikalkylator" element={<PremiumAccessControl calculatorId="energy-savings"><EnergySavingsCalculator /></PremiumAccessControl>} />
+          <Route path="/timtaxekalkylator" element={<PremiumAccessControl calculatorId="hourly-rate"><HourlyRateCalculator /></PremiumAccessControl>} />
+          <Route path="/moteskostnadskalkylator" element={<PremiumAccessControl calculatorId="meeting-cost"><MeetingCostCalculator /></PremiumAccessControl>} />
+          <Route path="/sparmalskalkylator" element={<PremiumAccessControl calculatorId="savings-goal"><SavingsGoalCalculator /></PremiumAccessControl>} />
+          <Route path="/koffeinkalkylator" element={<PremiumAccessControl calculatorId="caffeine"><CaffeineCalculator /></PremiumAccessControl>} />
+          <Route path="/kryptokalkylator" element={<PremiumAccessControl calculatorId="crypto-profit"><CryptoProfitCalculator /></PremiumAccessControl>} />
+        </Routes>
+        <PremiumToggle />
+      </PremiumProvider>
+    </FeatureFlagProvider>
   );
 }
 

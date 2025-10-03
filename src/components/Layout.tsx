@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Footer from './Footer';
 import CalculatorNavigation from './CalculatorNavigation';
 import SEO from './SEO';
+import FeatureFlagControls from './FeatureFlagControls';
 import { useScrollToTop } from '../hooks/useScrollToTop';
 
 interface LayoutProps {
@@ -40,12 +41,21 @@ const Layout: React.FC<LayoutProps> = ({ children, seo }) => {
     }
   };
 
+  // Merge seo props with defaults, ensuring required fields are present
+  const seoProps = {
+    ...defaultSEO,
+    ...seo,
+    title: seo?.title || defaultSEO.title,
+    description: seo?.description || defaultSEO.description
+  };
+
   return (
     <>
-      <SEO {...(seo || defaultSEO)} />
+      <SEO {...seoProps} />
       {children}
       {!isHomePage && !isBlogPage && <CalculatorNavigation />}
       <Footer />
+      <FeatureFlagControls />
     </>
   );
 };

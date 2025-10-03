@@ -47,7 +47,9 @@ const BMICalculator = () => {
         category: 'Normalvikt',
         color: '#22C55E', // Green
         description: 'Du har ett BMI inom normalviktsspannet.',
-        healthRisks: [],
+        healthRisks: [
+          'Du har inga hälsorisker',
+        ],
         recommendations: [
           'Fortsätt med hälsosamma vanor',
           'Regelbunden motion',

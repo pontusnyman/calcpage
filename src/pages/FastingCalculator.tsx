@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Clock, Timer, Info, Battery } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowLeft, Clock, Timer } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface FastingStage {

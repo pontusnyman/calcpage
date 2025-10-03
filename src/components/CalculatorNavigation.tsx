@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { 
   Moon, Beer, Coffee, Scale, Flame, Target, Timer, TrendingUp, 
   Wallet, Home, Percent, Clock, Heart, Activity, ArrowDownUp, 
-  Trophy, Calendar, Users, DollarSign, Zap, Car, PiggyBank, Bitcoin 
+  Trophy, Calendar, Users, DollarSign, Zap, Car, PiggyBank, Bitcoin, BookOpen 
 } from 'lucide-react';
+import { useFeatureFlag, useFeatureFlags } from '../contexts/FeatureFlagContext';
+import { usePremium } from '../contexts/PremiumContext';
+import CrownIcon from './CrownIcon';
 
 interface Calculator {
   icon: React.ReactNode;
@@ -13,6 +16,11 @@ interface Calculator {
 }
 
 const calculators: Calculator[] = [
+  {
+    icon: <BookOpen />,
+    title: "Blogg",
+    path: "/blog"
+  },
   {
     icon: <Calendar />,
     title: "Nedräkningskalkylator",
@@ -156,6 +164,16 @@ const calculators: Calculator[] = [
 ];
 
 const CalculatorNavigation: React.FC = () => {
+  const showCalculatorNavigation = useFeatureFlag('showCalculatorNavigation');
+  const { getVisibleCalculators } = useFeatureFlags();
+  const { isCalculatorPremium } = usePremium();
+
+  if (!showCalculatorNavigation) {
+    return null;
+  }
+
+  const visibleCalculators = getVisibleCalculators();
+
   return (
     <div className="bg-gray-50 border-t border-gray-200 py-12 mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -163,20 +181,28 @@ const CalculatorNavigation: React.FC = () => {
           Utforska fler kalkylatorer
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {calculators.map((calc) => (
-            <Link
-              key={calc.path}
-              to={calc.path}
-              className="flex items-center p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              <div className="text-indigo-600 mr-3">
-                {calc.icon}
-              </div>
-              <span className="text-sm font-medium text-gray-900">
-                {calc.title}
-              </span>
-            </Link>
-          ))}
+          {visibleCalculators.map((calc) => {
+            const isPremium = isCalculatorPremium(calc.id);
+            return (
+              <Link
+                key={calc.path}
+                to={calc.path}
+                className="flex items-center p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors relative"
+              >
+                <div className="text-indigo-600 mr-3">
+                  {calculators.find(c => c.path === calc.path)?.icon || <Activity className="w-5 h-5" />}
+                </div>
+                <span className="text-sm font-medium text-gray-900">
+                  {calc.title}
+                </span>
+                {isPremium && (
+                  <div className="absolute top-2 right-2">
+                    <CrownIcon size="sm" />
+                  </div>
+                )}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

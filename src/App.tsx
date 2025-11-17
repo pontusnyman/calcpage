@@ -202,7 +202,7 @@ const MainPage: React.FC = () => {
 function App() {
   const initialFeatureFlags = {
     showCalculators: true,
-    showCalculatorNavigation: true,
+    showCalculatorNavigation: false,
     showFooterCalculators: true,
     calculatorVisibility: {
       'compound-interest': true,
@@ -275,7 +275,7 @@ function App() {
           <Route path="/koffeinkalkylator" element={<PremiumAccessControl calculatorId="caffeine"><CaffeineCalculator /></PremiumAccessControl>} />
           <Route path="/kryptokalkylator" element={<PremiumAccessControl calculatorId="crypto-profit"><CryptoProfitCalculator /></PremiumAccessControl>} />
         </Routes>
-        <PremiumToggle />
+        {!import.meta.env.PROD && <PremiumToggle />}
       </PremiumProvider>
     </FeatureFlagProvider>
   );

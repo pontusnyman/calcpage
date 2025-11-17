@@ -1,24 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-
-// Premium calculator IDs - these calculators require premium access
-export const PREMIUM_CALCULATORS = [
-  'compound-interest',
-  'crypto-profit',
-  'savings-goal',
-  'car-lease',
-  'hourly-rate',
-  'energy-savings',
-  'meeting-cost',
-  'bmr',
-  'weight-reduce',
-  'fasting',
-  'ovulation',
-  'jet-lag',
-  'caffeine',
-  'race-finish',
-  'heart-rate-zones',
-  'deadline'
-];
+import { ALL_CALCULATORS } from './FeatureFlagContext';
 
 interface PremiumContextType {
   isPremium: boolean;
@@ -58,7 +39,8 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   };
 
   const isCalculatorPremium = (calculatorId: string): boolean => {
-    return PREMIUM_CALCULATORS.includes(calculatorId);
+    const calculator = ALL_CALCULATORS.find(calc => calc.id === calculatorId);
+    return calculator?.premium ?? false;
   };
 
   const canAccessCalculator = (calculatorId: string): boolean => {

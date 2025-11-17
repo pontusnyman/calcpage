@@ -55,7 +55,7 @@ const Layout: React.FC<LayoutProps> = ({ children, seo }) => {
       {children}
       {!isHomePage && !isBlogPage && <CalculatorNavigation />}
       <Footer />
-      <FeatureFlagControls />
+      {!import.meta.env.PROD && <FeatureFlagControls />}
     </>
   );
 };

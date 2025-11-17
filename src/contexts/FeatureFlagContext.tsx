@@ -7,49 +7,50 @@ export interface CalculatorInfo {
   path: string;
   category: string;
   description: string;
+  premium?: boolean;
 }
 
 export const ALL_CALCULATORS: CalculatorInfo[] = [
   // Economy
-  { id: 'compound-interest', title: 'Ränta på ränta kalkylator', path: '/rantakalkylator', category: 'Ekonomi', description: 'Beräkna hur ditt sparande växer med ränta-på-ränta effekten' },
-  { id: 'loan', title: 'Lånekostnadskalkylator', path: '/lanekalkylator', category: 'Ekonomi', description: 'Beräkna månadskostnad och total kostnad för ditt lån' },
-  { id: 'mortgage', title: 'Bolånekalkylator', path: '/bolanekalkylator', category: 'Ekonomi', description: 'Beräkna månadskostnad och amortering för ditt bolån' },
-  { id: 'vat', title: 'Momskalkylator', path: '/momskalkylator', category: 'Ekonomi', description: 'Räkna ut moms enkelt med vår momskalkylator' },
-  { id: 'crypto-profit', title: 'Krypto Vinst/Förlust', path: '/kryptokalkylator', category: 'Ekonomi', description: 'Beräkna vinst eller förlust på dina kryptoinvesteringar' },
-  { id: 'savings-goal', title: 'Sparmålskalkylator', path: '/sparmalskalkylator', category: 'Ekonomi', description: 'Beräkna hur mycket du behöver spara för att nå ditt mål' },
-  { id: 'car-lease', title: 'Leasing vs Köp', path: '/billeasingkalkylator', category: 'Ekonomi', description: 'Jämför kostnaden för att leasa eller köpa en bil' },
-  { id: 'hourly-rate', title: 'Timtaxekalkylator', path: '/timtaxekalkylator', category: 'Ekonomi', description: 'Beräkna din timtaxa baserat på årslön' },
-  { id: 'discount', title: 'Rabattkalkylator', path: '/rabattkalkylator', category: 'Ekonomi', description: 'Beräkna rabatt och slutpris' },
-  { id: 'energy-savings', title: 'Energikalkylator', path: '/energikalkylator', category: 'Ekonomi', description: 'Beräkna energibesparingar och kostnader' },
-  { id: 'meeting-cost', title: 'Möteskostnadskalkylator', path: '/moteskostnadskalkylator', category: 'Ekonomi', description: 'Beräkna kostnaden för möten' },
+  { id: 'compound-interest', title: 'Ränta på ränta kalkylator', path: '/rantakalkylator', category: 'Ekonomi', description: 'Beräkna hur ditt sparande växer med ränta-på-ränta effekten', premium: false },
+  { id: 'loan', title: 'Lånekostnadskalkylator', path: '/lanekalkylator', category: 'Ekonomi', description: 'Beräkna månadskostnad och total kostnad för ditt lån', premium: false },
+  { id: 'mortgage', title: 'Bolånekalkylator', path: '/bolanekalkylator', category: 'Ekonomi', description: 'Beräkna månadskostnad och amortering för ditt bolån', premium: false },
+  { id: 'vat', title: 'Momskalkylator', path: '/momskalkylator', category: 'Ekonomi', description: 'Räkna ut moms enkelt med vår momskalkylator', premium: false },
+  { id: 'crypto-profit', title: 'Krypto Vinst/Förlust', path: '/kryptokalkylator', category: 'Ekonomi', description: 'Beräkna vinst eller förlust på dina kryptoinvesteringar', premium: true },
+  { id: 'savings-goal', title: 'Sparmålskalkylator', path: '/sparmalskalkylator', category: 'Ekonomi', description: 'Beräkna hur mycket du behöver spara för att nå ditt mål', premium: true },
+  { id: 'car-lease', title: 'Leasing vs Köp', path: '/billeasingkalkylator', category: 'Ekonomi', description: 'Jämför kostnaden för att leasa eller köpa en bil', premium: true },
+  { id: 'hourly-rate', title: 'Timtaxekalkylator', path: '/timtaxekalkylator', category: 'Ekonomi', description: 'Beräkna din timtaxa baserat på årslön', premium: true },
+  { id: 'discount', title: 'Rabattkalkylator', path: '/rabattkalkylator', category: 'Ekonomi', description: 'Beräkna rabatt och slutpris', premium: false },
+  { id: 'energy-savings', title: 'Energikalkylator', path: '/energikalkylator', category: 'Ekonomi', description: 'Beräkna energibesparingar och kostnader', premium: true },
+  { id: 'meeting-cost', title: 'Möteskostnadskalkylator', path: '/moteskostnadskalkylator', category: 'Ekonomi', description: 'Beräkna kostnaden för möten', premium: true },
 
   // Health
-  { id: 'bmi', title: 'Beräkna ditt BMI värde', path: '/bmikalkylator', category: 'Hälsa', description: 'Fyll i din längd, vikt för att ta reda på ditt BMI värde' },
-  { id: 'bmr', title: 'BMR Kalkylator', path: '/bmrkalkylator', category: 'Hälsa', description: 'Beräkna din basala ämnesomsättning och dagliga kaloriförbrukning' },
-  { id: 'calorie', title: 'Kaloribehovskalkylator', path: '/kalorikalkylator', category: 'Hälsa', description: 'Beräkna ditt dagliga energibehov baserat på din aktivitetsnivå' },
-  { id: 'weight-reduce', title: 'Viktminskningskalkylator', path: '/viktminskningskalkylator', category: 'Hälsa', description: 'Beräkna ditt dagliga kaloriintag för att nå din målvikt' },
-  { id: 'fasting', title: 'Fastekalkylator', path: '/fastekalkylator', category: 'Hälsa', description: 'Håll koll på din fasta och lär dig om kroppens olika faser' },
-  { id: 'ovulation', title: 'Ägglossningskalkylator', path: '/agglossningskalkylator', category: 'Hälsa', description: 'Beräkna din ägglossning och mest fertila period' },
+  { id: 'bmi', title: 'Beräkna ditt BMI värde', path: '/bmikalkylator', category: 'Hälsa', description: 'Fyll i din längd, vikt för att ta reda på ditt BMI värde', premium: false },
+  { id: 'bmr', title: 'BMR Kalkylator', path: '/bmrkalkylator', category: 'Hälsa', description: 'Beräkna din basala ämnesomsättning och dagliga kaloriförbrukning', premium: true },
+  { id: 'calorie', title: 'Kaloribehovskalkylator', path: '/kalorikalkylator', category: 'Hälsa', description: 'Beräkna ditt dagliga energibehov baserat på din aktivitetsnivå', premium: false },
+  { id: 'weight-reduce', title: 'Viktminskningskalkylator', path: '/viktminskningskalkylator', category: 'Hälsa', description: 'Beräkna ditt dagliga kaloriintag för att nå din målvikt', premium: true },
+  { id: 'fasting', title: 'Fastekalkylator', path: '/fastekalkylator', category: 'Hälsa', description: 'Håll koll på din fasta och lär dig om kroppens olika faser', premium: true },
+  { id: 'ovulation', title: 'Ägglossningskalkylator', path: '/agglossningskalkylator', category: 'Hälsa', description: 'Beräkna din ägglossning och mest fertila period', premium: true },
 
   // Lifestyle
-  { id: 'sleep', title: 'Sömnkalkylator', path: '/sovkalkylator', category: 'Livsstil', description: 'Beräkna optimal sänggående och uppvakningstid baserat på sömnperioder' },
-  { id: 'alcohol', title: 'Alkoholkalkylator', path: '/alkoholkalkylator', category: 'Livsstil', description: 'Beräkna när alkoholen har försvunnit från blodet' },
-  { id: 'countdown', title: 'Nedräkningskalkylator', path: '/nedrakning', category: 'Livsstil', description: 'Räkna ner till viktiga datum och händelser' },
-  { id: 'age', title: 'Ålderskalkylator', path: '/alderkalkylator', category: 'Livsstil', description: 'Beräkna din exakta ålder i år, månader och dagar' },
-  { id: 'jet-lag', title: 'Jet Lag Planerare', path: '/jetlagkalkylator', category: 'Livsstil', description: 'Minimera effekterna av jet lag med en personlig anpassningsplan' },
-  { id: 'caffeine', title: 'Koffeinkalkylator', path: '/koffeinkalkylator', category: 'Livsstil', description: 'Beräkna koffeinintag och utsöndring' },
+  { id: 'sleep', title: 'Sömnkalkylator', path: '/sovkalkylator', category: 'Livsstil', description: 'Beräkna optimal sänggående och uppvakningstid baserat på sömnperioder', premium: false },
+  { id: 'alcohol', title: 'Alkoholkalkylator', path: '/alkoholkalkylator', category: 'Livsstil', description: 'Beräkna när alkoholen har försvunnit från blodet', premium: false },
+  { id: 'countdown', title: 'Nedräkningskalkylator', path: '/nedrakning', category: 'Livsstil', description: 'Räkna ner till viktiga datum och händelser', premium: false },
+  { id: 'age', title: 'Ålderskalkylator', path: '/alderkalkylator', category: 'Livsstil', description: 'Beräkna din exakta ålder i år, månader och dagar', premium: false },
+  { id: 'jet-lag', title: 'Jet Lag Planerare', path: '/jetlagkalkylator', category: 'Livsstil', description: 'Minimera effekterna av jet lag med en personlig anpassningsplan', premium: true },
+  { id: 'caffeine', title: 'Koffeinkalkylator', path: '/koffeinkalkylator', category: 'Livsstil', description: 'Beräkna koffeinintag och utsöndring', premium: true },
 
   // Training
-  { id: 'running-pace', title: 'Tempokalkylator', path: '/tempokalkylator', category: 'Träning', description: 'Beräkna ditt löptempo och hastighet baserat på distans och tid' },
-  { id: 'race-finish', title: 'Måltidsprediktor', path: '/maltidsprediktor', category: 'Träning', description: 'Beräkna din förväntade måltid baserat på tempo och distans' },
-  { id: 'heart-rate-zones', title: 'Pulszoner Kalkylator', path: '/pulszoner', category: 'Träning', description: 'Beräkna dina optimala pulszoner för effektiv träning' },
+  { id: 'running-pace', title: 'Tempokalkylator', path: '/tempokalkylator', category: 'Träning', description: 'Beräkna ditt löptempo och hastighet baserat på distans och tid', premium: false },
+  { id: 'race-finish', title: 'Måltidsprediktor', path: '/maltidsprediktor', category: 'Träning', description: 'Beräkna din förväntade måltid baserat på tempo och distans', premium: true },
+  { id: 'heart-rate-zones', title: 'Pulszoner Kalkylator', path: '/pulszoner', category: 'Träning', description: 'Beräkna dina optimala pulszoner för effektiv träning', premium: true },
 
   // Cooking
-  { id: 'measurement-converter', title: 'Måttomvandlare', path: '/mattomvandlare', category: 'Matlagning', description: 'Konvertera mellan olika svenska mått för vikt och volym' },
-  { id: 'cup-converter', title: 'Amerikansk måttomvandlare', path: '/kopparkalkylator', category: 'Matlagning', description: 'Konvertera mellan amerikanska mått och deciliter för exakta matlagningsrecept' },
+  { id: 'measurement-converter', title: 'Måttomvandlare', path: '/mattomvandlare', category: 'Matlagning', description: 'Konvertera mellan olika svenska mått för vikt och volym', premium: false },
+  { id: 'cup-converter', title: 'Amerikansk måttomvandlare', path: '/kopparkalkylator', category: 'Matlagning', description: 'Konvertera mellan amerikanska mått och deciliter för exakta matlagningsrecept', premium: false },
 
   // Productivity
-  { id: 'deadline', title: 'Deadline Kalkylator', path: '/deadlinekalkylator', category: 'Produktivitet', description: 'Beräkna slutdatum baserat på startdatum och arbetsdagar' }
+  { id: 'deadline', title: 'Deadline Kalkylator', path: '/deadlinekalkylator', category: 'Produktivitet', description: 'Beräkna slutdatum baserat på startdatum och arbetsdagar', premium: true }
 ];
 
 interface FeatureFlags {
@@ -180,7 +181,7 @@ export const useFeatureFlags = (): FeatureFlagContextType => {
 };
 
 // Hook for checking specific feature flags
-export const useFeatureFlag = (flagName: keyof FeatureFlags): boolean => {
+export const useFeatureFlag = (flagName: 'showCalculators' | 'showCalculatorNavigation' | 'showFooterCalculators'): boolean => {
   const { featureFlags } = useFeatureFlags();
   return featureFlags[flagName];
 };

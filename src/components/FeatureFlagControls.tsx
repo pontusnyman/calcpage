@@ -3,7 +3,8 @@ import { useFeatureFlags, ALL_CALCULATORS } from '../contexts/FeatureFlagContext
 
 const FeatureFlagControls: React.FC = () => {
   const { featureFlags, updateFeatureFlag, updateCalculatorVisibility } = useFeatureFlags();
-  const [activeTab, setActiveTab] = useState<'general' | 'calculators'>('general');
+  const isDev = !import.meta.env.PROD;
+  const [activeTab, setActiveTab] = useState<'general' | 'calculators'>(isDev ? 'general' : 'calculators');
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
 
   const toggleCategory = (category: string) => {
@@ -21,14 +22,16 @@ const FeatureFlagControls: React.FC = () => {
   return (
     <div className="fixed bottom-4 right-4 bg-white border border-gray-300 rounded-lg shadow-lg p-4 z-50 max-w-sm max-h-96 overflow-y-auto">
       <div className="flex space-x-2 mb-3">
-        <button
-          onClick={() => setActiveTab('general')}
-          className={`px-2 py-1 text-xs rounded ${
-            activeTab === 'general' ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600'
-          }`}
-        >
-          General
-        </button>
+        {isDev && (
+          <button
+            onClick={() => setActiveTab('general')}
+            className={`px-2 py-1 text-xs rounded ${
+              activeTab === 'general' ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600'
+            }`}
+          >
+            General
+          </button>
+        )}
         <button
           onClick={() => setActiveTab('calculators')}
           className={`px-2 py-1 text-xs rounded ${
@@ -39,7 +42,7 @@ const FeatureFlagControls: React.FC = () => {
         </button>
       </div>
 
-      {activeTab === 'general' && (
+      {isDev && activeTab === 'general' && (
         <div className="space-y-2">
           <h3 className="text-sm font-semibold text-gray-700 mb-2">General Flags</h3>
           <label className="flex items-center space-x-2">

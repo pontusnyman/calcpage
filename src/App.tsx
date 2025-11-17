@@ -5,11 +5,14 @@ import CalculatorCard from './components/CalculatorCard';
 import Layout from './components/Layout';
 import TopNav from './components/TopNav';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import { FeatureFlagProvider, useFeatureFlag, useFeatureFlags } from './contexts/FeatureFlagContext';
 import { PremiumProvider, usePremium } from './contexts/PremiumContext';
 import CrownIcon from './components/CrownIcon';
 import PremiumAccessControl from './components/PremiumAccessControl';
 import PremiumToggle from './components/PremiumToggle';
+import AdBanner from './components/AdBanner';
+import AdSidebar from './components/AdSidebar';
 
 // Calculator imports
 import SleepCalculator from './pages/SleepCalculator';
@@ -134,21 +137,11 @@ const MainPage: React.FC = () => {
           showCalculators={showCalculators}
         />
 
-        <div className="max-w-7xl mx-auto my-4 px-4 sm:px-6 lg:px-8">
-          <div className="bg-gray-200 h-32 rounded-lg flex items-center justify-center sticky top-24 z-40">
-            <p className="text-gray-500">Annonsplats</p>
-          </div>
-        </div>
+        <AdBanner position="top" />
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-            <div className="hidden lg:block lg:col-span-2">
-              <div className="sticky top-[11rem]">
-                <div className="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-500">Annonsplats</p>
-                </div>
-              </div>
-            </div>
+            <AdSidebar />
 
             <div className="lg:col-span-8">
               {showCalculators ? (
@@ -195,21 +188,11 @@ const MainPage: React.FC = () => {
               )}
             </div>
 
-            <div className="hidden lg:block lg:col-span-2">
-              <div className="sticky top-[11rem]">
-                <div className="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-500">Annonsplats</p>
-                </div>
-              </div>
-            </div>
+            <AdSidebar />
           </div>
         </main>
 
-        <div className="lg:hidden max-w-7xl mx-auto my-4 px-4 sm:px-6">
-          <div className="bg-gray-200 h-32 rounded-lg flex items-center justify-center sticky bottom-4">
-            <p className="text-gray-500">Annonsplats</p>
-          </div>
-        </div>
+        <AdBanner position="bottom" />
       </div>
       {/* <Footer /> */}
     </Layout>
@@ -261,6 +244,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/sovkalkylator" element={<SleepCalculator />} />
           <Route path="/alkoholkalkylator" element={<AlcoholCalculator />} />
           <Route path="/kopparkalkylator" element={<CupCalculator />} />

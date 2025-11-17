@@ -16,9 +16,9 @@ interface TopNavProps {
 
 const TopNav: React.FC<TopNavProps> = ({ 
   currentPage = 'home', 
-  categories = [], 
-  onCategoryClick,
-  showCalculators = false 
+  // categories = [], 
+  // onCategoryClick,
+  // showCalculators = false 
 }) => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -31,6 +31,16 @@ const TopNav: React.FC<TopNavProps> = ({
           </div>
           <div className="flex items-center space-x-4 mt-4 md:mt-0 md:ml-4">
             <Link
+              to="/"
+              className={`flex items-center px-4 py-2 text-sm font-medium whitespace-nowrap ${
+                currentPage === 'home' 
+                  ? 'text-indigo-600' 
+                  : 'text-gray-700 hover:text-indigo-600'
+              }`}
+            >
+              Kalkylatorerna
+            </Link>
+            <Link
               to="/blog"
               className={`flex items-center px-4 py-2 text-sm font-medium whitespace-nowrap ${
                 currentPage === 'blog' 
@@ -40,7 +50,7 @@ const TopNav: React.FC<TopNavProps> = ({
             >
               Blogg
             </Link>
-            {showCalculators && categories.length > 0 && (
+            {/* {showCalculators && categories.length > 0 && (
               <div className="flex overflow-x-auto pb-2 -mb-2 space-x-4">
                 {categories.map((category) => (
                   <button
@@ -52,7 +62,7 @@ const TopNav: React.FC<TopNavProps> = ({
                   </button>
                 ))}
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, TrendingUp, Calculator, Table } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowLeft, TrendingUp, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
   Chart as ChartJS,
@@ -31,9 +31,10 @@ interface CompoundResult {
   totalContributions: number;
   yearlyData: {
     year: number;
-    balance: number;
-    contributions: number;
-    interest: number;
+    startValue: number;
+    yearlySavings: number;
+    yearlyInterest: number;
+    endValue: number;
   }[];
 }
 
@@ -52,19 +53,26 @@ const CompoundInterestCalculator = () => {
 
     for (let year = 0; year <= years; year++) {
       const yearStart = balance;
+      let yearlySavings = 0;
+      
       for (let month = 0; month < 12; month++) {
         if (year > 0) { // Don't add monthly contributions for year 0
           balance += monthlyContribution;
           totalContributions += monthlyContribution;
+          yearlySavings += monthlyContribution;
         }
         balance *= (1 + monthlyRate);
       }
       
+      const yearEnd = balance;
+      const yearlyInterest = yearEnd - yearStart - yearlySavings;
+      
       yearlyData.push({
         year,
-        balance: Math.round(balance),
-        contributions: Math.round(totalContributions),
-        interest: Math.round(balance - totalContributions)
+        startValue: Math.round(yearStart),
+        yearlySavings: Math.round(yearlySavings),
+        yearlyInterest: Math.round(yearlyInterest),
+        endValue: Math.round(yearEnd)
       });
     }
 
@@ -86,7 +94,7 @@ const CompoundInterestCalculator = () => {
       {
         fill: true,
         label: 'Balans',
-        data: result?.yearlyData.map(data => data.balance) || [],
+        data: result?.yearlyData.map(data => data.endValue) || [],
         borderColor: 'rgb(45, 212, 191)',
         backgroundColor: 'rgba(45, 212, 191, 0.2)',
       }
@@ -102,7 +110,7 @@ const CompoundInterestCalculator = () => {
       tooltip: {
         callbacks: {
           label: function(context: any) {
-            return `${context.parsed.y.toLocaleString()} kr`;
+            return `${context.parsed.y.toLocaleString('sv-SE')} kr`;
           }
         }
       }
@@ -111,7 +119,7 @@ const CompoundInterestCalculator = () => {
       y: {
         ticks: {
           callback: function(value: any) {
-            return value.toLocaleString() + ' kr';
+            return value.toLocaleString('sv-SE') + ' kr';
           }
         }
       }
@@ -197,19 +205,25 @@ const CompoundInterestCalculator = () => {
                 <div className="space-y-4">
                   <div>
                     <div className="text-teal-100 text-sm">Slutsumma efter {years} år</div>
-                    <div className="text-3xl font-bold">{result.finalAmount.toLocaleString()} kr</div>
+                    <div className="text-3xl font-bold">{result.finalAmount.toLocaleString('sv-SE')} kr</div>
                   </div>
                   <div>
                     <div className="text-teal-100 text-sm">Total avkastning</div>
-                    <div className="text-2xl font-semibold">{result.totalInterest.toLocaleString()} kr</div>
+                    <div className="text-2xl font-semibold">{result.totalInterest.toLocaleString('sv-SE')} kr</div>
                   </div>
                   <div>
                     <div className="text-teal-100 text-sm">Totalt sparat belopp</div>
-                    <div className="text-2xl font-semibold">{result.totalContributions.toLocaleString()} kr</div>
+                    <div className="text-2xl font-semibold">{result.totalContributions.toLocaleString('sv-SE')} kr</div>
                   </div>
                 </div>
               </div>
             )}
+
+            <div className="bg-teal-100 rounded-2xl shadow-xl p-8 mt-6">
+              <div className="h-64 rounded-lg flex items-center justify-center bg-teal-50 border-2 border-teal-200">
+                <p className="text-teal-600">Annonsplats</p>
+              </div>
+            </div>
           </div>
 
           <div className="lg:col-span-2 space-y-8">
@@ -226,27 +240,26 @@ const CompoundInterestCalculator = () => {
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-xl p-8">
-                  <h2 className="text-xl font-semibold mb-6 flex items-center">
-                    <Table className="w-6 h-6 mr-2 text-teal-600" />
-                    Årlig utveckling
-                  </h2>
+                  <h2 className="text-xl font-semibold mb-4">Årlig utveckling</h2>
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
                         <tr className="border-b border-gray-200">
-                          <th className="text-left py-3 px-4">År</th>
-                          <th className="text-right py-3 px-4">Balans</th>
-                          <th className="text-right py-3 px-4">Insatt</th>
-                          <th className="text-right py-3 px-4">Avkastning</th>
+                          <th className="text-left py-3 px-4 font-medium text-gray-700">År</th>
+                          <th className="text-right py-3 px-4 font-medium text-gray-700">Startvärde</th>
+                          <th className="text-right py-3 px-4 font-medium text-gray-700">Årets sparande</th>
+                          <th className="text-right py-3 px-4 font-medium text-gray-700">Avkastning (kr)</th>
+                          <th className="text-right py-3 px-4 font-medium text-gray-700">Värde vid årets slut</th>
                         </tr>
                       </thead>
                       <tbody>
                         {result.yearlyData.map((data) => (
-                          <tr key={data.year} className="border-b border-gray-100">
+                          <tr key={data.year} className="border-b border-gray-100 hover:bg-gray-50">
                             <td className="py-3 px-4">{data.year}</td>
-                            <td className="text-right py-3 px-4">{data.balance.toLocaleString()} kr</td>
-                            <td className="text-right py-3 px-4">{data.contributions.toLocaleString()} kr</td>
-                            <td className="text-right py-3 px-4">{data.interest.toLocaleString()} kr</td>
+                            <td className="text-right py-3 px-4">{data.startValue.toLocaleString('sv-SE')} kr</td>
+                            <td className="text-right py-3 px-4">{data.yearlySavings.toLocaleString('sv-SE')} kr</td>
+                            <td className="text-right py-3 px-4">{data.yearlyInterest.toLocaleString('sv-SE')} kr</td>
+                            <td className="text-right py-3 px-4 font-semibold">{data.endValue.toLocaleString('sv-SE')} kr</td>
                           </tr>
                         ))}
                       </tbody>

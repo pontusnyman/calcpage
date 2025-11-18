@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, Wallet, AlertTriangle, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ interface LoanResult {
     year: number;
     principal: number;
     interest: number;
+    fees: number;
     remainingBalance: number;
   }[];
 }
@@ -18,24 +19,35 @@ const LoanCalculator = () => {
   const [loanAmount, setLoanAmount] = useState<number>(130000);
   const [years, setYears] = useState<number>(9);
   const [interestRate, setInterestRate] = useState<number>(8.44);
+  const [setupFee, setSetupFee] = useState<number>(0);
+  const [annualFee, setAnnualFee] = useState<number>(0);
   const [result, setResult] = useState<LoanResult | null>(null);
 
   const calculateLoan = () => {
-    const monthlyRate = interestRate / 100 / 12;
-    const numberOfPayments = years * 12;
+    // Validate inputs
+    const validLoanAmount = isNaN(loanAmount) || loanAmount <= 0 ? 130000 : loanAmount;
+    const validYears = isNaN(years) || years <= 0 ? 9 : years;
+    const validInterestRate = isNaN(interestRate) || interestRate < 0 ? 8.44 : interestRate;
+    const validSetupFee = isNaN(setupFee) || setupFee < 0 ? 0 : setupFee;
+    const validAnnualFee = isNaN(annualFee) || annualFee < 0 ? 0 : annualFee;
+
+    const monthlyRate = validInterestRate / 100 / 12;
+    const numberOfPayments = validYears * 12;
     
     // Calculate monthly payment using the loan payment formula
-    const monthlyPayment = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
+    const monthlyPayment = (validLoanAmount * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
                           (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
     
-    const totalAmount = monthlyPayment * numberOfPayments;
-    const totalInterest = totalAmount - loanAmount;
+    const baseTotalAmount = monthlyPayment * numberOfPayments;
+    const totalFees = validSetupFee + (validAnnualFee * numberOfPayments);
+    const totalAmount = baseTotalAmount + totalFees;
+    const totalInterest = baseTotalAmount - validLoanAmount;
 
     // Calculate yearly amortization schedule
-    let remainingBalance = loanAmount;
+    let remainingBalance = validLoanAmount;
     const yearlyPayments = [];
 
-    for (let year = 1; year <= years; year++) {
+    for (let year = 1; year <= validYears; year++) {
       let yearlyPrincipal = 0;
       let yearlyInterest = 0;
 
@@ -48,10 +60,15 @@ const LoanCalculator = () => {
         remainingBalance -= principalPayment;
       }
 
+      // Calculate fees for this year
+      const yearlyFees = validAnnualFee * 12; // Monthly fee * 12 months
+      const feesForYear = year === 1 ? validSetupFee + yearlyFees : yearlyFees;
+
       yearlyPayments.push({
         year,
         principal: yearlyPrincipal,
         interest: yearlyInterest,
+        fees: feesForYear,
         remainingBalance: Math.max(0, remainingBalance)
       });
     }
@@ -91,7 +108,10 @@ const LoanCalculator = () => {
               <input
                 type="number"
                 value={loanAmount}
-                onChange={(e) => setLoanAmount(Math.max(0, Number(e.target.value)))}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setLoanAmount(isNaN(value) ? 0 : Math.max(0, value));
+                }}
                 className="w-full border-2 border-rose-200 rounded-lg px-4 py-2 focus:border-rose-500 focus:ring-rose-500"
               />
             </div>
@@ -103,7 +123,10 @@ const LoanCalculator = () => {
               <input
                 type="number"
                 value={years}
-                onChange={(e) => setYears(Math.max(1, Math.min(30, Number(e.target.value))))}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setYears(isNaN(value) ? 1 : Math.max(1, Math.min(30, value)));
+                }}
                 className="w-full border-2 border-rose-200 rounded-lg px-4 py-2 focus:border-rose-500 focus:ring-rose-500"
               />
             </div>
@@ -115,8 +138,41 @@ const LoanCalculator = () => {
               <input
                 type="number"
                 value={interestRate}
-                onChange={(e) => setInterestRate(Math.max(0, Math.min(100, Number(e.target.value))))}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setInterestRate(isNaN(value) ? 0 : Math.max(0, Math.min(100, value)));
+                }}
                 step="0.01"
+                className="w-full border-2 border-rose-200 rounded-lg px-4 py-2 focus:border-rose-500 focus:ring-rose-500"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Uppläggningsavgift (kr)
+              </label>
+              <input
+                type="number"
+                value={setupFee}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setSetupFee(isNaN(value) ? 0 : Math.max(0, value));
+                }}
+                className="w-full border-2 border-rose-200 rounded-lg px-4 py-2 focus:border-rose-500 focus:ring-rose-500"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Aviavgift (kr/månad)
+              </label>
+              <input
+                type="number"
+                value={annualFee}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setAnnualFee(isNaN(value) ? 0 : Math.max(0, value));
+                }}
                 className="w-full border-2 border-rose-200 rounded-lg px-4 py-2 focus:border-rose-500 focus:ring-rose-500"
               />
             </div>
@@ -135,21 +191,21 @@ const LoanCalculator = () => {
                 <div className="bg-rose-50 rounded-xl p-6">
                   <div className="text-rose-600 text-sm font-medium mb-1">Månadskostnad</div>
                   <div className="text-3xl font-bold text-gray-900">
-                    {Math.round(result.monthlyPayment).toLocaleString()} kr
+                    {Math.round(result.monthlyPayment).toLocaleString('sv-SE')} kr
                   </div>
                 </div>
 
                 <div className="bg-rose-500 rounded-xl p-6 text-white">
                   <div className="text-rose-100 text-sm font-medium mb-1">Total kostnad</div>
                   <div className="text-3xl font-bold">
-                    {Math.round(result.totalAmount).toLocaleString()} kr
+                    {Math.round(result.totalAmount).toLocaleString('sv-SE')} kr
                   </div>
                 </div>
 
                 <div className="bg-rose-50 rounded-xl p-6">
                   <div className="text-rose-600 text-sm font-medium mb-1">Total ränta</div>
                   <div className="text-3xl font-bold text-gray-900">
-                    {Math.round(result.totalInterest).toLocaleString()} kr
+                    {Math.round(result.totalInterest).toLocaleString('sv-SE')} kr
                   </div>
                 </div>
               </div>
@@ -166,6 +222,7 @@ const LoanCalculator = () => {
                         <th className="text-left py-3 px-4">År</th>
                         <th className="text-right py-3 px-4">Amortering</th>
                         <th className="text-right py-3 px-4">Räntekostnad</th>
+                        <th className="text-right py-3 px-4">Avgifter</th>
                         <th className="text-right py-3 px-4">Kvar att betala</th>
                       </tr>
                     </thead>
@@ -174,13 +231,16 @@ const LoanCalculator = () => {
                         <tr key={payment.year} className="border-b border-gray-100">
                           <td className="py-3 px-4">{payment.year}</td>
                           <td className="text-right py-3 px-4">
-                            {Math.round(payment.principal).toLocaleString()} kr
+                            {Math.round(payment.principal).toLocaleString('sv-SE')} kr
                           </td>
                           <td className="text-right py-3 px-4">
-                            {Math.round(payment.interest).toLocaleString()} kr
+                            {Math.round(payment.interest).toLocaleString('sv-SE')} kr
                           </td>
                           <td className="text-right py-3 px-4">
-                            {Math.round(payment.remainingBalance).toLocaleString()} kr
+                            {Math.round(payment.fees).toLocaleString('sv-SE')} kr
+                          </td>
+                          <td className="text-right py-3 px-4">
+                            {Math.round(payment.remainingBalance).toLocaleString('sv-SE')} kr
                           </td>
                         </tr>
                       ))}

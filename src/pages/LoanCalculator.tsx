@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, Wallet, AlertTriangle, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCalculatorShare } from '../hooks/useCalculatorShare';
+import ShareButton from '../components/ShareButton';
+import AdBanner from '../components/AdBanner';
+import { getUrlParams, getNumberParam } from '../utils/urlParams';
 
 interface LoanResult {
   monthlyPayment: number;
@@ -17,19 +21,60 @@ interface LoanResult {
 
 const LoanCalculator = () => {
   const [loanAmount, setLoanAmount] = useState<number>(130000);
+  const [loanAmountDisplay, setLoanAmountDisplay] = useState<string>('130 000');
   const [years, setYears] = useState<number>(9);
   const [interestRate, setInterestRate] = useState<number>(8.44);
   const [setupFee, setSetupFee] = useState<number>(0);
   const [annualFee, setAnnualFee] = useState<number>(0);
   const [result, setResult] = useState<LoanResult | null>(null);
 
-  const calculateLoan = () => {
+  // Format number with Swedish formatting (spaces as thousand separators)
+  const formatSwedishNumber = (num: number): string => {
+    if (num === 0) return '';
+    return num.toLocaleString('sv-SE').replace(/,/g, ' ');
+  };
+
+  // Parse formatted string back to number
+  const parseSwedishNumber = (str: string): number => {
+    // Remove all spaces and parse
+    const cleaned = str.replace(/\s/g, '');
+    return Number(cleaned) || 0;
+  };
+
+  // Format number string with spaces as thousands separators
+  const formatNumberString = (str: string): string => {
+    // Remove all non-digits
+    const digitsOnly = str.replace(/\D/g, '');
+    if (!digitsOnly) return '';
+    
+    // Add spaces as thousand separators from right to left
+    return digitsOnly.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
+
+  // Share functionality
+  const { handleShare } = useCalculatorShare({
+    params: {
+      loanAmount: loanAmount,
+      years: years,
+      interestRate: interestRate,
+      setupFee: setupFee,
+      annualFee: annualFee
+    }
+  });
+
+  const calculateLoanWithValues = (
+    amount: number,
+    loanYears: number,
+    rate: number,
+    fee: number,
+    monthlyFee: number
+  ) => {
     // Validate inputs
-    const validLoanAmount = isNaN(loanAmount) || loanAmount <= 0 ? 130000 : loanAmount;
-    const validYears = isNaN(years) || years <= 0 ? 9 : years;
-    const validInterestRate = isNaN(interestRate) || interestRate < 0 ? 8.44 : interestRate;
-    const validSetupFee = isNaN(setupFee) || setupFee < 0 ? 0 : setupFee;
-    const validAnnualFee = isNaN(annualFee) || annualFee < 0 ? 0 : annualFee;
+    const validLoanAmount = isNaN(amount) || amount <= 0 ? 130000 : amount;
+    const validYears = isNaN(loanYears) || loanYears <= 0 ? 9 : loanYears;
+    const validInterestRate = isNaN(rate) || rate < 0 ? 8.44 : rate;
+    const validSetupFee = isNaN(fee) || fee < 0 ? 0 : fee;
+    const validAnnualFee = isNaN(monthlyFee) || monthlyFee < 0 ? 0 : monthlyFee;
 
     const monthlyRate = validInterestRate / 100 / 12;
     const numberOfPayments = validYears * 12;
@@ -81,6 +126,33 @@ const LoanCalculator = () => {
     });
   };
 
+  const calculateLoan = () => {
+    calculateLoanWithValues(loanAmount, years, interestRate, setupFee, annualFee);
+  };
+
+  // Parse URL parameters on mount and auto-calculate
+  useEffect(() => {
+    const params = getUrlParams();
+    if (params.has('loanAmount')) {
+      const parsedLoanAmount = getNumberParam(params, 'loanAmount', 130000);
+      const parsedYears = getNumberParam(params, 'years', 9);
+      const parsedInterestRate = getNumberParam(params, 'interestRate', 8.44);
+      const parsedSetupFee = getNumberParam(params, 'setupFee', 0);
+      const parsedAnnualFee = getNumberParam(params, 'annualFee', 0);
+      
+      setLoanAmount(parsedLoanAmount);
+      setLoanAmountDisplay(formatSwedishNumber(parsedLoanAmount));
+      setYears(parsedYears);
+      setInterestRate(parsedInterestRate);
+      setSetupFee(parsedSetupFee);
+      setAnnualFee(parsedAnnualFee);
+      
+      // Auto-calculate with parsed values directly
+      calculateLoanWithValues(parsedLoanAmount, parsedYears, parsedInterestRate, parsedSetupFee, parsedAnnualFee);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-rose-50 to-rose-100">
       <div className="max-w-4xl mx-auto px-4 py-8">
@@ -106,11 +178,26 @@ const LoanCalculator = () => {
                 Lånebelopp (kr)
               </label>
               <input
-                type="number"
-                value={loanAmount}
+                type="text"
+                value={loanAmountDisplay}
                 onChange={(e) => {
-                  const value = Number(e.target.value);
-                  setLoanAmount(isNaN(value) ? 0 : Math.max(0, value));
+                  const inputValue = e.target.value;
+                  // Format with spaces as user types
+                  const formatted = formatNumberString(inputValue);
+                  setLoanAmountDisplay(formatted);
+                  // Parse and update the actual number value
+                  const parsed = parseSwedishNumber(formatted);
+                  setLoanAmount(parsed);
+                }}
+                onBlur={(e) => {
+                  // Ensure proper formatting on blur
+                  const parsed = parseSwedishNumber(e.target.value);
+                  setLoanAmount(parsed);
+                  if (parsed === 0) {
+                    setLoanAmountDisplay('');
+                  } else {
+                    setLoanAmountDisplay(formatSwedishNumber(parsed));
+                  }
                 }}
                 className="w-full border-2 border-rose-200 rounded-lg px-4 py-2 focus:border-rose-500 focus:ring-rose-500"
               />
@@ -153,10 +240,22 @@ const LoanCalculator = () => {
               </label>
               <input
                 type="number"
-                value={setupFee}
+                value={setupFee === 0 ? '' : setupFee}
                 onChange={(e) => {
-                  const value = Number(e.target.value);
-                  setSetupFee(isNaN(value) ? 0 : Math.max(0, value));
+                  const inputValue = e.target.value;
+                  if (inputValue === '' || inputValue === '-') {
+                    setSetupFee(0);
+                  } else {
+                    const value = Number(inputValue);
+                    if (!isNaN(value)) {
+                      setSetupFee(Math.max(0, value));
+                    }
+                  }
+                }}
+                onBlur={(e) => {
+                  if (e.target.value === '' || e.target.value === '0') {
+                    setSetupFee(0);
+                  }
                 }}
                 className="w-full border-2 border-rose-200 rounded-lg px-4 py-2 focus:border-rose-500 focus:ring-rose-500"
               />
@@ -168,22 +267,37 @@ const LoanCalculator = () => {
               </label>
               <input
                 type="number"
-                value={annualFee}
+                value={annualFee === 0 ? '' : annualFee}
                 onChange={(e) => {
-                  const value = Number(e.target.value);
-                  setAnnualFee(isNaN(value) ? 0 : Math.max(0, value));
+                  const inputValue = e.target.value;
+                  if (inputValue === '' || inputValue === '-') {
+                    setAnnualFee(0);
+                  } else {
+                    const value = Number(inputValue);
+                    if (!isNaN(value)) {
+                      setAnnualFee(Math.max(0, value));
+                    }
+                  }
+                }}
+                onBlur={(e) => {
+                  if (e.target.value === '' || e.target.value === '0') {
+                    setAnnualFee(0);
+                  }
                 }}
                 className="w-full border-2 border-rose-200 rounded-lg px-4 py-2 focus:border-rose-500 focus:ring-rose-500"
               />
             </div>
           </div>
 
-          <button
-            onClick={calculateLoan}
-            className="w-full mt-6 bg-rose-500 hover:bg-rose-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
-          >
-            Beräkna lånekostnad
-          </button>
+          <div className="mt-6 space-y-3">
+            <button
+              onClick={calculateLoan}
+              className="w-full bg-rose-500 hover:bg-rose-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+            >
+              Beräkna lånekostnad
+            </button>
+            <ShareButton onShare={handleShare} color="rose" />
+          </div>
 
           {result && (
             <div className="mt-8">
@@ -246,6 +360,10 @@ const LoanCalculator = () => {
                       ))}
                     </tbody>
                   </table>
+                </div>
+
+                <div className="mt-8">
+                  <AdBanner position="bottom" />
                 </div>
               </div>
             </div>

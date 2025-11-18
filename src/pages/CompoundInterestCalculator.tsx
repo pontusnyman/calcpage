@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, TrendingUp, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCalculatorShare } from '../hooks/useCalculatorShare';
+import ShareButton from '../components/ShareButton';
+import { getUrlParams, getNumberParam } from '../utils/urlParams';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -44,6 +47,28 @@ const CompoundInterestCalculator = () => {
   const [years, setYears] = useState<number>(25);
   const [interestRate, setInterestRate] = useState<number>(7);
   const [result, setResult] = useState<CompoundResult | null>(null);
+
+  // Share functionality
+  const { handleShare } = useCalculatorShare({
+    params: {
+      initialAmount: initialAmount,
+      monthlyContribution: monthlyContribution,
+      years: years,
+      interestRate: interestRate
+    }
+  });
+
+  // Parse URL parameters on mount
+  useEffect(() => {
+    const params = getUrlParams();
+    if (params.has('initialAmount')) {
+      setInitialAmount(getNumberParam(params, 'initialAmount', 30000));
+      setMonthlyContribution(getNumberParam(params, 'monthlyContribution', 900));
+      setYears(getNumberParam(params, 'years', 25));
+      setInterestRate(getNumberParam(params, 'interestRate', 7));
+      // Auto-calculate will happen via the existing useEffect dependency
+    }
+  }, []);
 
   const calculateCompoundInterest = () => {
     let balance = initialAmount;
@@ -197,6 +222,7 @@ const CompoundInterestCalculator = () => {
                   />
                 </div>
               </div>
+              <ShareButton onShare={handleShare} color="teal" className="mt-6" />
             </div>
 
             {result && (

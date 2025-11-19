@@ -13,6 +13,10 @@ import PremiumAccessControl from './components/PremiumAccessControl';
 import PremiumToggle from './components/PremiumToggle';
 import AdBanner from './components/AdBanner';
 import AdSidebar from './components/AdSidebar';
+import CookieConsent from './components/CookieConsent';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import CookiePolicy from './pages/CookiePolicy';
+import TermsOfService from './pages/TermsOfService';
 
 // Calculator imports
 import SleepCalculator from './pages/SleepCalculator';
@@ -137,11 +141,11 @@ const MainPage: React.FC = () => {
           showCalculators={showCalculators}
         />
 
-        <AdBanner position="top" />
+        <AdBanner position="top" adSlot="YOUR_TOP_BANNER_AD_SLOT_ID" />
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-            <AdSidebar />
+            <AdSidebar adSlot="YOUR_SIDEBAR_AD_SLOT_ID" />
 
             <div className="lg:col-span-8">
               {showCalculators ? (
@@ -187,12 +191,10 @@ const MainPage: React.FC = () => {
                 </div>
               )}
             </div>
-
-            <AdSidebar />
           </div>
         </main>
 
-        <AdBanner position="bottom" />
+        <AdBanner position="bottom" adSlot="YOUR_BOTTOM_BANNER_AD_SLOT_ID" />
       </div>
       {/* <Footer /> */}
     </Layout>
@@ -207,7 +209,7 @@ function App() {
     calculatorVisibility: {
       'compound-interest': true,
       'blog': true,
-      'loan': false,
+      'loan': true,
       'mortgage': false,
       'vat': false,
       'crypto-profit': false,
@@ -274,7 +276,11 @@ function App() {
           <Route path="/sparmalskalkylator" element={<PremiumAccessControl calculatorId="savings-goal"><SavingsGoalCalculator /></PremiumAccessControl>} />
           <Route path="/koffeinkalkylator" element={<PremiumAccessControl calculatorId="caffeine"><CaffeineCalculator /></PremiumAccessControl>} />
           <Route path="/kryptokalkylator" element={<PremiumAccessControl calculatorId="crypto-profit"><CryptoProfitCalculator /></PremiumAccessControl>} />
+          <Route path="/integritetspolicy" element={<PrivacyPolicy />} />
+          <Route path="/cookiepolicy" element={<CookiePolicy />} />
+          <Route path="/anvandarvillkor" element={<TermsOfService />} />
         </Routes>
+        <CookieConsent />
         {!import.meta.env.PROD && <PremiumToggle />}
       </PremiumProvider>
     </FeatureFlagProvider>

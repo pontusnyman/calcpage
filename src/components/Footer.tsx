@@ -44,7 +44,20 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-8 border-t border-gray-200 pt-8">
-          <p className="text-base text-gray-400 text-center">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
+            <Link to="/integritetspolicy" className="text-sm text-gray-400 hover:text-gray-600">
+              Integritetspolicy
+            </Link>
+            <span className="hidden sm:inline text-gray-400">•</span>
+            <Link to="/cookiepolicy" className="text-sm text-gray-400 hover:text-gray-600">
+              Cookie Policy
+            </Link>
+            <span className="hidden sm:inline text-gray-400">•</span>
+            <Link to="/anvandarvillkor" className="text-sm text-gray-400 hover:text-gray-600">
+              Användarvillkor
+            </Link>
+          </div>
+          <p className="text-base text-gray-400 text-center mt-4">
             © {new Date().getFullYear()} Kalkulatorn.se. Alla rättigheter förbehållna.
           </p>
         </div>

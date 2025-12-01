@@ -21,7 +21,7 @@ const blogPosts: BlogPost[] = [
     id: 'ranta-pa-ranta',
     title: 'Ränta på ränta – den enkla principen som bygger stora förmögenheter över tid',
     description: 'Ränta på ränta brukar kallas världens åttonde underverk – och det är lätt att förstå varför. Upptäck hur denna kraftfulla princip kan hjälpa dig bygga förmögenhet över tid.',
-    date: '2024-12-15',
+    date: '2024-12-01',
     readTime: '6 min',
     category: 'Ekonomi',
     image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=800',
@@ -84,11 +84,11 @@ const Blog: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <TopNav currentPage="blog" />
 
-      <AdBanner position="top" />
+      <AdBanner position="top" adSlot="YOUR_TOP_BANNER_AD_SLOT_ID" />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-          <AdSidebar />
+          <AdSidebar adSlot="YOUR_SIDEBAR_AD_SLOT_ID" />
 
           <div className="lg:col-span-8">
             <div className="flex items-center justify-between mb-8">
@@ -141,11 +141,11 @@ const Blog: React.FC = () => {
             </div>
           </div>
 
-          <AdSidebar />
+          <AdSidebar adSlot="YOUR_SIDEBAR_AD_SLOT_ID" />
         </div>
       </main>
 
-      <AdBanner position="bottom" />
+      <AdBanner position="bottom" adSlot="YOUR_BOTTOM_BANNER_AD_SLOT_ID" />
     </div>
   );
 };

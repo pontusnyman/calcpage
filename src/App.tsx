@@ -209,7 +209,7 @@ function App() {
     calculatorVisibility: {
       'compound-interest': true,
       'blog': true,
-      'loan': true,
+      'loan': false,
       'mortgage': false,
       'vat': false,
       'crypto-profit': false,

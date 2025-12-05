@@ -18,14 +18,14 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
-    id: 'ranta-pa-ranta',
-    title: 'Ränta på ränta – den enkla principen som bygger stora förmögenheter över tid',
-    description: 'Ränta på ränta brukar kallas världens åttonde underverk – och det är lätt att förstå varför. Upptäck hur denna kraftfulla princip kan hjälpa dig bygga förmögenhet över tid.',
-    date: '2025-12-01',
-    readTime: '6 min',
+    id: 'savings-strategies',
+    title: 'Smarta sparstrategier för olika livssituationer',
+    description: 'Upptäck olika sparstrategier och hur du kan använda våra sparkalkylatorer för att nå dina ekonomiska mål.',
+    date: '2025-12-03',
+    readTime: '9 min',
     category: 'Ekonomi',
-    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/ranta-pa-ranta'
+    image: 'https://images.unsplash.com/photo-1579621970795-87facc2f976d?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/savings-strategies'
   },
   {
     id: 'lanekostnad-guide',
@@ -36,6 +36,16 @@ const blogPosts: BlogPost[] = [
     category: 'Ekonomi',
     image: 'https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     link: '/blog/lanekostnad-guide'
+  },
+  {
+    id: 'ranta-pa-ranta',
+    title: 'Ränta på ränta – den enkla principen som bygger stora förmögenheter över tid',
+    description: 'Ränta på ränta brukar kallas världens åttonde underverk – och det är lätt att förstå varför. Upptäck hur denna kraftfulla princip kan hjälpa dig bygga förmögenhet över tid.',
+    date: '2025-12-01',
+    readTime: '6 min',
+    category: 'Ekonomi',
+    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/ranta-pa-ranta'
   },
   // {
   //   id: 'healthy-sleep-habits',
@@ -77,16 +87,6 @@ const blogPosts: BlogPost[] = [
   //   image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800',
   //   link: '/blog/running-basics'
   // },
-  // {
-  //   id: 'savings-strategies',
-  //   title: 'Smarta sparstrategier för olika livssituationer',
-  //   description: 'Upptäck olika sparstrategier och hur du kan använda våra sparkalkylatorer för att nå dina ekonomiska mål.',
-  //   date: '2024-03-03',
-  //   readTime: '9 min',
-  //   category: 'Ekonomi',
-  //   image: 'https://images.unsplash.com/photo-1579621970795-87facc2f976d?auto=format&fit=crop&q=80&w=800',
-  //   link: '/blog/savings-strategies'
-  // }
 ];
 
 const Blog: React.FC = () => {

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, Calculator, Percent, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getUrlParams, getNumberParam } from '../utils/urlParams';
 
 interface DiscountResult {
   originalPrice: number;
@@ -11,30 +12,79 @@ interface DiscountResult {
 
 const DiscountCalculator = () => {
   const [originalPrice, setOriginalPrice] = useState<number>(1000);
+  const [originalPriceDisplay, setOriginalPriceDisplay] = useState<string>('1 000');
   const [discountType, setDiscountType] = useState<'percentage' | 'amount'>('percentage');
   const [discountValue, setDiscountValue] = useState<number>(20);
+  const [discountValueDisplay, setDiscountValueDisplay] = useState<string>('20');
   const [result, setResult] = useState<DiscountResult | null>(null);
   const [shareButtonText, setShareButtonText] = useState('Dela');
 
-  const calculateDiscount = () => {
+  // Format number with Swedish formatting (spaces as thousand separators)
+  const formatSwedishNumber = (num: number): string => {
+    if (num === 0) return '';
+    return num.toLocaleString('sv-SE').replace(/,/g, ' ');
+  };
+
+  // Parse formatted string back to number
+  const parseSwedishNumber = (str: string): number => {
+    const cleaned = str.replace(/\s/g, '');
+    return Number(cleaned) || 0;
+  };
+
+  // Format number string with spaces as thousands separators
+  const formatNumberString = (str: string): string => {
+    const digitsOnly = str.replace(/\D/g, '');
+    if (!digitsOnly) return '';
+    return digitsOnly.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
+
+  const calculateDiscountWithValues = (
+    price: number,
+    type: 'percentage' | 'amount',
+    value: number
+  ) => {
     let discountAmount: number;
     
-    if (discountType === 'percentage') {
-      discountAmount = (originalPrice * discountValue) / 100;
+    if (type === 'percentage') {
+      discountAmount = (price * value) / 100;
     } else {
-      discountAmount = discountValue;
+      discountAmount = value;
     }
 
-    const finalPrice = originalPrice - discountAmount;
-    const savingsPercentage = (discountAmount / originalPrice) * 100;
+    const finalPrice = price - discountAmount;
+    const savingsPercentage = (discountAmount / price) * 100;
 
     setResult({
-      originalPrice,
+      originalPrice: price,
       discountAmount,
       finalPrice,
       savingsPercentage
     });
   };
+
+  const calculateDiscount = () => {
+    calculateDiscountWithValues(originalPrice, discountType, discountValue);
+  };
+
+  // Parse URL parameters on mount and auto-calculate
+  useEffect(() => {
+    const params = getUrlParams();
+    if (params.has('p')) {
+      const parsedPrice = getNumberParam(params, 'p', 1000);
+      const parsedType = params.get('t') === 'amount' ? 'amount' : 'percentage';
+      const parsedValue = getNumberParam(params, 'v', 20);
+      
+      setOriginalPrice(parsedPrice);
+      setOriginalPriceDisplay(formatSwedishNumber(parsedPrice));
+      setDiscountType(parsedType);
+      setDiscountValue(parsedValue);
+      setDiscountValueDisplay(formatSwedishNumber(parsedValue));
+      
+      // Auto-calculate with parsed values directly
+      calculateDiscountWithValues(parsedPrice, parsedType, parsedValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleShare = async () => {
     const shareParams = new URLSearchParams({
@@ -81,9 +131,18 @@ const DiscountCalculator = () => {
                 Ordinarie pris (kr)
               </label>
               <input
-                type="number"
-                value={originalPrice}
-                onChange={(e) => setOriginalPrice(Math.max(0, Number(e.target.value)))}
+                type="text"
+                value={originalPriceDisplay}
+                onChange={(e) => {
+                  const formatted = formatNumberString(e.target.value);
+                  setOriginalPriceDisplay(formatted);
+                  setOriginalPrice(parseSwedishNumber(formatted));
+                }}
+                onBlur={(e) => {
+                  const parsed = parseSwedishNumber(e.target.value);
+                  setOriginalPrice(parsed);
+                  setOriginalPriceDisplay(parsed === 0 ? '' : formatSwedishNumber(parsed));
+                }}
                 className="w-full border-2 border-yellow-200 rounded-lg px-4 py-2 focus:border-yellow-500 focus:ring-yellow-500"
               />
             </div>
@@ -94,7 +153,10 @@ const DiscountCalculator = () => {
               </label>
               <div className="grid grid-cols-2 gap-4">
                 <button
-                  onClick={() => setDiscountType('percentage')}
+                  onClick={() => {
+                    setDiscountType('percentage');
+                    setDiscountValueDisplay(formatSwedishNumber(discountValue));
+                  }}
                   className={`py-2 px-4 rounded-lg text-center transition-colors ${
                     discountType === 'percentage'
                       ? 'bg-yellow-500 text-white'
@@ -104,7 +166,10 @@ const DiscountCalculator = () => {
                   Procent (%)
                 </button>
                 <button
-                  onClick={() => setDiscountType('amount')}
+                  onClick={() => {
+                    setDiscountType('amount');
+                    setDiscountValueDisplay(formatSwedishNumber(discountValue));
+                  }}
                   className={`py-2 px-4 rounded-lg text-center transition-colors ${
                     discountType === 'amount'
                       ? 'bg-yellow-500 text-white'
@@ -121,9 +186,24 @@ const DiscountCalculator = () => {
                 {discountType === 'percentage' ? 'Rabatt (%)' : 'Rabatt (kr)'}
               </label>
               <input
-                type="number"
-                value={discountValue}
-                onChange={(e) => setDiscountValue(Math.max(0, Number(e.target.value)))}
+                type={discountType === 'percentage' ? 'number' : 'text'}
+                value={discountType === 'percentage' ? discountValue : discountValueDisplay}
+                onChange={(e) => {
+                  if (discountType === 'percentage') {
+                    setDiscountValue(Math.max(0, Number(e.target.value)));
+                  } else {
+                    const formatted = formatNumberString(e.target.value);
+                    setDiscountValueDisplay(formatted);
+                    setDiscountValue(parseSwedishNumber(formatted));
+                  }
+                }}
+                onBlur={(e) => {
+                  if (discountType === 'amount') {
+                    const parsed = parseSwedishNumber(e.target.value);
+                    setDiscountValue(parsed);
+                    setDiscountValueDisplay(parsed === 0 ? '' : formatSwedishNumber(parsed));
+                  }
+                }}
                 className="w-full border-2 border-yellow-200 rounded-lg px-4 py-2 focus:border-yellow-500 focus:ring-yellow-500"
               />
             </div>
@@ -159,7 +239,7 @@ const DiscountCalculator = () => {
                   <div className="bg-yellow-50 rounded-xl p-6">
                     <div className="text-yellow-600 text-sm font-medium mb-1">Du sparar</div>
                     <div className="text-3xl font-bold text-gray-900">
-                      {Math.round(result.discountAmount).toLocaleString()} kr
+                      {Math.round(result.discountAmount).toLocaleString('sv-SE')} kr
                     </div>
                     <div className="text-sm text-gray-500 mt-2">
                       {result.savingsPercentage.toFixed(1)}% rabatt
@@ -169,10 +249,10 @@ const DiscountCalculator = () => {
                   <div className="bg-yellow-500 rounded-xl p-6 text-white">
                     <div className="text-yellow-100 text-sm font-medium mb-1">Slutpris</div>
                     <div className="text-3xl font-bold">
-                      {Math.round(result.finalPrice).toLocaleString()} kr
+                      {Math.round(result.finalPrice).toLocaleString('sv-SE')} kr
                     </div>
                     <div className="text-sm text-yellow-100 mt-2">
-                      Ordinarie pris: {result.originalPrice.toLocaleString()} kr
+                      Ordinarie pris: {result.originalPrice.toLocaleString('sv-SE')} kr
                     </div>
                   </div>
                 </div>
@@ -189,9 +269,9 @@ const DiscountCalculator = () => {
                         : discountValue;
                       return (
                         <div key={price} className="p-4 bg-yellow-50 rounded-lg">
-                          <div className="font-medium text-gray-900">{price} kr</div>
+                          <div className="font-medium text-gray-900">{price.toLocaleString('sv-SE')} kr</div>
                           <div className="text-yellow-600 font-semibold">
-                            {Math.round(price - discount)} kr
+                            {Math.round(price - discount).toLocaleString('sv-SE')} kr
                           </div>
                         </div>
                       );

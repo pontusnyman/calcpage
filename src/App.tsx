@@ -216,7 +216,7 @@ function App() {
       'savings-goal': true,
       'car-lease': false,
       'hourly-rate': false,
-      'discount': false,
+      'discount': true,
       'energy-savings': false,
       'meeting-cost': false,
       'bmi': false,

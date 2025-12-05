@@ -17,7 +17,7 @@ export const ALL_CALCULATORS: CalculatorInfo[] = [
   { id: 'mortgage', title: 'Bolånekalkylator', path: '/bolanekalkylator', category: 'Ekonomi', description: 'Beräkna månadskostnad och amortering för ditt bolån', premium: false },
   { id: 'vat', title: 'Momskalkylator', path: '/momskalkylator', category: 'Ekonomi', description: 'Räkna ut moms enkelt med vår momskalkylator', premium: false },
   { id: 'crypto-profit', title: 'Krypto Vinst/Förlust', path: '/kryptokalkylator', category: 'Ekonomi', description: 'Beräkna vinst eller förlust på dina kryptoinvesteringar', premium: true },
-  { id: 'savings-goal', title: 'Sparmålskalkylator', path: '/sparmalskalkylator', category: 'Ekonomi', description: 'Beräkna hur mycket du behöver spara för att nå ditt mål', premium: true },
+  { id: 'savings-goal', title: 'Sparmålskalkylator', path: '/sparmalskalkylator', category: 'Ekonomi', description: 'Beräkna hur mycket du behöver spara för att nå ditt mål', premium: false },
   { id: 'car-lease', title: 'Leasing vs Köp', path: '/billeasingkalkylator', category: 'Ekonomi', description: 'Jämför kostnaden för att leasa eller köpa en bil', premium: true },
   { id: 'hourly-rate', title: 'Timtaxekalkylator', path: '/timtaxekalkylator', category: 'Ekonomi', description: 'Beräkna din timtaxa baserat på årslön', premium: true },
   { id: 'discount', title: 'Rabattkalkylator', path: '/rabattkalkylator', category: 'Ekonomi', description: 'Beräkna rabatt och slutpris', premium: false },

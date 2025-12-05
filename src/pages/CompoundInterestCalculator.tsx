@@ -43,10 +43,31 @@ interface CompoundResult {
 
 const CompoundInterestCalculator = () => {
   const [initialAmount, setInitialAmount] = useState<number>(30000);
+  const [initialAmountDisplay, setInitialAmountDisplay] = useState<string>('30 000');
   const [monthlyContribution, setMonthlyContribution] = useState<number>(900);
+  const [monthlyContributionDisplay, setMonthlyContributionDisplay] = useState<string>('900');
   const [years, setYears] = useState<number>(25);
   const [interestRate, setInterestRate] = useState<number>(7);
   const [result, setResult] = useState<CompoundResult | null>(null);
+
+  // Format number with Swedish formatting (spaces as thousand separators)
+  const formatSwedishNumber = (num: number): string => {
+    if (num === 0) return '';
+    return num.toLocaleString('sv-SE').replace(/,/g, ' ');
+  };
+
+  // Parse formatted string back to number
+  const parseSwedishNumber = (str: string): number => {
+    const cleaned = str.replace(/\s/g, '');
+    return Number(cleaned) || 0;
+  };
+
+  // Format number string with spaces as thousands separators
+  const formatNumberString = (str: string): string => {
+    const digitsOnly = str.replace(/\D/g, '');
+    if (!digitsOnly) return '';
+    return digitsOnly.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
 
   // Share functionality
   const { handleShare } = useCalculatorShare({
@@ -62,8 +83,12 @@ const CompoundInterestCalculator = () => {
   useEffect(() => {
     const params = getUrlParams();
     if (params.has('initialAmount')) {
-      setInitialAmount(getNumberParam(params, 'initialAmount', 30000));
-      setMonthlyContribution(getNumberParam(params, 'monthlyContribution', 900));
+      const parsedInitial = getNumberParam(params, 'initialAmount', 30000);
+      const parsedMonthly = getNumberParam(params, 'monthlyContribution', 900);
+      setInitialAmount(parsedInitial);
+      setInitialAmountDisplay(formatSwedishNumber(parsedInitial));
+      setMonthlyContribution(parsedMonthly);
+      setMonthlyContributionDisplay(formatSwedishNumber(parsedMonthly));
       setYears(getNumberParam(params, 'years', 25));
       setInterestRate(getNumberParam(params, 'interestRate', 7));
       // Auto-calculate will happen via the existing useEffect dependency
@@ -178,9 +203,18 @@ const CompoundInterestCalculator = () => {
                     Startkapital (kr)
                   </label>
                   <input
-                    type="number"
-                    value={initialAmount}
-                    onChange={(e) => setInitialAmount(Math.max(0, Number(e.target.value)))}
+                    type="text"
+                    value={initialAmountDisplay}
+                    onChange={(e) => {
+                      const formatted = formatNumberString(e.target.value);
+                      setInitialAmountDisplay(formatted);
+                      setInitialAmount(parseSwedishNumber(formatted));
+                    }}
+                    onBlur={(e) => {
+                      const parsed = parseSwedishNumber(e.target.value);
+                      setInitialAmount(parsed);
+                      setInitialAmountDisplay(parsed === 0 ? '' : formatSwedishNumber(parsed));
+                    }}
                     className="w-full border-2 border-teal-200 rounded-lg px-4 py-2 focus:border-teal-500 focus:ring-teal-500"
                   />
                 </div>
@@ -190,9 +224,18 @@ const CompoundInterestCalculator = () => {
                     Månadssparande (kr/mån)
                   </label>
                   <input
-                    type="number"
-                    value={monthlyContribution}
-                    onChange={(e) => setMonthlyContribution(Math.max(0, Number(e.target.value)))}
+                    type="text"
+                    value={monthlyContributionDisplay}
+                    onChange={(e) => {
+                      const formatted = formatNumberString(e.target.value);
+                      setMonthlyContributionDisplay(formatted);
+                      setMonthlyContribution(parseSwedishNumber(formatted));
+                    }}
+                    onBlur={(e) => {
+                      const parsed = parseSwedishNumber(e.target.value);
+                      setMonthlyContribution(parsed);
+                      setMonthlyContributionDisplay(parsed === 0 ? '' : formatSwedishNumber(parsed));
+                    }}
                     className="w-full border-2 border-teal-200 rounded-lg px-4 py-2 focus:border-teal-500 focus:ring-teal-500"
                   />
                 </div>
@@ -245,11 +288,11 @@ const CompoundInterestCalculator = () => {
               </div>
             )}
 
-            <div className="bg-teal-100 rounded-2xl shadow-xl p-8 mt-6">
+            {/* <div className="bg-teal-100 rounded-2xl shadow-xl p-8 mt-6">
               <div className="h-64 rounded-lg flex items-center justify-center bg-teal-50 border-2 border-teal-200">
                 <p className="text-teal-600">Annonsplats</p>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="lg:col-span-2 space-y-8">

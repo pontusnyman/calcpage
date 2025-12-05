@@ -213,7 +213,7 @@ function App() {
       'mortgage': false,
       'vat': false,
       'crypto-profit': false,
-      'savings-goal': false,
+      'savings-goal': true,
       'car-lease': false,
       'hourly-rate': false,
       'discount': false,

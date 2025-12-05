@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, PiggyBank, Calculator, Share2, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getUrlParams, getNumberParam } from '../utils/urlParams';
 
 interface SavingsResult {
   monthlyContribution: number;
@@ -17,33 +18,59 @@ interface SavingsResult {
 
 const SavingsGoalCalculator = () => {
   const [targetAmount, setTargetAmount] = useState<number>(100000);
+  const [targetAmountDisplay, setTargetAmountDisplay] = useState<string>('100 000');
   const [timeMonths, setTimeMonths] = useState<number>(24);
   const [interestRate, setInterestRate] = useState<number>(2);
   const [initialAmount, setInitialAmount] = useState<number>(10000);
+  const [initialAmountDisplay, setInitialAmountDisplay] = useState<string>('10 000');
   const [result, setResult] = useState<SavingsResult | null>(null);
   const [shareButtonText, setShareButtonText] = useState('Dela');
 
-  const calculateSavings = () => {
-    const monthlyRate = interestRate / 100 / 12;
+  // Format number with Swedish formatting (spaces as thousand separators)
+  const formatSwedishNumber = (num: number): string => {
+    if (num === 0) return '';
+    return num.toLocaleString('sv-SE').replace(/,/g, ' ');
+  };
+
+  // Parse formatted string back to number
+  const parseSwedishNumber = (str: string): number => {
+    const cleaned = str.replace(/\s/g, '');
+    return Number(cleaned) || 0;
+  };
+
+  // Format number string with spaces as thousands separators
+  const formatNumberString = (str: string): string => {
+    const digitsOnly = str.replace(/\D/g, '');
+    if (!digitsOnly) return '';
+    return digitsOnly.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
+
+  const calculateSavingsWithValues = (
+    target: number,
+    time: number,
+    rate: number,
+    initial: number
+  ) => {
+    const monthlyRate = rate / 100 / 12;
     let monthlyContribution = 0;
     
     // Calculate required monthly contribution using PMT formula
     if (monthlyRate === 0) {
-      monthlyContribution = (targetAmount - initialAmount) / timeMonths;
+      monthlyContribution = (target - initial) / time;
     } else {
       monthlyContribution = (
-        (targetAmount - initialAmount * Math.pow(1 + monthlyRate, timeMonths)) *
+        (target - initial * Math.pow(1 + monthlyRate, time)) *
         monthlyRate /
-        (Math.pow(1 + monthlyRate, timeMonths) - 1)
+        (Math.pow(1 + monthlyRate, time) - 1)
       );
     }
 
     // Generate monthly data
     const monthlyData = [];
-    let balance = initialAmount;
-    let totalContributions = initialAmount;
+    let balance = initial;
+    let totalContributions = initial;
     
-    for (let month = 1; month <= timeMonths; month++) {
+    for (let month = 1; month <= time; month++) {
       const interest = balance * monthlyRate;
       balance += monthlyContribution + interest;
       totalContributions += monthlyContribution;
@@ -64,6 +91,32 @@ const SavingsGoalCalculator = () => {
       monthlyData
     });
   };
+
+  const calculateSavings = () => {
+    calculateSavingsWithValues(targetAmount, timeMonths, interestRate, initialAmount);
+  };
+
+  // Parse URL parameters on mount and auto-calculate
+  useEffect(() => {
+    const params = getUrlParams();
+    if (params.has('target')) {
+      const parsedTarget = getNumberParam(params, 'target', 100000);
+      const parsedTime = getNumberParam(params, 'time', 24);
+      const parsedRate = getNumberParam(params, 'rate', 2);
+      const parsedInitial = getNumberParam(params, 'initial', 10000);
+      
+      setTargetAmount(parsedTarget);
+      setTargetAmountDisplay(formatSwedishNumber(parsedTarget));
+      setTimeMonths(parsedTime);
+      setInterestRate(parsedRate);
+      setInitialAmount(parsedInitial);
+      setInitialAmountDisplay(formatSwedishNumber(parsedInitial));
+      
+      // Auto-calculate with parsed values directly
+      calculateSavingsWithValues(parsedTarget, parsedTime, parsedRate, parsedInitial);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleShare = async () => {
     const shareParams = new URLSearchParams({
@@ -88,7 +141,8 @@ const SavingsGoalCalculator = () => {
     { months: 12, label: '1 år' },
     { months: 24, label: '2 år' },
     { months: 36, label: '3 år' },
-    { months: 60, label: '5 år' }
+    { months: 60, label: '5 år' },
+    { months: 120, label: '10 år' },
   ];
 
   return (
@@ -116,9 +170,18 @@ const SavingsGoalCalculator = () => {
                 Sparmål (kr)
               </label>
               <input
-                type="number"
-                value={targetAmount}
-                onChange={(e) => setTargetAmount(Math.max(0, Number(e.target.value)))}
+                type="text"
+                value={targetAmountDisplay}
+                onChange={(e) => {
+                  const formatted = formatNumberString(e.target.value);
+                  setTargetAmountDisplay(formatted);
+                  setTargetAmount(parseSwedishNumber(formatted));
+                }}
+                onBlur={(e) => {
+                  const parsed = parseSwedishNumber(e.target.value);
+                  setTargetAmount(parsed);
+                  setTargetAmountDisplay(parsed === 0 ? '' : formatSwedishNumber(parsed));
+                }}
                 className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-green-500 focus:ring-green-500"
               />
             </div>
@@ -128,9 +191,18 @@ const SavingsGoalCalculator = () => {
                 Startkapital (kr)
               </label>
               <input
-                type="number"
-                value={initialAmount}
-                onChange={(e) => setInitialAmount(Math.max(0, Number(e.target.value)))}
+                type="text"
+                value={initialAmountDisplay}
+                onChange={(e) => {
+                  const formatted = formatNumberString(e.target.value);
+                  setInitialAmountDisplay(formatted);
+                  setInitialAmount(parseSwedishNumber(formatted));
+                }}
+                onBlur={(e) => {
+                  const parsed = parseSwedishNumber(e.target.value);
+                  setInitialAmount(parsed);
+                  setInitialAmountDisplay(parsed === 0 ? '' : formatSwedishNumber(parsed));
+                }}
                 className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-green-500 focus:ring-green-500"
               />
             </div>
@@ -145,7 +217,7 @@ const SavingsGoalCalculator = () => {
                 onChange={(e) => setTimeMonths(Math.max(1, Number(e.target.value)))}
                 className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-green-500 focus:ring-green-500"
               />
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mt-2">
                 {commonTimeframes.map((timeframe) => (
                   <button
                     key={timeframe.months}
@@ -198,17 +270,17 @@ const SavingsGoalCalculator = () => {
                   <div className="bg-green-50 rounded-xl p-6">
                     <div className="text-green-600 text-sm font-medium mb-1">Månadssparande</div>
                     <div className="text-3xl font-bold text-gray-900">
-                      {Math.round(result.monthlyContribution)} kr
+                      {Math.round(result.monthlyContribution).toLocaleString('sv-SE')} kr
                     </div>
                     <div className="text-sm text-gray-500 mt-2">
-                      För att nå ditt mål på {targetAmount.toLocaleString()} kr
+                      För att nå ditt mål på {targetAmount.toLocaleString('sv-SE')} kr
                     </div>
                   </div>
 
                   <div className="bg-green-500 rounded-xl p-6 text-white">
                     <div className="text-green-100 text-sm font-medium mb-1">Slutbelopp</div>
                     <div className="text-3xl font-bold">
-                      {Math.round(result.finalAmount).toLocaleString()} kr
+                      {Math.round(result.finalAmount).toLocaleString('sv-SE')} kr
                     </div>
                     <div className="text-sm text-green-100 mt-2">
                       Efter {timeMonths} månader
@@ -217,23 +289,17 @@ const SavingsGoalCalculator = () => {
                 </div>
 
                 <div className="bg-green-50 rounded-xl p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <div className="text-green-600 text-sm font-medium mb-1">Totalt sparat</div>
                       <div className="text-xl font-bold text-gray-900">
-                        {Math.round(result.totalContributions).toLocaleString()} kr
+                        {Math.round(result.totalContributions).toLocaleString('sv-SE')} kr
                       </div>
                     </div>
                     <div>
                       <div className="text-green-600 text-sm font-medium mb-1">Total ränta</div>
                       <div className="text-xl font-bold text-gray-900">
-                        {Math.round(result.totalInterest).toLocaleString()} kr
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-green-600 text-sm font-medium mb-1">Effektiv årsränta</div>
-                      <div className="text-xl font-bold text-gray-900">
-                        {((Math.pow(result.finalAmount / initialAmount, 12 / timeMonths) - 1) * 100).toFixed(1)}%
+                        {Math.round(result.totalInterest).toLocaleString('sv-SE')} kr
                       </div>
                     </div>
                   </div>

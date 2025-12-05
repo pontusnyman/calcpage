@@ -192,6 +192,131 @@ const blogPosts: BlogPost[] = [
       
       <p>Om du regelbundet har problem med sömn i mer än tre veckor, överväg att konsultera en läkare. Sömnstörningar kan påverka din hälsa och livskvalitet avsevärt.</p>
     `
+  },
+  {
+    id: 'lanekostnad-guide',
+    title: 'Vad kostar ditt privatlån – och hur räknar du ut det?',
+    description: 'Lär dig hur lånekostnader fungerar och testa själv med vår Lånekostnadskalkylator.',
+    date: '2025-12-02',
+    readTime: '7 min',
+    category: 'Ekonomi',
+    image: 'https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    link: '/blog/lanekostnad-guide',
+    author: 'Pontus',
+    content: `
+      <p><b>När du tar ett privatlån är det viktigt att förstå den verkliga kostnaden</b> – inte bara räntan, utan alla avgifter och kostnader som kommer med lånet. Många fokuserar enbart på räntesatsen, men den totala lånekostnaden kan vara betydligt högre än du tror.</p>
+
+      <p>I denna guide går vi igenom vad som faktiskt ingår i kostnaden för ett privatlån, hur du beräknar den totala kostnaden och hur du kan använda vår lånekostnadskalkylator för att jämföra olika alternativ.</p>
+      <p>
+        Vill du själv räkna ut din lånekostnad? Prova vår <a href="/lanekalkylator" class="text-blue-600 underline hover:text-blue-800">Lånekostnadskalkylator</a> för att få en tydlig översikt och jämföra olika lånevillkor.
+      </p>
+
+      <h2>Vad ingår i lånekostnaden?</h2>
+      
+      <p>Den totala kostnaden för ett privatlån består av flera komponenter:</p>
+
+      <h3>1. Ränta</h3>
+      
+      <p>Räntan är den mest kända kostnaden och är den procentuella avgiften du betalar för att låna pengar. Räntan kan vara fast eller rörlig:</p>
+      
+      <ul>
+        <li><strong>Fast ränta:</strong> Förändras inte under låneperioden, ger förutsägbarhet</li>
+        <li><strong>Rörlig ränta:</strong> Kan ändras över tid, ofta lägre initialt men med osäkerhet</li>
+      </ul>
+
+      <h3>2. Uppläggningsavgift</h3>
+      
+      <p>Många banker tar ut en engångsavgift när lånet upprättas. Denna kan variera från några hundra kronor till flera tusen, beroende på lånebelopp och bank.</p>
+
+      <h3>3. Årsavgift</h3>
+      
+      <p>Vissa långivare tar ut en årlig avgift för att administrera lånet. Detta är en återkommande kostnad som kan påverka den totala kostnaden avsevärt över tid.</p>
+
+      <h3>4. Amorteringskrav</h3>
+      
+      <p>Även om amorteringar inte är en "kostnad" i traditionell mening, påverkar de din månadsbetalning och din ekonomiska situation. Vissa lån kräver amorteringar medan andra inte gör det.</p>
+
+      <h2>Hur beräknar du den totala lånekostnaden?</h2>
+      
+      <p>Den totala kostnaden för ett lån beräknas genom att lägga ihop alla räntebetalningar, avgifter och andra kostnader över hela låneperioden. Detta kallas ofta för den totala kreditkostnaden.</p>
+
+      <p>Formeln ser ut så här:</p>
+      
+      <p><strong>Total kostnad = (Ränta × Lånebelopp × Antal år) + Uppläggningsavgift + (Årsavgift × Antal år)</strong></p>
+
+      <h3>Ett praktiskt exempel:</h3>
+      
+      <ul>
+        <li>Lånebelopp: 100 000 kr</li>
+        <li>Ränta: 5,5 % per år</li>
+        <li>Lånetid: 5 år</li>
+        <li>Uppläggningsavgift: 1 500 kr</li>
+        <li>Årsavgift: 500 kr per år</li>
+      </ul>
+
+      <p>Beräkning:</p>
+      <ul>
+        <li>Räntekostnad: 100 000 × 0,055 × 5 = 27 500 kr</li>
+        <li>Uppläggningsavgift: 1 500 kr</li>
+        <li>Årsavgift: 500 × 5 = 2 500 kr</li>
+        <li><strong>Total kostnad: 31 500 kr</strong></li>
+      </ul>
+
+      <p>Det betyder att du totalt betalar 131 500 kr för att låna 100 000 kr över 5 år.</p>
+
+      <h2>Effektiv ränta – den verkliga kostnaden</h2>
+      
+      <p>Effektiv ränta är ett sätt att jämföra olika lån på ett rättvist sätt. Den inkluderar alla kostnader och visar den verkliga årliga kostnaden i procent. Detta gör det lättare att jämföra olika lånealternativ.</p>
+
+      <p>En låg nominell ränta kan faktiskt vara dyrare än en högre om det finns många avgifter kopplade till lånet.</p>
+
+      <h2>Faktorer som påverkar lånekostnaden</h2>
+      
+      <h3>1. Kreditvärdighet</h3>
+      
+      <p>Din kreditvärdighet är en av de viktigaste faktorerna. En bättre kreditvärdighet ger ofta lägre räntor och bättre villkor.</p>
+
+      <h3>2. Lånebelopp</h3>
+      
+      <p>Större lån kan ibland ge bättre räntor, men det beror på banken och dina förutsättningar.</p>
+
+      <h3>3. Lånetid</h3>
+      
+      <p>Längre lånetid innebär ofta högre total kostnad eftersom räntan betalas under en längre period, även om månadskostnaden kan vara lägre.</p>
+
+      <h3>4. Säkerhet</h3>
+      
+      <p>Lån med säkerhet (som bil eller fastighet) har ofta lägre räntor än obundna lån.</p>
+
+      <h2>Använd vår lånekostnadskalkylator</h2>
+      
+      <p>För att göra det enklare att förstå och jämföra olika lånealternativ har vi skapat en lånekostnadskalkylator. Med den kan du:</p>
+      
+      <ul>
+        <li>Beräkna den totala kostnaden för ditt lån</li>
+        <li>Se månadskostnaden inklusive ränta och amortering</li>
+        <li>Jämföra olika lånealternativ</li>
+        <li>Förstå hur olika faktorer påverkar kostnaden</li>
+      </ul>
+
+      <p>Kalkylatorn tar hänsyn till alla relevanta kostnader och ger dig en tydlig bild av vad lånet faktiskt kommer att kosta.</p>
+
+      <h2>Tips för att minska lånekostnaden</h2>
+      
+      <ol>
+        <li><strong>Förbättra din kreditvärdighet:</strong> Betala räkningar i tid och håll låg kreditanvändning</li>
+        <li><strong>Jämför olika långivare:</strong> Använd vår kalkylator för att hitta det bästa alternativet</li>
+        <li><strong>Förhandla:</strong> Många banker är beredda att förhandla, särskilt om du är en god kund</li>
+        <li><strong>Överväg kortare lånetid:</strong> Om du har råd kan en kortare löptid minska den totala kostnaden</li>
+        <li><strong>Undvik onödiga avgifter:</strong> Läs villkoren noggrant och undvik långivare med många dolda avgifter</li>
+      </ol>
+
+      <h2>Slutsats</h2>
+      
+      <p>Att förstå den verkliga kostnaden för ett privatlån är avgörande för att fatta rätt ekonomiska beslut. Genom att titta på mer än bara räntan och inkludera alla avgifter får du en rättvis bild av vad lånet faktiskt kostar.</p>
+
+      <p>Använd vår lånekostnadskalkylator för att utforska olika scenarier och hitta det lån som passar dig bäst. Kom ihåg att även små skillnader i ränta eller avgifter kan göra stor skillnad över tid.</p>
+    `
   }
 ];
 

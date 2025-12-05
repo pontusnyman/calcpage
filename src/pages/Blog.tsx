@@ -21,11 +21,21 @@ const blogPosts: BlogPost[] = [
     id: 'ranta-pa-ranta',
     title: 'Ränta på ränta – den enkla principen som bygger stora förmögenheter över tid',
     description: 'Ränta på ränta brukar kallas världens åttonde underverk – och det är lätt att förstå varför. Upptäck hur denna kraftfulla princip kan hjälpa dig bygga förmögenhet över tid.',
-    date: '2024-12-01',
+    date: '2025-12-01',
     readTime: '6 min',
     category: 'Ekonomi',
     image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=800',
     link: '/blog/ranta-pa-ranta'
+  },
+  {
+    id: 'lanekostnad-guide',
+    title: 'Vad kostar ditt privatlån – och hur räknar du ut det?',
+    description: 'Lär dig hur lånekostnader fungerar, vilka avgifter som ingår och hur du själv kan räkna ut din totala lånekostnad. Utforska olika scenarier och testa själv med vår Lånekostnadskalkylator för att ta kontroll över din ekonomi.',
+    date: '2025-12-02',
+    readTime: '7 min',
+    category: 'Ekonomi',
+    image: 'https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    link: '/blog/lanekostnad-guide'
   },
   // {
   //   id: 'healthy-sleep-habits',

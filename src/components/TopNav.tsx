@@ -31,7 +31,7 @@ const TopNav: React.FC<TopNavProps> = ({
                 alt="Kalkylatorn"
                 width={265}
                 height={336}
-                className="w-[15rem] h-auto"
+                className="w-36 sm:w-40 md:w-44 h-auto max-w-full"
                 decoding="async"
                 fetchPriority="high"
               />

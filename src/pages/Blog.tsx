@@ -66,6 +66,16 @@ const blogPosts: BlogPost[] = [
     link: '/blog/amerikansk-mattomvandlaren'
   },
   {
+    id: 'lopning-var-tempo-och-mal',
+    title: 'Vår och löprunda: sätt rätt tempo när säsongen vänder',
+    description: 'Ljusare kvällar lockar många ut – men spring för snabbt för tidigt gör ofta mer skada än nytta. Tips för mjuk start, vad löptempo betyder – och hur du räknar ut minuter per kilometer och km/h med temporäknaren.',
+    date: '2026-04-10',
+    readTime: '6 min',
+    category: 'Träning',
+    image: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/lopning-var-tempo-och-mal'
+  },
+  {
     id: 'savings-strategies',
     title: 'Smarta sparstrategier för olika livssituationer',
     description: 'Upptäck olika sparstrategier och hur du kan använda våra sparkalkylatorer för att nå dina ekonomiska mål.',

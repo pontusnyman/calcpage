@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, Timer, Trophy } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCalculatorShare } from '../hooks/useCalculatorShare';
+import ShareButton from '../components/ShareButton';
+import { getUrlParams, getNumberParam } from '../utils/urlParams';
 
 interface PaceResult {
   paceMinutes: number;
@@ -15,6 +18,49 @@ const RunningPaceCalculator = () => {
   const [minutes, setMinutes] = useState<number>(25);
   const [seconds, setSeconds] = useState<number>(0);
   const [result, setResult] = useState<PaceResult | null>(null);
+
+  const { handleShare } = useCalculatorShare({
+    params: {
+      distance,
+      hours,
+      minutes,
+      seconds,
+    },
+  });
+
+  useEffect(() => {
+    const params = getUrlParams();
+    if (!params.has('distance')) return;
+
+    const d = Math.max(0.1, getNumberParam(params, 'distance', 5));
+    const h = Math.max(0, Math.min(99, Math.floor(getNumberParam(params, 'hours', 0))));
+    const m = Math.max(0, Math.min(59, Math.floor(getNumberParam(params, 'minutes', 25))));
+    const s = Math.max(0, Math.min(59, Math.floor(getNumberParam(params, 'seconds', 0))));
+    const totalRunSeconds = h * 3600 + m * 60 + s;
+
+    setDistance(d);
+    setHours(h);
+    setMinutes(m);
+    setSeconds(s);
+
+    if (totalRunSeconds <= 0) {
+      setResult(null);
+      return;
+    }
+
+    const secondsPerKm = totalRunSeconds / d;
+    const paceMinutes = Math.floor(secondsPerKm / 60);
+    const paceSeconds = Math.round(secondsPerKm % 60);
+    const speedKmh = (d / totalRunSeconds) * 3600;
+
+    setResult({
+      paceMinutes,
+      paceSeconds,
+      totalSeconds: secondsPerKm,
+      speedKmh,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration from share URL
+  }, []);
 
   const calculatePace = () => {
     // Convert all time to seconds
@@ -163,6 +209,8 @@ const RunningPaceCalculator = () => {
                     })}
                   </div>
                 </div>
+
+                <ShareButton onShare={handleShare} color="teal" />
               </div>
             )}
           </div>

@@ -229,7 +229,7 @@ function App() {
       'age': false,
       'jet-lag': false,
       'caffeine': false,
-      'running-pace': false,
+      'running-pace': true,
       'race-finish': false,
       'heart-rate-zones': false,
       'measurement-converter': true,

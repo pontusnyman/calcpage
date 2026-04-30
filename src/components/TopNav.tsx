@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo2.svg';
+import logo from '../assets/logo-nav.webp';
 
 interface Category {
   id: string;
@@ -26,7 +26,15 @@ const TopNav: React.FC<TopNavProps> = ({
         <div className="flex flex-col md:flex-row md:items-center">
           <div className="flex justify-center md:justify-start">
             <Link to="/">
-              <img src={logo} alt="logo" className="w-[15rem]" />
+              <img
+                src={logo}
+                alt="Kalkylatorn"
+                width={265}
+                height={336}
+                className="w-[15rem] h-auto"
+                decoding="async"
+                fetchPriority="high"
+              />
             </Link>
           </div>
           <div className="flex items-center space-x-4 mt-4 md:mt-0 md:ml-4">

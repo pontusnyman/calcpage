@@ -1,0 +1,3 @@
+# https://www.kalkylatorn.com/
+User-agent: *
+Allow: /

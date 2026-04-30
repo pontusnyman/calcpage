@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { ADSENSE_CLIENT, loadAdSenseScript } from '../lib/adsenseLoader';
 
 interface AdBannerProps {
   position?: 'top' | 'bottom';
@@ -13,19 +14,26 @@ const AdBanner: React.FC<AdBannerProps> = ({ position = 'top', className = '', a
     : 'sticky bottom-4';
 
   useEffect(() => {
-    // Only load ads if user has consented to cookies
     const consent = localStorage.getItem('cookieConsent');
-    if (consent === 'accepted' && adRef.current && typeof window !== 'undefined') {
-      try {
-        // Check if AdSense script is loaded
-        if ((window as any).adsbygoogle) {
-          ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-        }
-      } catch (e) {
-        console.error('Error loading AdSense ad:', e);
-      }
+    if (consent !== 'accepted' || !adRef.current || !adSlot || typeof window === 'undefined') {
+      return;
     }
-  }, []);
+    let cancelled = false;
+    loadAdSenseScript()
+      .then(() => {
+        if (cancelled || !adRef.current) return;
+        try {
+          ((window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle =
+            (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle || []).push({});
+        } catch (e) {
+          console.error('Error loading AdSense ad:', e);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [adSlot]);
 
   // Show placeholder if no consent or no ad slot
   const consent = typeof window !== 'undefined' ? localStorage.getItem('cookieConsent') : null;
@@ -39,7 +47,7 @@ const AdBanner: React.FC<AdBannerProps> = ({ position = 'top', className = '', a
             ref={adRef}
             className="adsbygoogle block"
             style={{ display: 'block', minHeight: '90px' }}
-            data-ad-client="ca-pub-8378245206733631"
+            data-ad-client={ADSENSE_CLIENT}
             data-ad-slot={adSlot}
             data-ad-format="auto"
             data-full-width-responsive="true"

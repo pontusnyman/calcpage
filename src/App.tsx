@@ -1,51 +1,61 @@
-import React, { useRef } from 'react';
+import React, { useRef, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Moon, Beer, Coffee, Scale, Flame, Target, Timer, TrendingUp, Wallet, Home, Percent, Clock, Heart, Activity, ArrowDownUp, Trophy, Calendar, Plane, Bitcoin, PiggyBank, Car, DollarSign, Zap, Users } from 'lucide-react';
 import CalculatorCard from './components/CalculatorCard';
 import Layout from './components/Layout';
 import TopNav from './components/TopNav';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
 import { FeatureFlagProvider, useFeatureFlag, useFeatureFlags } from './contexts/FeatureFlagContext';
 import { PremiumProvider, usePremium } from './contexts/PremiumContext';
 import CrownIcon from './components/CrownIcon';
 import PremiumAccessControl from './components/PremiumAccessControl';
 import PremiumToggle from './components/PremiumToggle';
 import CookieConsent from './components/CookieConsent';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import CookiePolicy from './pages/CookiePolicy';
-import TermsOfService from './pages/TermsOfService';
+import AdSenseBootstrap from './components/AdSenseBootstrap';
 
-// Calculator imports
-import SleepCalculator from './pages/SleepCalculator';
-import AlcoholCalculator from './pages/AlcoholCalculator';
-import CupCalculator from './pages/CupCalculator';
-import BMICalculator from './pages/BMICalculator';
-import CalorieCalculator from './pages/CalorieCalculator';
-import WeightReduceCalculator from './pages/WeightReduceCalculator';
-import RunningPaceCalculator from './pages/RunningPaceCalculator';
-import CompoundInterestCalculator from './pages/CompoundInterestCalculator';
-import LoanCalculator from './pages/LoanCalculator';
-import MortgageCalculator from './pages/MortgageCalculator';
-import VATCalculator from './pages/VATCalculator';
-import FastingCalculator from './pages/FastingCalculator';
-import OvulationCalculator from './pages/OvulationCalculator';
-import BMRCalculator from './pages/BMRCalculator';
-import MeasurementConverter from './pages/MeasurementConverter';
-import RaceFinishPredictor from './pages/RaceFinishPredictor';
-import HeartRateZonesCalculator from './pages/HeartRateZonesCalculator';
-import DeadlineCalculator from './pages/DeadlineCalculator';
-import JetLagCalculator from './pages/JetLagCalculator';
-import CountdownCalculator from './pages/CountdownCalculator';
-import AgeCalculator from './pages/AgeCalculator';
-import CarLeaseCalculator from './pages/CarLeaseCalculator';
-import DiscountCalculator from './pages/DiscountCalculator';
-import EnergySavingsCalculator from './pages/EnergySavingsCalculator';
-import HourlyRateCalculator from './pages/HourlyRateCalculator';
-import MeetingCostCalculator from './pages/MeetingCostCalculator';
-import SavingsGoalCalculator from './pages/SavingsGoalCalculator';
-import CaffeineCalculator from './pages/CaffeineCalculator';
-import CryptoProfitCalculator from './pages/CryptoProfitCalculator';
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const SleepCalculator = lazy(() => import('./pages/SleepCalculator'));
+const AlcoholCalculator = lazy(() => import('./pages/AlcoholCalculator'));
+const CupCalculator = lazy(() => import('./pages/CupCalculator'));
+const BMICalculator = lazy(() => import('./pages/BMICalculator'));
+const CalorieCalculator = lazy(() => import('./pages/CalorieCalculator'));
+const WeightReduceCalculator = lazy(() => import('./pages/WeightReduceCalculator'));
+const RunningPaceCalculator = lazy(() => import('./pages/RunningPaceCalculator'));
+const CompoundInterestCalculator = lazy(() => import('./pages/CompoundInterestCalculator'));
+const LoanCalculator = lazy(() => import('./pages/LoanCalculator'));
+const MortgageCalculator = lazy(() => import('./pages/MortgageCalculator'));
+const VATCalculator = lazy(() => import('./pages/VATCalculator'));
+const FastingCalculator = lazy(() => import('./pages/FastingCalculator'));
+const OvulationCalculator = lazy(() => import('./pages/OvulationCalculator'));
+const BMRCalculator = lazy(() => import('./pages/BMRCalculator'));
+const MeasurementConverter = lazy(() => import('./pages/MeasurementConverter'));
+const RaceFinishPredictor = lazy(() => import('./pages/RaceFinishPredictor'));
+const HeartRateZonesCalculator = lazy(() => import('./pages/HeartRateZonesCalculator'));
+const DeadlineCalculator = lazy(() => import('./pages/DeadlineCalculator'));
+const JetLagCalculator = lazy(() => import('./pages/JetLagCalculator'));
+const CountdownCalculator = lazy(() => import('./pages/CountdownCalculator'));
+const AgeCalculator = lazy(() => import('./pages/AgeCalculator'));
+const CarLeaseCalculator = lazy(() => import('./pages/CarLeaseCalculator'));
+const DiscountCalculator = lazy(() => import('./pages/DiscountCalculator'));
+const EnergySavingsCalculator = lazy(() => import('./pages/EnergySavingsCalculator'));
+const HourlyRateCalculator = lazy(() => import('./pages/HourlyRateCalculator'));
+const MeetingCostCalculator = lazy(() => import('./pages/MeetingCostCalculator'));
+const SavingsGoalCalculator = lazy(() => import('./pages/SavingsGoalCalculator'));
+const CaffeineCalculator = lazy(() => import('./pages/CaffeineCalculator'));
+const CryptoProfitCalculator = lazy(() => import('./pages/CryptoProfitCalculator'));
+
+const RouteFallback: React.FC = () => (
+  <div
+    className="min-h-[50vh] flex items-center justify-center bg-gray-50"
+    role="status"
+    aria-live="polite"
+  >
+    <span className="text-gray-500 text-sm">Laddar …</span>
+  </div>
+);
 
 interface Category {
   id: string;
@@ -231,6 +241,7 @@ function App() {
   return (
     <FeatureFlagProvider initialFlags={initialFeatureFlags}>
       <PremiumProvider>
+        <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/blog" element={<Blog />} />
@@ -268,6 +279,8 @@ function App() {
           <Route path="/cookiepolicy" element={<CookiePolicy />} />
           <Route path="/anvandarvillkor" element={<TermsOfService />} />
         </Routes>
+        </Suspense>
+        <AdSenseBootstrap />
         <CookieConsent />
         {!import.meta.env.PROD && <PremiumToggle />}
       </PremiumProvider>

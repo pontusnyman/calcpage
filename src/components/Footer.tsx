@@ -10,17 +10,17 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Om oss</h3>
-            <p className="mt-4 text-base text-gray-500">
+            <h3 className="text-sm font-semibold text-gray-600 tracking-wider uppercase">Om oss</h3>
+            <p className="mt-4 text-base text-gray-600">
               Kalkylatorn.se erbjuder gratis onlinekalkylatorer för olika vardagliga beräkningar och omvandlingar.
             </p>
           </div>
           {showFooterCalculators && (
             <div>
-              <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Resurser</h3>
+              <h3 className="text-sm font-semibold text-gray-600 tracking-wider uppercase">Resurser</h3>
               <ul className="mt-4 space-y-4">
                 <li>
-                  <Link to="/blog" className="text-base text-gray-500 hover:text-gray-900">
+                  <Link to="/blog" className="text-base text-gray-600 hover:text-gray-900">
                     Blogg
                   </Link>
                 </li>
@@ -33,10 +33,10 @@ const Footer: React.FC = () => {
             </div>
           )}
           <div>
-            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Kontakt</h3>
+            <h3 className="text-sm font-semibold text-gray-600 tracking-wider uppercase">Kontakt</h3>
             <ul className="mt-4 space-y-4">
               <li>
-                <a href="mailto:kontakt@kalkylatorn.com" className="text-base text-gray-500 hover:text-gray-900">
+                <a href="mailto:kontakt@kalkylatorn.com" className="text-base text-gray-600 hover:text-gray-900">
                   kontakt@kalkylatorn.com
                 </a>
               </li>
@@ -45,19 +45,19 @@ const Footer: React.FC = () => {
         </div>
         <div className="mt-8 border-t border-gray-200 pt-8">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
-            <Link to="/integritetspolicy" className="text-sm text-gray-400 hover:text-gray-600">
+            <Link to="/integritetspolicy" className="text-sm text-gray-600 hover:text-gray-900 underline-offset-2 hover:underline">
               Integritetspolicy
             </Link>
-            <span className="hidden sm:inline text-gray-400">•</span>
-            <Link to="/cookiepolicy" className="text-sm text-gray-400 hover:text-gray-600">
+            <span className="hidden sm:inline text-gray-500" aria-hidden="true">•</span>
+            <Link to="/cookiepolicy" className="text-sm text-gray-600 hover:text-gray-900 underline-offset-2 hover:underline">
               Cookie Policy
             </Link>
-            <span className="hidden sm:inline text-gray-400">•</span>
-            <Link to="/anvandarvillkor" className="text-sm text-gray-400 hover:text-gray-600">
+            <span className="hidden sm:inline text-gray-500" aria-hidden="true">•</span>
+            <Link to="/anvandarvillkor" className="text-sm text-gray-600 hover:text-gray-900 underline-offset-2 hover:underline">
               Användarvillkor
             </Link>
           </div>
-          <p className="text-base text-gray-400 text-center mt-4">
+          <p className="text-base text-gray-600 text-center mt-4">
             © {new Date().getFullYear()} Kalkulatorn.se. Alla rättigheter förbehållna.
           </p>
         </div>

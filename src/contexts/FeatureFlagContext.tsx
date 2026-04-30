@@ -20,7 +20,7 @@ export const ALL_CALCULATORS: CalculatorInfo[] = [
   { id: 'savings-goal', title: 'Sparmålskalkylator', path: '/sparmalskalkylator', category: 'Ekonomi', description: 'Beräkna hur mycket du behöver spara för att nå ditt mål', premium: false },
   { id: 'car-lease', title: 'Leasing vs Köp', path: '/billeasingkalkylator', category: 'Ekonomi', description: 'Jämför kostnaden för att leasa eller köpa en bil', premium: true },
   { id: 'hourly-rate', title: 'Timtaxekalkylator', path: '/timtaxekalkylator', category: 'Ekonomi', description: 'Beräkna din timtaxa baserat på årslön', premium: true },
-  { id: 'discount', title: 'Rabattkalkylator', path: '/rabattkalkylator', category: 'Ekonomi', description: 'Beräkna rabatt och slutpris', premium: false },
+  { id: 'discount', title: 'Rabattkalkylator', path: '/rabattkalkylator', category: 'Ekonomi', description: 'Beräkna rabatt och slutpris enkelt och snabbt med denna kalkylator', premium: false },
   { id: 'energy-savings', title: 'Energikalkylator', path: '/energikalkylator', category: 'Ekonomi', description: 'Beräkna energibesparingar och kostnader', premium: true },
   { id: 'meeting-cost', title: 'Möteskostnadskalkylator', path: '/moteskostnadskalkylator', category: 'Ekonomi', description: 'Beräkna kostnaden för möten', premium: true },
 
@@ -29,7 +29,7 @@ export const ALL_CALCULATORS: CalculatorInfo[] = [
   { id: 'bmr', title: 'BMR Kalkylator', path: '/bmrkalkylator', category: 'Hälsa', description: 'Beräkna din basala ämnesomsättning och dagliga kaloriförbrukning', premium: true },
   { id: 'calorie', title: 'Kaloribehovskalkylator', path: '/kalorikalkylator', category: 'Hälsa', description: 'Beräkna ditt dagliga energibehov baserat på din aktivitetsnivå', premium: false },
   { id: 'weight-reduce', title: 'Viktminskningskalkylator', path: '/viktminskningskalkylator', category: 'Hälsa', description: 'Beräkna ditt dagliga kaloriintag för att nå din målvikt', premium: true },
-  { id: 'fasting', title: 'Fastekalkylator', path: '/fastekalkylator', category: 'Hälsa', description: 'Håll koll på din fasta och lär dig om kroppens olika faser', premium: true },
+  { id: 'fasting', title: 'Fastekalkylator', path: '/fastekalkylator', category: 'Hälsa', description: 'Håll koll på din fasta och lär dig om kroppens olika faser', premium: false },
   { id: 'ovulation', title: 'Ägglossningskalkylator', path: '/agglossningskalkylator', category: 'Hälsa', description: 'Beräkna din ägglossning och mest fertila period', premium: true },
 
   // Lifestyle

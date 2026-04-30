@@ -18,6 +18,16 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    id: 'fasta-24-till-96-timmar',
+    title: 'Fasta från 24 till 96 timmar: vad händer i kroppen och vilka kan fördelarna vara?',
+    description: 'En översikt av kort till medellång fasta — från ett dygn upp till fyra dygn — och vanliga hälsovinster diskuterade i forskning. Planera din fasta med vår Fastekalkylator.',
+    date: '2026-04-30',
+    readTime: '8 min',
+    category: 'Hälsa',
+    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/fasta-24-till-96-timmar'
+  },
+  {
     id: 'savings-strategies',
     title: 'Smarta sparstrategier för olika livssituationer',
     description: 'Upptäck olika sparstrategier och hur du kan använda våra sparkalkylatorer för att nå dina ekonomiska mål.',

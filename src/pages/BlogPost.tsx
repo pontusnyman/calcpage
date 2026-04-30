@@ -470,6 +470,77 @@ const blogPosts: BlogPost[] = [
 
       <p>Kom ihåg att varje resa börjar med ett första steg. Börja spara idag, även om det är ett litet belopp, och låt tiden och ränta-på-ränta effekten arbeta för dig.</p>
     `
+  },
+  {
+    id: 'fasta-24-till-96-timmar',
+    title: 'Fasta från 24 till 96 timmar: vad händer i kroppen och vilka kan fördelarna vara?',
+    description: 'En översikt av kort till medellång fasta — från ett dygn upp till fyra dygn — och vanliga hälsovinster diskuterade i forskning. Planera din fasta med vår Fastekalkylator.',
+    date: '2026-04-30',
+    readTime: '8 min',
+    category: 'Hälsa',
+    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/fasta-24-till-96-timmar',
+    author: 'Pontus',
+    content: `
+      <p><b>Fasta är en av mänsklighetens äldsta vanor</b> — och intresset för strukturerade fasteperioder har vuxit kraftigt. Här fokuserar vi på fastor från cirka 24 timmar upp till 96 timmar (fyra dygn): vad som ofta beskrivs i vetenskaplig litteratur, vilka effekter som kan uppstå vid olika längder, och hur du kan planera tiderna praktiskt.</p>
+
+      <p>Det här är <strong>inte medicinsk rådgivning</strong>. Längre fastor passar inte alla; rådfråga alltid vård vid sjukdom, graviditet, amning, diabetes eller mediciner som påverkar blodsocker. Stoppa om du mår illa, yr eller osäker.</p>
+
+      <p>Vill du räkna ut när din fasta börjar och slutar, eller hur länge du fastat? Använd vår <a href="/fastekalkylator" class="text-blue-600 underline hover:text-blue-800">Fastekalkylator</a> — där kan du enkelt följa tidsfönstret för just din plan.</p>
+
+      <h2>Varför pratar man om 24–96 timmar?</h2>
+
+      <p>Många kroppsliga processer styrs av om du nyligen ätit eller inte. När du inte tar in energi under en längre period förändras hormoner, bränsleanvändning och cellreparation. Exakt tidslinje varierar mellan individer, men forskning och klinisk erfarenhet ger ungefärliga intervaller som är användbara att känna till.</p>
+
+      <h2>24 timmar (ett dygn)</h2>
+
+      <p>En helfasta över ett dygn är ofta en begriplig första nivå för friska vuxna. Kroppen går från att främst använda glukos från mat till i större utsträckning att mobilisera lagrat glykogen och fett.</p>
+
+      <p><strong>Möjliga effekter som ofta nämns:</strong> Insulin kan sjunka, vilket underlättar fettomsättning; många upplever mental klarhet när hungervågen passerat; för vissa blir ett dygn ett sätt att bryta snacking utan extrem belastning.</p>
+
+      <h2>Cirka 36–48 timmar (halvannat till två dygn)</h2>
+
+      <p>När glykogenlager tömts mer väsentligt ökar omfattningen av fettnedbrytning och ketoner kan börja spela en större roll som energikälla för hjärnan jämfört med strax efter måltid.</p>
+
+      <p><strong>Möjliga effekter som ofta nämns:</strong> Fortsatt förbättrad insulinkänslighet hos många över tid med upprepade protokoll; autofagi (cellernas ”städning”) diskuteras ofta i litteraturen vid längre brist på näringsintag, men exakt mätning i människa är svår; hunger kan komma och gå i vågor.</p>
+
+      <h2>72 timmar (tre dygn)</h2>
+
+      <p>Efter cirka tre dygn är många djupt i ketos om de är friska och välhydrade. Immunologiska och stamcellsmekanismer har studerats i djur och i begränsade humana studier — lovande men inte färdigt kartlagda för alla målgrupper.</p>
+
+      <p><strong>Möjliga effekter som ofta nämns:</strong> Kraftigare metabolt skifte; viktigast är noggrann vätske- och elektrolytbalans och att inte pressa på om kroppen protesterar. Tre dygn kräver ofta mer erfarenhet eller uppsikt.</p>
+
+      <h2>96 timmar (fyra dygn)</h2>
+
+      <p>Fyra dygn tillhör de längre volontära fastorna. Här ökar risken för biverkningar som yrsel, utmattning eller elektrolytobalans om du inte är van och inte följer säkerhetsrutiner.</p>
+
+      <p><strong>Möjliga effekter som ofta nämns:</strong> Fortsatt förlängning av samma metabola och reparativa teman som vid kortare fasta, men med högre krav på övervakning, vila och i många fall professionell vägledning. De flesta som fastar så här länge gör det under kontrollerade former.</p>
+
+      <h2>Gemensamma teman: vad brukar lyftas som potentiella fördelar?</h2>
+
+      <ul>
+        <li><strong>Metabol flexibilitet:</strong> Kroppen tränas att växla mellan bränslen.</li>
+        <li><strong>Insulin och blodsocker:</strong> Hos friska kan perioder utan kalorier ge lägre insulinbelastning.</li>
+        <li><strong>Inflammation och biologiska signalsystem:</strong> Vissa biomarkörer för inflammation har visat på förbättring i studier på fastoprotocol.</li>
+        <li><strong>Fokus och ritual:</strong> Många uppskattar enkelhet i kosten under fastan och tydliga tidsramar.</li>
+      </ul>
+
+      <p>Effekten varierar med kön, ålder, sömn, stress och genetik — det som fungerar för en person är inte automatiskt rätt för en annan.</p>
+
+      <h2>Hydrering, elektrolyter och brytande av fastan</h2>
+
+      <p>Vid all fasta utan mat: drick tillräckligt med vatten; vid längre fastor är balansen av salt, magnesium och kalium ofta viktigare att hålla koll på tillsammans med vården vid behov. Bryt långa fastor mjukt med mindre måltider för att minska matsmältningsbesvär.</p>
+
+      <h2>Planera med Fastekalkylatorn</h2>
+
+      <p>När du jämför scenarier — till exempel 24 jämfört med 48 eller 72 timmar — hjälper det att se exakt var på dygnet fastan börjar och slutar. Vår <a href="/fastekalkylator" class="text-blue-600 underline hover:text-blue-800">Fastekalkylator</a> är till för precis det: sätt starttid eller sluttid och få fram hur länge du fastat eller när nästa måltid är planerad enligt ditt mål.</p>
+
+      <h2>Slutsats</h2>
+
+      <p>Fastor mellan ett och fyra dygn kan för vissa friska vuxna vara ett sätt att utforska metabol hälsa och enkelhet kring måltider — samtidigt som längre spann kräver mer förberedelse, respekt för kroppens signaler och oftast kontakt med vårdpersonal. Utforska tidsintervallet först på kortare nivåer, dokumentera hur du mår och anpassa sedan.</p>
+
+      <p><a href="/fastekalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna Fastekalkylatorn</a> och planera din nästa fasta med tydliga tider.</p>
+    `
   }
 ];
 

@@ -223,7 +223,7 @@ function App() {
       'bmr': false,
       'calorie': false,
       'weight-reduce': false,
-      'fasting': false,
+      'fasting': true,
       'ovulation': false,
       'sleep': false,
       'alcohol': false,
@@ -258,7 +258,7 @@ function App() {
           <Route path="/lanekalkylator" element={<LoanCalculator />} />
           <Route path="/bolanekalkylator" element={<MortgageCalculator />} />
           <Route path="/momskalkylator" element={<VATCalculator />} />
-          <Route path="/fastekalkylator" element={<PremiumAccessControl calculatorId="fasting"><FastingCalculator /></PremiumAccessControl>} />
+          <Route path="/fastekalkylator" element={<FastingCalculator />} />
           <Route path="/agglossningskalkylator" element={<PremiumAccessControl calculatorId="ovulation"><OvulationCalculator /></PremiumAccessControl>} />
           <Route path="/bmrkalkylator" element={<PremiumAccessControl calculatorId="bmr"><BMRCalculator /></PremiumAccessControl>} />
           <Route path="/mattomvandlare" element={<MeasurementConverter />} />

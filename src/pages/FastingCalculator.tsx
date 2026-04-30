@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Clock, Timer } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCalculatorShare } from '../hooks/useCalculatorShare';
+import ShareButton from '../components/ShareButton';
+import { getUrlParams, getStringParam, getNumberParam } from '../utils/urlParams';
+
+const FAST_DURATION_OPTIONS = [12, 16, 18, 24, 36, 48, 72, 96] as const;
+const START_MINUTE_OPTIONS = ['00', '15', '30', '45'] as const;
 
 interface FastingStage {
   hours: number;
@@ -18,10 +24,45 @@ const FastingCalculator = () => {
   const [endDateTime, setEndDateTime] = useState<string>('');
   const [progress, setProgress] = useState(0);
   const [currentStage, setCurrentStage] = useState<FastingStage | null>(null);
+  const [elapsedFasting, setElapsedFasting] = useState('0h 0m');
+
+  const { handleShare } = useCalculatorShare({
+    params: {
+      startDate,
+      startHour,
+      startMinute,
+      duration,
+    },
+  });
 
   // Add scroll to top effect when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const params = getUrlParams();
+    if (!params.has('startDate')) return;
+
+    const date = getStringParam(params, 'startDate', '');
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      setStartDate(date);
+    }
+
+    const hourNum = getNumberParam(params, 'startHour', new Date().getHours());
+    setStartHour(Math.max(0, Math.min(23, hourNum)).toString().padStart(2, '0'));
+
+    const minuteRaw = getStringParam(params, 'startMinute', '00');
+    setStartMinute(
+      START_MINUTE_OPTIONS.includes(minuteRaw as (typeof START_MINUTE_OPTIONS)[number])
+        ? minuteRaw
+        : '00'
+    );
+
+    const dur = getNumberParam(params, 'duration', 16);
+    setDuration(
+      FAST_DURATION_OPTIONS.includes(dur as (typeof FAST_DURATION_OPTIONS)[number]) ? dur : 16
+    );
   }, []);
 
   const fastingStages: FastingStage[] = [
@@ -109,8 +150,10 @@ const FastingCalculator = () => {
       const start = new Date(`${startDate}T${startHour}:${startMinute}`);
       const now = new Date();
       const endTime = new Date(start.getTime() + duration * 60 * 60 * 1000);
-      
-      // Format end date and time
+      const nowMs = now.getTime();
+      const startMs = start.getTime();
+      const endMs = endTime.getTime();
+
       const endTimeString = endTime.toLocaleString('sv-SE', {
         year: 'numeric',
         month: '2-digit',
@@ -119,28 +162,40 @@ const FastingCalculator = () => {
         minute: '2-digit'
       });
       setEndDateTime(endTimeString);
-      
-      if (now >= endTime) {
+
+      const cappedElapsedMs =
+        nowMs >= endMs
+          ? duration * 60 * 60 * 1000
+          : Math.max(0, nowMs - startMs);
+      const dispH = Math.floor(cappedElapsedMs / (1000 * 60 * 60));
+      const dispM = Math.floor((cappedElapsedMs % (1000 * 60 * 60)) / (1000 * 60));
+      setElapsedFasting(`${dispH}h ${dispM}m`);
+
+      if (nowMs >= endMs) {
         setTimeLeft('Fastan är avslutad!');
         setProgress(100);
+        const elapsedHours = duration;
+        const completedStage = [...fastingStages]
+          .reverse()
+          .find(stage => elapsedHours >= stage.hours);
+        setCurrentStage(completedStage || null);
         return;
       }
 
-      const diff = endTime.getTime() - now.getTime();
+      const diff = endMs - nowMs;
       const hours = Math.floor(diff / (1000 * 60 * 60));
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      
+
       setTimeLeft(`${hours}h ${minutes}m`);
 
-      const elapsedHours = (now.getTime() - start.getTime()) / (1000 * 60 * 60);
+      const elapsedHours = (nowMs - startMs) / (1000 * 60 * 60);
       setProgress((elapsedHours / duration) * 100);
 
-      // Find current stage
-      const currentStage = [...fastingStages]
+      const activeStage = [...fastingStages]
         .reverse()
         .find(stage => elapsedHours >= stage.hours);
-      
-      setCurrentStage(currentStage || null);
+
+      setCurrentStage(activeStage || null);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -222,12 +277,19 @@ const FastingCalculator = () => {
                 onChange={(e) => setDuration(parseInt(e.target.value))}
                 className="w-full border-2 border-teal-200 rounded-lg px-4 py-2 focus:border-teal-500 focus:ring-teal-500"
               >
-                {[12, 16, 18, 24, 36, 48, 72, 96].map(hours => (
+                {FAST_DURATION_OPTIONS.map(hours => (
                   <option key={hours} value={hours}>
                     {hours} timmar
                   </option>
                 ))}
               </select>
+            </div>
+
+            <ShareButton onShare={handleShare} color="teal" className="mt-6" />
+
+            <div className="bg-teal-50 rounded-xl p-6">
+              <div className="text-teal-600 text-sm font-medium mb-1">Fastat i</div>
+              <div className="text-3xl font-bold text-gray-900 tabular-nums">{elapsedFasting}</div>
             </div>
 
             <div className="bg-teal-50 rounded-xl p-6">

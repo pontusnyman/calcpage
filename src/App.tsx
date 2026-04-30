@@ -207,7 +207,7 @@ function App() {
       'discount': true,
       'energy-savings': false,
       'meeting-cost': false,
-      'bmi': false,
+      'bmi': true,
       'bmr': false,
       'calorie': true,
       'weight-reduce': false,

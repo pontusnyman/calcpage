@@ -2,8 +2,6 @@ import React from 'react';
 import { Calendar, Book, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TopNav from '../components/TopNav';
-import AdBanner from '../components/AdBanner';
-import AdSidebar from '../components/AdSidebar';
 
 interface BlogPost {
   id: string;
@@ -36,6 +34,16 @@ const blogPosts: BlogPost[] = [
     category: 'Hälsa',
     image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
     link: '/blog/kaloribehov-bmr-och-tdee'
+  },
+  {
+    id: 'bmi-vad-det-ar-och-kalkylatorn',
+    title: 'BMI: vad det är, hur det räknas — och hur vår kalkylator tolkar resultatet',
+    description: 'Så här fungerar Body Mass Index, vilka gränser som används för undervikt till fetma — och hur du kan prova själv med BMI-kalkylatorn på Kalkulatorn.se.',
+    date: '2026-04-20',
+    readTime: '6 min',
+    category: 'Hälsa',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/bmi-vad-det-ar-och-kalkylatorn'
   },
   {
     id: 'savings-strategies',
@@ -114,68 +122,56 @@ const Blog: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <TopNav currentPage="blog" />
 
-      <AdBanner position="top" adSlot="YOUR_TOP_BANNER_AD_SLOT_ID" />
-
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-          <AdSidebar adSlot="YOUR_SIDEBAR_AD_SLOT_ID" />
+        <div className="flex items-center justify-between mb-8">
+          {/* <Link to="/" className="inline-flex items-center text-gray-600 hover:text-gray-900">
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Tillbaka till kalkylatorer
+          </Link> */}
+          <h1 className="text-3xl font-bold text-gray-900">Blogg</h1>
+        </div>
 
-          <div className="lg:col-span-8">
-            <div className="flex items-center justify-between mb-8">
-              {/* <Link to="/" className="inline-flex items-center text-gray-600 hover:text-gray-900">
-                <ArrowLeft className="w-5 h-5 mr-2" />
-                Tillbaka till kalkylatorer
-              </Link> */}
-              <h1 className="text-3xl font-bold text-gray-900">Blogg</h1>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-              {blogPosts.map((post) => (
-                <article key={post.id} className="bg-white rounded-2xl shadow-xl overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-6">
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      <time dateTime={post.date}>
-                        {new Date(post.date).toLocaleDateString('sv-SE')}
-                      </time>
-                      <span className="mx-2">•</span>
-                      <Clock className="w-4 h-4 mr-1" />
-                      <span>{post.readTime}</span>
-                    </div>
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">
-                      {post.title}
-                    </h2>
-                    <p className="text-gray-600 mb-4">
-                      {post.description}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                        {post.category}
-                      </span>
-                      <Link
-                        to={post.link}
-                        className="inline-flex items-center text-indigo-600 hover:text-indigo-500"
-                      >
-                        <span className="mr-2">Läs mer</span>
-                        <Book className="w-4 h-4" />
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <AdSidebar adSlot="YOUR_SIDEBAR_AD_SLOT_ID" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {blogPosts.map((post) => (
+            <article key={post.id} className="bg-white rounded-2xl shadow-xl overflow-hidden">
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <div className="flex items-center text-sm text-gray-500 mb-4">
+                  <Calendar className="w-4 h-4 mr-1" />
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString('sv-SE')}
+                  </time>
+                  <span className="mx-2">•</span>
+                  <Clock className="w-4 h-4 mr-1" />
+                  <span>{post.readTime}</span>
+                </div>
+                <h2 className="text-xl font-bold text-gray-900 mb-2">
+                  {post.title}
+                </h2>
+                <p className="text-gray-600 mb-4">
+                  {post.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                    {post.category}
+                  </span>
+                  <Link
+                    to={post.link}
+                    className="inline-flex items-center text-indigo-600 hover:text-indigo-500"
+                  >
+                    <span className="mr-2">Läs mer</span>
+                    <Book className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </main>
-
-      <AdBanner position="bottom" adSlot="YOUR_BOTTOM_BANNER_AD_SLOT_ID" />
     </div>
   );
 };

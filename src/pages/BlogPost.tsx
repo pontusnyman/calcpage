@@ -618,6 +618,69 @@ const blogPosts: BlogPost[] = [
 
       <p><a href="/fastekalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna Fastekalkylatorn</a> och planera din nästa fasta med tydliga tider.</p>
     `
+  },
+  {
+    id: 'bmi-vad-det-ar-och-kalkylatorn',
+    title: 'BMI: vad det är, hur det räknas — och hur vår kalkylator tolkar resultatet',
+    description: 'Så här fungerar Body Mass Index, vilka gränser som används för undervikt till fetma — och hur du kan prova själv med BMI-kalkylatorn på Kalkulatorn.se.',
+    date: '2026-04-20',
+    readTime: '6 min',
+    category: 'Hälsa',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/bmi-vad-det-ar-och-kalkylatorn',
+    author: 'Pontus',
+    content: `
+      <p><b>Body Mass Index (BMI)</b> är ett enkelt mått som sätter ihop din vikt och din längd till ett enda tal. Det används ofta som riktlinje för att bedöma om vikten i förhållande till längden ligger i ett spann som klassas som undervikt, normalvikt, övervikt eller fetma — samma gränser som i vår <a href="/bmikalkylator" class="text-blue-600 underline hover:text-blue-800">BMI-kalkylator</a>.</p>
+
+      <p>Här går vi igenom formeln, vad kategorierna betyder, varför BMI inte säger allt om hälsa — och vad du får utöver själva siffran när du använder vårt verktyg.</p>
+
+      <p>Vill du räkna direkt? Öppna <a href="/bmikalkylator" class="text-blue-600 underline hover:text-blue-800">BMI-kalkylatorn</a>, fyll i längd (cm) och vikt (kg) och tryck på ”Beräkna BMI”.</p>
+
+      <h2>Hur räknas BMI?</h2>
+
+      <p>BMI beräknas som <strong>vikt delat med längden i meter i kvadrat</strong>. Om du mäter längd i centimeter, som i kalkylatorn, räknas först om till meter: längd i meter = längd i cm ÷ 100. Sedan:</p>
+
+      <p><strong>BMI = vikt (kg) ÷ (längd i meter)²</strong></p>
+
+      <p>Exempel: 170 cm och 70 kg ger 1,70 m och BMI = 70 ÷ (1,70 × 1,70) ≈ <strong>24,2</strong>, vilket hamnar i intervallet för normalvikt enligt vanliga gränser.</p>
+
+      <h2>Kategorierna — som i kalkylatorn</h2>
+
+      <p>På Kalkulatorn.se används samma huvudintervall som i många internationella riktlinjer (t.ex. WHO):</p>
+
+      <ul>
+        <li><strong>Undervikt:</strong> BMI under 18,5</li>
+        <li><strong>Normalvikt:</strong> 18,5 upp till men inte inklusive 25</li>
+        <li><strong>Övervikt:</strong> 25 upp till men inte inklusive 30</li>
+        <li><strong>Fetma:</strong> BMI 30 eller högre</li>
+      </ul>
+
+      <p>I gränssnittet visas detta också som en färgad <strong>BMI-skala</strong> så du ser var du landar i förhållande till de andra intervallen.</p>
+
+      <h2>Vad mer gör BMI-kalkylatorn?</h2>
+
+      <p>Förutom själva indexet och kategorin visar sidan texter om <strong>hälsorisker</strong> och <strong>rekommendationer</strong> kopplade till respektive klass — tänkt som allmän informationsnivå, inte personlig diagnos.</p>
+
+      <p>Ligger du utanför normalviktsspannet (18,5–24,9) får du ett kort avsnitt om ungefär <strong>vilken vikt som motsvarar gränsen mot ”grön zon”</strong> (normalvikt) för din angivna längd — praktiskt om du vill förstå storleksordningen på skillnaden, inte som ett löfte om exakt målvikt.</p>
+
+      <p>Du kan också <strong>dela resultatet med en länk</strong>; kalkylatorn kan läsa in höjd och vikt från URL-parametrar så att mottagaren ser samma beräkning.</p>
+
+      <h2>BMI:s begränsningar</h2>
+
+      <p>BMI är grovt: det tar inte hänsyn till <strong>muskelmassa</strong>, benstomme, hur fettet är fördelat, <strong>ålder</strong> eller <strong>kön</strong>. En vältränad person kan få högt BMI trots låg kroppsfettprocent; äldre kan ha andra hänsyn än unga vuxna.</p>
+
+      <p>Därför skriver vi också på kalkylatorns sida att BMI bara är en tumregel — för individuell bedömning ska du vända dig till legitimerad vård eller dietist.</p>
+
+      <h2>Pröva BMI-kalkylatorn</h2>
+
+      <p>Sammanfattningsvis får du med <a href="/bmikalkylator" class="text-blue-600 underline hover:text-blue-800">BMI-kalkylatorn</a> en snabb, tydlig beräkning utifrån längd och vikt, samma kategorier som ovan, visuell skala, kort information om risker och rekommendationer, samt vikthänvisning om du ligger utanför normalviktsspannet.</p>
+
+      <p><a href="/bmikalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna BMI-kalkylatorn</a> och testa med dina egna mått.</p>
+
+      <h2>Slutsats</h2>
+
+      <p>BMI är ett välkänt och lättberäknat mått på vikt i förhållande till längd. Det hjälper många att orientera sig — men ersätter inte klinisk bedömning. Använd vår kalkylator som ett pedagogiskt verktyg och komplettera med professionell rådgivning om du funderar på större livsstilsförändringar eller har medicinska frågor.</p>
+    `
   }
 ];
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Analytics } from '@vercel/analytics/react';
+import DeferredAnalytics from './DeferredAnalytics';
 import { useLocation } from 'react-router-dom';
 import Footer from './Footer';
 import CalculatorNavigation from './CalculatorNavigation';
@@ -62,7 +62,7 @@ const Layout: React.FC<LayoutProps> = ({ children, seo }) => {
         </div>
       </div>
       {!import.meta.env.PROD && <FeatureFlagControls />}
-      <Analytics path={location.pathname + location.search} route={location.pathname} />
+      <DeferredAnalytics path={location.pathname + location.search} route={location.pathname} />
     </>
   );
 };

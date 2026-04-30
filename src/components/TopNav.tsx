@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo-nav.webp';
+
+const LOGO_URL = '/logo-nav.webp';
 
 interface Category {
   id: string;
@@ -27,7 +28,7 @@ const TopNav: React.FC<TopNavProps> = ({
           <div className="flex min-w-0 shrink justify-center md:justify-start">
             <Link to="/" className="block min-w-0 max-w-full leading-[0]">
               <img
-                src={logo}
+                src={LOGO_URL}
                 alt="Kalkylatorn"
                 width={265}
                 height={336}

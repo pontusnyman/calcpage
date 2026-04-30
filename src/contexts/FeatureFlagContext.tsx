@@ -47,7 +47,7 @@ export const ALL_CALCULATORS: CalculatorInfo[] = [
 
   // Cooking
   { id: 'measurement-converter', title: 'Måttomvandlare', path: '/mattomvandlare', category: 'Matlagning', description: 'Konvertera mellan olika svenska mått för vikt och volym', premium: false },
-  { id: 'cup-converter', title: 'Amerikansk måttomvandlare', path: '/kopparkalkylator', category: 'Matlagning', description: 'Konvertera mellan amerikanska mått och deciliter för exakta matlagningsrecept', premium: false },
+  { id: 'cup-converter', title: 'Amerikansk måttomvandlare', path: '/kopparkalkylator', category: 'Matlagning', description: 'Konvertera mellan amerikanska mått och deciliter för exakta mått', premium: false },
 
   // Productivity
   { id: 'deadline', title: 'Deadline Kalkylator', path: '/deadlinekalkylator', category: 'Produktivitet', description: 'Beräkna slutdatum baserat på startdatum och arbetsdagar', premium: true }

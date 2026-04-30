@@ -222,8 +222,8 @@ function App() {
       'running-pace': false,
       'race-finish': false,
       'heart-rate-zones': false,
-      'measurement-converter': false,
-      'cup-converter': false,
+      'measurement-converter': true,
+      'cup-converter': true,
       'deadline': false,
     }
   };

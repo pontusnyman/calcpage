@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Scale, ArrowDownUp, Calculator } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowLeft, ArrowDownUp, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCalculatorShare } from '../hooks/useCalculatorShare';
+import ShareButton from '../components/ShareButton';
+import { getUrlParams, getStringParam } from '../utils/urlParams';
 
 interface Measurement {
   name: string;
@@ -64,6 +67,42 @@ const CupCalculator = () => {
       description: 'Amerikansk tesked'
     }
   };
+
+  const { handleShare } = useCalculatorShare({
+    params: {
+      amount,
+      selectedMeasure,
+    },
+  });
+
+  useEffect(() => {
+    const params = getUrlParams();
+    if (!params.has('amount') && !params.has('selectedMeasure')) {
+      return;
+    }
+
+    let nextAmount = amount;
+    let nextMeasure = selectedMeasure;
+
+    if (params.has('amount')) {
+      nextAmount = getStringParam(params, 'amount', '1') || '1';
+    }
+    if (params.has('selectedMeasure')) {
+      const m = getStringParam(params, 'selectedMeasure', '');
+      if (m in measurements) nextMeasure = m;
+    }
+
+    setAmount(nextAmount);
+    setSelectedMeasure(nextMeasure);
+
+    const measure = measurements[nextMeasure];
+    const value = parseFloat(nextAmount) || 0;
+    setResult({
+      ...measure,
+      value: value * measure.value,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration from share URL
+  }, []);
 
   const handleCalculate = () => {
     const measure = measurements[selectedMeasure];
@@ -139,6 +178,8 @@ const CupCalculator = () => {
               >
                 Konvertera
               </button>
+
+              <ShareButton onShare={handleShare} color="teal" className="mt-6" />
 
               {result && (
                 <div className="mt-8 p-6 bg-amber-50 rounded-xl border-2 border-amber-200">

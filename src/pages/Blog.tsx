@@ -46,6 +46,26 @@ const blogPosts: BlogPost[] = [
     link: '/blog/bmi-vad-det-ar-och-kalkylatorn'
   },
   {
+    id: 'svenska-mattomvandlaren',
+    title: 'Måttomvandlare: så räknar du om svenska vikt- och volymmått i köket',
+    description: 'Från kilogram till gram, liter till matsked och kryddmått — så hänger de svenska köksmåtten ihop och hur du kan konvertera snabbt med måttomvandlaren.',
+    date: '2026-04-15',
+    readTime: '5 min',
+    category: 'Matlagning',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/svenska-mattomvandlaren'
+  },
+  {
+    id: 'amerikansk-mattomvandlaren',
+    title: 'Amerikansk måttomvandlare: cups, pints och fluid ounces till deciliter',
+    description: 'Amerikanska recept använder andra enheter. Här är skillnaden mellan cup, pint och fluid ounce — och hur du får rätt volym i deciliter med kopparkalkylatorn.',
+    date: '2026-04-12',
+    readTime: '6 min',
+    category: 'Matlagning',
+    image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/amerikansk-mattomvandlaren'
+  },
+  {
     id: 'savings-strategies',
     title: 'Smarta sparstrategier för olika livssituationer',
     description: 'Upptäck olika sparstrategier och hur du kan använda våra sparkalkylatorer för att nå dina ekonomiska mål.',

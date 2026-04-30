@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Scale, ArrowDownUp, Calculator } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowLeft, ArrowDownUp, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCalculatorShare } from '../hooks/useCalculatorShare';
+import ShareButton from '../components/ShareButton';
+import { getUrlParams, getStringParam } from '../utils/urlParams';
 
 interface Measurement {
   name: string;
@@ -97,6 +100,52 @@ const MeasurementConverter = () => {
     { from: '1 krm', to: '1 ml' }
   ];
 
+  const { handleShare } = useCalculatorShare({
+    params: {
+      amount,
+      fromUnit,
+      toUnit,
+    },
+  });
+
+  useEffect(() => {
+    const params = getUrlParams();
+    if (!params.has('amount') && !params.has('fromUnit') && !params.has('toUnit')) {
+      return;
+    }
+
+    let nextAmount = amount;
+    let nextFrom = fromUnit;
+    let nextTo = toUnit;
+
+    if (params.has('amount')) {
+      nextAmount = getStringParam(params, 'amount', '1') || '1';
+    }
+    if (params.has('fromUnit')) {
+      const f = getStringParam(params, 'fromUnit', '');
+      if (f in measurements) nextFrom = f;
+    }
+    if (params.has('toUnit')) {
+      const t = getStringParam(params, 'toUnit', '');
+      if (t in measurements) nextTo = t;
+    }
+
+    if (measurements[nextFrom].type !== measurements[nextTo].type) {
+      nextTo = measurements[nextFrom].type === 'weight' ? 'g' : 'ml';
+    }
+
+    setAmount(nextAmount);
+    setFromUnit(nextFrom);
+    setToUnit(nextTo);
+
+    const fromMeasure = measurements[nextFrom];
+    const toMeasure = measurements[nextTo];
+    const value = parseFloat(nextAmount) || 0;
+    const baseValue = value * fromMeasure.baseValue;
+    setResult(baseValue / toMeasure.baseValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration from share URL
+  }, []);
+
   const handleCalculate = () => {
     const fromMeasure = measurements[fromUnit];
     const toMeasure = measurements[toUnit];
@@ -185,6 +234,8 @@ const MeasurementConverter = () => {
               >
                 Konvertera
               </button>
+
+              <ShareButton onShare={handleShare} color="teal" className="mt-6" />
 
               {result !== null && (
                 <div className="mt-6 p-6 bg-blue-50 rounded-xl border-2 border-blue-200">

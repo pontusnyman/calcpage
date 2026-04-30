@@ -681,6 +681,90 @@ const blogPosts: BlogPost[] = [
 
       <p>BMI är ett välkänt och lättberäknat mått på vikt i förhållande till längd. Det hjälper många att orientera sig — men ersätter inte klinisk bedömning. Använd vår kalkylator som ett pedagogiskt verktyg och komplettera med professionell rådgivning om du funderar på större livsstilsförändringar eller har medicinska frågor.</p>
     `
+  },
+  {
+    id: 'svenska-mattomvandlaren',
+    title: 'Måttomvandlare: så räknar du om svenska vikt- och volymmått i köket',
+    description: 'Från kilogram till gram, liter till matsked och kryddmått — så hänger de svenska köksmåtten ihop och hur du kan konvertera snabbt med måttomvandlaren.',
+    date: '2026-04-15',
+    readTime: '5 min',
+    category: 'Matlagning',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/svenska-mattomvandlaren',
+    author: 'Pontus',
+    content: `
+      <p><b>Svenska recept och matlagningsrutiner bygger på en tågordning av enheter</b> som de flesta lär sig utantill: deciliter till koppen, matsked mot tesked, gram när det handlar om vikt. När du ska hälva eller dubbla ett recept, eller när något bara finns angivet i en annan enhet än du tänker, räcker det med några fasta omräkningsregler — eller ett klick i <a href="/mattomvandlare" class="text-blue-600 underline hover:text-blue-800">måttomvandlaren</a>.</p>
+
+      <p>Här går vi igenom hur <strong>vikt</strong> och <strong>volym</strong> hänger ihop i svenska kök, och vad som skiljer volym i milliliter från vikt i gram när du bakar.</p>
+
+      <p><a href="/mattomvandlare" class="text-blue-600 underline hover:text-blue-800">Öppna måttomvandlaren</a> och välj vilken enhet du utgår från och vilken du vill ha — kalkylatorn håller isär volym och vikt så du inte av misstag blandar mängder som inte går att jämföra direkt.</p>
+
+      <h2>Vikt: kilogram, hektogram och gram</h2>
+
+      <p>I Sverige används i köket oftast <strong>gram</strong> som finaste steg, med <strong>kilogram</strong> (1000 g) för större mängder och <strong>hektogram</strong> (100 g) som du fortfarande ser på förpackningar och i äldre recept. Kedjan är rak: 1 kg = 10 hg = 1000 g. Det gör det enkelt att skala recept — halverar du ett kilo till 500 g vet du exakt var du ligger.</p>
+
+      <h2>Volym: liter, deciliter, centiliter och milliliter</h2>
+
+      <p>Volym i metriska enheter följer tiopotenser: 1 liter = 10 dl = 100 cl = 1000 ml. Det är grunden till nästan all svensk måttagning av vätskor och av ”måttade” torrvaror i mått.</p>
+
+      <h2>Matsked, tesked och kryddmått</h2>
+
+      <p>Matlagningsmått i Sverige är i praktiken volymmått kopplade till milliliter: en <strong>matsked (msk)</strong> är ofta satt till 15 ml, en <strong>tesked (tsk)</strong> till 5 ml och ett <strong>kryddmått (krm)</strong> till 1 ml i många recept och tabeller — samma princip som i vår <a href="/mattomvandlare" class="text-blue-600 underline hover:text-blue-800">måttomvandlare</a>. Det betyder att tre matskedar vätska motsvarar ungefär 4,5 cl eller 0,45 dl, vilket är lätt att kontrollera om du föredrar mått med dl-skala.</p>
+
+      <h2>Varför ”2 dl mjöl” inte alltid är samma antal gram</h2>
+
+      <p><strong>Deciliter mäter volym</strong>, medan mjöl, socker och liknande väger olika mycket per deciliter beroende på hur packat måttet är och vilket sorts mjöl det är. På sidan finns kort referens till typiska omräkningar (t.ex. strösocker och vetemjöl) — men när precision spelar roll (macarons, bröd, chokladtårta) är våg och gram ofta säkrast.</p>
+
+      <h2>Använd måttomvandlaren i vardagen</h2>
+
+      <p>Sammanfattningsvis: svenska köksmått är byggda så att du kan hoppa mellan kg–hg–g och l–dl–cl–ml samt msk–tsk–krm utan att memorera allt. <a href="/mattomvandlare" class="text-blue-600 underline hover:text-blue-800">Måttomvandlaren</a> gör samma jobb på sekunder när du står med en sked i ena handen och receptet i den andra.</p>
+    `
+  },
+  {
+    id: 'amerikansk-mattomvandlaren',
+    title: 'Amerikansk måttomvandlare: cups, pints och fluid ounces till deciliter',
+    description: 'Amerikanska recept använder andra enheter. Här är skillnaden mellan cup, pint och fluid ounce — och hur du får rätt volym i deciliter med kopparkalkylatorn.',
+    date: '2026-04-12',
+    readTime: '6 min',
+    category: 'Matlagning',
+    image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/amerikansk-mattomvandlaren',
+    author: 'Pontus',
+    content: `
+      <p><b>Översätter du recept från USA till svenska mått stöter du snabbt på cup, tablespoon och fluid ounce</b> — enheter som inte alls motsvarar ”en kopp” från köksskåpet eller en svensk matsked rakt av. Amerikanska volymenheter är definierade utifrån US customary system, och en vanlig kopp i bakrecept (”cup”) är ett fast mått, inte valfri kaffemugg.</p>
+
+      <p>Med <a href="/kopparkalkylator" class="text-blue-600 underline hover:text-blue-800">amerikansk måttomvandlare (kopparkalkylatorn)</a> får du omräkning direkt till <strong>deciliter</strong>, så du kan mäta med det du redan har hemma.</p>
+
+      <h2>Vad är en US cup i praktiken?</h2>
+
+      <p>En <strong>amerikansk standard ”cup”</strong> för matlagning motsvarar i vår kalkylator ungefär 2,37 dl (värdet följer samma definition som på själva verktyget). Det är det första du bör låsa fast när du bakar efter amerikanska bloggar eller kokböcker — annars blir deg och smet fel i proportion.</p>
+
+      <h2>Tablespoon och teaspoon — inte samma som msk och tsk alltid</h2>
+
+      <p>Amerikanska <strong>tablespoon (Tbsp)</strong> och <strong>teaspoon (tsp)</strong> är egna standardmått. I kalkylatorn är de omräknade till deciliter i linje med US mått (t.ex. matsked och tesked som egna poster), så du slipper gissa om receptet menar ”level” eller ”heaping” — utgå från angivna mängder och justera smak om det behövs.</p>
+
+      <h2>Pint, quart och gallon — vätskor i större skala</h2>
+
+      <p>För soppor, lemonad och storkok förekommer <strong>liquid pint</strong>, <strong>quart</strong> och <strong>gallon</strong>. Där skiljer sig också amerikanska vätskepinten från en imperial (brittisk) pint — därför är det viktigt att använda ett verktyg som följer <strong>US definitions</strong>, vilket <a href="/kopparkalkylator" class="text-blue-600 underline hover:text-blue-800">kopparkalkylatorn</a> är byggd för.</p>
+
+      <p>Har du torra ingredienser angivna i <strong>dry pint</strong> är volymen annorlunda än för vätska; kalkylatorn har separat alternativ för det.</p>
+
+      <h2>Fluid ounces (fl oz)</h2>
+
+      <p><strong>Fluid ounce</strong> är ett volymmått, inte vikt. Många dryckes- och såsrecept anger fl oz — slå dem till dl i <a href="/kopparkalkylator" class="text-blue-600 underline hover:text-blue-800">amerikansk måttomvandlare</a> innan du häller.</p>
+
+      <h2>Så jobbar du effektivt med amerikanska recept</h2>
+
+      <ol>
+        <li>Identifiera vilken enhet receptet använder (cup, Tbsp, fl oz, med mera).</li>
+        <li>Mata in mängden i <a href="/kopparkalkylator" class="text-blue-600 underline hover:text-blue-800">kopparkalkylatorn</a> och läs av deciliter.</li>
+        <li>Kom ihåg att ingredienser som mjöl eller smör i cups fortfarande kan behöva våg för bästa resultat — volym i cup säger hur mycket du fyller måttet, inte alltid exakt densitet.</li>
+      </ol>
+
+      <p>Vill du bara konvertera mellan svenska enheter (kg, dl, msk) använder du i stället <a href="/mattomvandlare" class="text-blue-600 underline hover:text-blue-800">måttomvandlaren för svenska mått</a>. Tillsammans täcker de två verktygen de vanligaste situationerna när recept och kökslåda inte talar samma språk.</p>
+
+      <p><a href="/kopparkalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna amerikansk måttomvandlare</a> och prova med ditt nästa recept.</p>
+    `
   }
 ];
 

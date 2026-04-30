@@ -184,7 +184,7 @@ export const calculatorSEO: Record<string, SEOConfig> = {
   },
   '/amerikanskomvandlare': {
     title: 'Amerikansk måttomvandlare - Konvertera amerikanska mått',
-    description: 'Konvertera mellan amerikanska mått och deciliter för exakta matlagningsrecept. Enkel omvandling av cups, ounces och andra amerikanska måttenheter.',
+    description: 'Konvertera mellan amerikanska och svenska mått för exakta matlagningsrecept. Enkel omvandling av cups, ounces och andra amerikanska måttenheter.',
     schema: {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",

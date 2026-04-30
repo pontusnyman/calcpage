@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, Flame, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
+import ShareButton from '../components/ShareButton';
+import { useCalculatorShare } from '../hooks/useCalculatorShare';
+import { getNumberParam, getStringParam, getUrlParams } from '../utils/urlParams';
 import { calculatorSEO } from '../seo/calculatorSEO';
 
 interface CalorieResult {
@@ -10,6 +13,8 @@ interface CalorieResult {
   activityLevel: string;
 }
 
+const ACTIVITY_LEVEL_VALUES = [1.2, 1.375, 1.55, 1.725, 1.9] as const;
+
 const CalorieCalculator = () => {
   const [weight, setWeight] = useState<number>(70);
   const [height, setHeight] = useState<number>(170);
@@ -17,6 +22,16 @@ const CalorieCalculator = () => {
   const [gender, setGender] = useState<'man' | 'woman'>('man');
   const [activityLevel, setActivityLevel] = useState<number>(1.2);
   const [result, setResult] = useState<CalorieResult | null>(null);
+
+  const { handleShare } = useCalculatorShare({
+    params: {
+      weight,
+      height,
+      age,
+      gender,
+      activityLevel,
+    },
+  });
 
   // Get SEO configuration for Calorie Calculator
   const seo = calculatorSEO['/kalorikalkylator'];
@@ -28,6 +43,37 @@ const CalorieCalculator = () => {
     { value: 1.725, label: 'Träning 6-7 dagar/vecka', description: 'Mycket aktiv' },
     { value: 1.9, label: 'Träning 2 ggr/dag, tung träning', description: 'Extra aktiv' }
   ];
+
+  useEffect(() => {
+    const params = getUrlParams();
+    if (!params.has('weight')) return;
+
+    const w = Math.max(1, Math.min(300, getNumberParam(params, 'weight', 70)));
+    const h = Math.max(1, Math.min(300, getNumberParam(params, 'height', 170)));
+    const a = Math.max(1, Math.min(120, getNumberParam(params, 'age', 30)));
+    const gParam = getStringParam(params, 'gender', 'man');
+    const g: 'man' | 'woman' = gParam === 'woman' ? 'woman' : 'man';
+    const alRaw = getNumberParam(params, 'activityLevel', 1.2);
+    const al = ACTIVITY_LEVEL_VALUES.includes(alRaw as (typeof ACTIVITY_LEVEL_VALUES)[number])
+      ? alRaw
+      : 1.2;
+
+    setWeight(w);
+    setHeight(h);
+    setAge(a);
+    setGender(g);
+    setActivityLevel(al);
+
+    let bmr = 10 * w + 6.25 * h - 5 * a;
+    bmr = g === 'man' ? bmr + 5 : bmr - 161;
+    const tdee = bmr * al;
+    setResult({
+      bmr: Math.round(bmr),
+      tdee: Math.round(tdee),
+      activityLevel: activityLevels.find((level) => level.value === al)?.label || '',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration from share URL
+  }, []);
 
   const calculateCalories = () => {
     // Mifflin-St Jeor Equation
@@ -164,23 +210,26 @@ const CalorieCalculator = () => {
             </button>
 
             {result && (
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-orange-50 rounded-xl p-6">
-                  <div className="text-orange-600 text-sm font-medium mb-1">Basalmetabolism (BMR)</div>
-                  <div className="text-3xl font-bold text-gray-900">{result.bmr} kcal</div>
-                  <div className="text-sm text-gray-500 mt-2">
-                    Energin din kropp behöver i vila
+              <>
+                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-orange-50 rounded-xl p-6">
+                    <div className="text-orange-600 text-sm font-medium mb-1">Basalmetabolism (BMR)</div>
+                    <div className="text-3xl font-bold text-gray-900">{result.bmr} kcal</div>
+                    <div className="text-sm text-gray-500 mt-2">
+                      Energin din kropp behöver i vila
+                    </div>
                   </div>
-                </div>
 
-                <div className="bg-orange-500 rounded-xl p-6 text-white">
-                  <div className="text-orange-100 text-sm font-medium mb-1">Dagligt energibehov (TDEE)</div>
-                  <div className="text-3xl font-bold">{result.tdee} kcal</div>
-                  <div className="text-sm text-orange-100 mt-2">
-                    Baserat på din aktivitetsnivå: {result.activityLevel}
+                  <div className="bg-orange-500 rounded-xl p-6 text-white">
+                    <div className="text-orange-100 text-sm font-medium mb-1">Dagligt energibehov (TDEE)</div>
+                    <div className="text-3xl font-bold">{result.tdee} kcal</div>
+                    <div className="text-sm text-orange-100 mt-2">
+                      Baserat på din aktivitetsnivå: {result.activityLevel}
+                    </div>
                   </div>
                 </div>
-              </div>
+                <ShareButton onShare={handleShare} color="orange" className="mt-6" />
+              </>
             )}
           </div>
 

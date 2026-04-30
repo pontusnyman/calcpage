@@ -52,9 +52,14 @@ const Layout: React.FC<LayoutProps> = ({ children, seo }) => {
   return (
     <>
       <SEO {...seoProps} />
-      {children}
-      {!isHomePage && !isBlogPage && <CalculatorNavigation />}
-      <Footer />
+      {/* flex + gap avoids margin collapse between page content and footer (cards sat ~1px above footer with margin alone) */}
+      <div className="flex flex-col gap-16 md:gap-24">
+        {children}
+        <div className="flex flex-col">
+          {!isHomePage && !isBlogPage && <CalculatorNavigation />}
+          <Footer />
+        </div>
+      </div>
       {!import.meta.env.PROD && <FeatureFlagControls />}
     </>
   );

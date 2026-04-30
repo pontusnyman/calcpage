@@ -19,6 +19,83 @@ interface BlogPost {
 // Blog post data with full content
 const blogPosts: BlogPost[] = [
   {
+    id: 'kaloribehov-bmr-och-tdee',
+    title: 'Kaloribehov: vad är BMR och TDEE — och hur räknar du ut dem?',
+    description: 'Så funkar basalmetabolism och total energiförbrukning enligt Mifflin–St Jeor, vilka aktivitetsnivåer som används — och hur du kan räkna ut ditt eget dagliga behov med kalorikalkylatorn.',
+    date: '2026-04-30',
+    readTime: '7 min',
+    category: 'Hälsa',
+    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/kaloribehov-bmr-och-tdee',
+    author: 'Pontus',
+    content: `
+      <p><b>Kaloribehov</b> är den energi (kilokalorier, kcal) som kroppen behöver per dag för att hålla igång basfunktioner — andning, cirkulation, temperatur, hjärna — och för att täcka rörelse och vardagsaktivitet. På vår sajt uttrycks det som två tal: <strong>basalmetabolism (BMR)</strong> och <strong>totalt dagligt energibehov (TDEE)</strong>, precis som i vår kalorikalkylator.</p>
+
+      <p>Här går vi igenom vad skillnaden är, vilken formel kalkylatorn använder, hur aktivitetsnivåerna är tänkta — och varför resultatet alltid är en <strong>uppskattning</strong> som kan skilja sig åt mellan individer.</p>
+
+      <p>Vill du slippa räkna för hand? Använd vår <a href="/kalorikalkylator" class="text-blue-600 underline hover:text-blue-800">Kaloribehovskalkylator</a> — fyll i vikt, längd, ålder, kön och aktivitetsnivå så får du BMR och TDEE direkt.</p>
+
+      <h2>BMR: energin i vila</h2>
+
+      <p>BMR är den energi kroppen behöver i vila för att hålla liv i organen, utan att räkna in att du går till jobbet, tränar eller står upp mer än absolut nödvändigt. Det är alltså ett <em>golv</em> för din dagliga förbrukning — i praktiken ligger nästan alltid det verkliga behovet högre eftersom du rör dig, tänker och står på fötterna.</p>
+
+      <h2>TDEE: BMR plus vardag och träning</h2>
+
+      <p>TDEE (”Total Daily Energy Expenditure”) är kalkylatorns svar på <strong>ungefär hur många kcal du förbrukar under en genomsnittlig dag</strong> med din valda aktivitetsnivå. Den räknas genom att ta BMR och multiplicera med en <strong>aktivitetsfaktor</strong> — samma princip som i vår <a href="/kalorikalkylator" class="text-blue-600 underline hover:text-blue-800">Kaloribehovskalkylator</a>.</p>
+
+      <p>Kort sagt: <strong>TDEE ≈ BMR × aktivitetsfaktor</strong>.</p>
+
+      <h2>Mifflin–St Jeor: samma ekvation som i kalkylatorn</h2>
+
+      <p>Kalkylatorn använder <strong>Mifflin–St Jeor-ekvationen</strong> för BMR. Den är vanlig i kost- och träningsappar eftersom den ofta ger rimliga värden för vuxna utan att kräva kroppsfettprocent.</p>
+
+      <p>Först räknas ett gemensamt uttryck utifrån vikt (kg), längd (cm) och ålder (år):</p>
+
+      <p><strong>BMR-del = 10 × vikt + 6,25 × längd − 5 × ålder</strong></p>
+
+      <p>Sedan justeras för kön, i linje med kalkylatorns knappar för man respektive kvinna:</p>
+
+      <ul>
+        <li><strong>Man:</strong> BMR = BMR-del + 5</li>
+        <li><strong>Kvinna:</strong> BMR = BMR-del − 161</li>
+      </ul>
+
+      <p>Därefter: <strong>TDEE = BMR × vald aktivitetsfaktor</strong> (se nästa avsnitt). I gränssnittet avrundas värdena till hela kcal, som i resultatrutan för BMR och TDEE.</p>
+
+      <h2>Aktivitetsnivåerna — som i kalkylatorn</h2>
+
+      <p>För att gå från BMR till TDEE behövs en rimlig skattning av hur mycket du rör dig utöver vila. I kalkylatorn väljer du en av fem nivåer; varje nivå är kopplad till en fast faktor:</p>
+
+      <ul>
+        <li><strong>Lite till ingen träning</strong> (stillasittande livsstil) — faktor <strong>1,2</strong></li>
+        <li><strong>Träning 1–3 dagar/vecka</strong> (lätt aktiv) — <strong>1,375</strong></li>
+        <li><strong>Träning 4–5 dagar/vecka</strong> (måttligt aktiv) — <strong>1,55</strong></li>
+        <li><strong>Träning 6–7 dagar/vecka</strong> (mycket aktiv) — <strong>1,725</strong></li>
+        <li><strong>Träning 2 gånger per dag, tung träning</strong> (extra aktiv) — <strong>1,9</strong></li>
+      </ul>
+
+      <p>Om du ligger mitt emellan två nivåer kan ditt verkliga behov hamna däremellan. Målet är inte perfektion utan ett <strong>startvärde</strong> du kan justera utifrån hur vikt, prestation och hunger faktiskt beter sig över några veckor.</p>
+
+      <h2>Viktuppgång, viktnedgång eller bibehållen vikt</h2>
+
+      <p>TDEE är ofta beskrivet som ungefär det du behöver för att <strong>bibehålla</strong> nuvarande vikt om uppskattningen stämmer. Att äta konsekvent under TDEE ger i regel viktnedgång över tid; över TDEE kan ge viktuppgång. Hur snabbt det sker beror på hur stor skillnaden är, vätskebalans och enskilda faktorer — därför är det klokt att spåra trend över veckor, inte dag för dag.</p>
+
+      <h2>Varför är siffrorna ”bara” en uppskattning?</h2>
+
+      <p>Samma formel för två personer med identiska mått kan ge samma BMR — men deras verkliga förbrukning skiljer sig ändå åt, bland annat beroende på <strong>kroppssammansättning</strong> (muskel förbrukar mer i vila än lika mycket fettvolym), <strong>genetik</strong>, sömn, stress, sjukdom och exakt hur hård träningen är. Det är därför kalkylatorn också betonar att resultatet är en riktlinje, inte ett exakt mått från laboratorium.</p>
+
+      <h2>Pröva med Kaloribehovskalkylatorn</h2>
+
+      <p>Sammanfattningsvis: kalkylatorn visar <strong>BMR via Mifflin–St Jeor</strong> och <strong>TDEE via vald aktivitetsfaktor</strong>, med tydliga etiketter för varje steg — precis som beskrivs i avsnittet ”Om kalkylatorn” på sidan.</p>
+
+      <p><a href="/kalorikalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna Kaloribehovskalkylatorn</a> och testa med dina egna värden. Där kan du också dela länk med ifyllda parametrar om du vill jämföra med en tränare eller vän.</p>
+
+      <h2>Slutsats</h2>
+
+      <p>Kaloribehov handlar om att förstå <strong>basbehov i vila (BMR)</strong> och <strong>total förbrukning med aktivitet (TDEE)</strong>. Med samma metod som i vår kalkylator får du en begriplig och reproducerbar uppskattning — och sedan finjusterar du utifrån verkliga resultat, inte bara formeln.</p>
+    `
+  },
+  {
     id: 'ranta-pa-ranta',
     title: 'Ränta på ränta – den enkla principen som bygger stora förmögenheter över tid',
     description: 'Ränta på ränta brukar kallas världens åttonde underverk – och det är lätt att förstå varför. Upptäck hur denna kraftfulla princip kan hjälpa dig bygga förmögenhet över tid.',

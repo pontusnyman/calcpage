@@ -28,6 +28,16 @@ const blogPosts: BlogPost[] = [
     link: '/blog/fasta-24-till-96-timmar'
   },
   {
+    id: 'kaloribehov-bmr-och-tdee',
+    title: 'Kaloribehov: vad är BMR och TDEE — och hur räknar du ut dem?',
+    description: 'Så funkar basalmetabolism och total energiförbrukning enligt Mifflin–St Jeor, vilka aktivitetsnivåer som används — och hur du kan räkna ut ditt eget dagliga behov med kalorikalkylatorn.',
+    date: '2026-04-29',
+    readTime: '7 min',
+    category: 'Hälsa',
+    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/kaloribehov-bmr-och-tdee'
+  },
+  {
     id: 'savings-strategies',
     title: 'Smarta sparstrategier för olika livssituationer',
     description: 'Upptäck olika sparstrategier och hur du kan använda våra sparkalkylatorer för att nå dina ekonomiska mål.',

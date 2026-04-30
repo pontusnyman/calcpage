@@ -11,8 +11,6 @@ import { PremiumProvider, usePremium } from './contexts/PremiumContext';
 import CrownIcon from './components/CrownIcon';
 import PremiumAccessControl from './components/PremiumAccessControl';
 import PremiumToggle from './components/PremiumToggle';
-import AdBanner from './components/AdBanner';
-import AdSidebar from './components/AdSidebar';
 import CookieConsent from './components/CookieConsent';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
@@ -141,60 +139,50 @@ const MainPage: React.FC = () => {
           showCalculators={showCalculators}
         />
 
-        <AdBanner position="top" adSlot="YOUR_TOP_BANNER_AD_SLOT_ID" />
-
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-            <AdSidebar adSlot="YOUR_SIDEBAR_AD_SLOT_ID" />
-
-            <div className="lg:col-span-8">
-              {showCalculators ? (
-                <div className="space-y-12 my-8">
-                  {categories.map((category) => (
-                    <div
-                      key={category.id}
-                      ref={el => categoryRefs.current[category.id] = el}
-                      className="space-y-6"
-                    >
-                      <h2 className="text-2xl font-bold text-gray-900">{category.title}</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {category.calculators.map((calc, index) => {
-                          const isPremium = isCalculatorPremium(calc.id);
-                          return (
-                            <div key={index} className="relative">
-                              <CalculatorCard
-                                icon={calc.icon}
-                                title={calc.title}
-                                description={calc.description}
-                                path={calc.path}
-                              />
-                              {isPremium && (
-                                <div className="absolute top-3 right-3">
-                                  <CrownIcon size="md" />
-                                </div>
-                              )}
+          {showCalculators ? (
+            <div className="space-y-12 my-8">
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  ref={el => categoryRefs.current[category.id] = el}
+                  className="space-y-6"
+                >
+                  <h2 className="text-2xl font-bold text-gray-900">{category.title}</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {category.calculators.map((calc, index) => {
+                      const isPremium = isCalculatorPremium(calc.id);
+                      return (
+                        <div key={index} className="relative">
+                          <CalculatorCard
+                            icon={calc.icon}
+                            title={calc.title}
+                            description={calc.description}
+                            path={calc.path}
+                          />
+                          {isPremium && (
+                            <div className="absolute top-3 right-3">
+                              <CrownIcon size="md" />
                             </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              ) : (
-                <div className="my-8 text-center py-12">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                    Kalkylatorer är för närvarande inte tillgängliga
-                  </h2>
-                  <p className="text-gray-600">
-                    Vi arbetar på att förbättra våra kalkylatorer. Kom tillbaka snart!
-                  </p>
-                </div>
-              )}
+              ))}
             </div>
-          </div>
+          ) : (
+            <div className="my-8 text-center py-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                Kalkylatorer är för närvarande inte tillgängliga
+              </h2>
+              <p className="text-gray-600">
+                Vi arbetar på att förbättra våra kalkylatorer. Kom tillbaka snart!
+              </p>
+            </div>
+          )}
         </main>
-
-        <AdBanner position="bottom" adSlot="YOUR_BOTTOM_BANNER_AD_SLOT_ID" />
       </div>
       {/* <Footer /> */}
     </Layout>
@@ -221,7 +209,7 @@ function App() {
       'meeting-cost': false,
       'bmi': false,
       'bmr': false,
-      'calorie': false,
+      'calorie': true,
       'weight-reduce': false,
       'fasting': true,
       'ovulation': false,

@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
   const showFooterCalculators = useFeatureFlag('showFooterCalculators');
 
   return (
-    <footer className="bg-white border-t border-gray-200 mt-12">
+    <footer className="bg-white border-t border-gray-200">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -24,11 +24,11 @@ const Footer: React.FC = () => {
                     Blogg
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="/" className="text-base text-gray-500 hover:text-gray-900">
                     Alla kalkylatorer
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
           )}

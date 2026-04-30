@@ -24,14 +24,12 @@ const TopNav: React.FC<TopNavProps> = ({
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-center">
-          <div className="flex justify-center md:justify-start">
-            <Link to="/">
+          <div className="flex min-w-0 shrink justify-center md:justify-start">
+            <Link to="/" className="block min-w-0 max-w-full leading-[0]">
               <img
                 src={logo}
                 alt="Kalkylatorn"
-                width={265}
-                height={336}
-                className="w-36 sm:w-40 md:w-44 h-auto max-w-full"
+                className="box-border block max-h-none min-w-0 max-w-full object-contain [aspect-ratio:265/336] !w-10 sm:!w-12 md:!w-14"
                 decoding="async"
                 fetchPriority="high"
               />

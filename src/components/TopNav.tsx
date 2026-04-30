@@ -29,6 +29,8 @@ const TopNav: React.FC<TopNavProps> = ({
               <img
                 src={logo}
                 alt="Kalkylatorn"
+                width={265}
+                height={336}
                 className="box-border block max-h-none min-w-0 max-w-full object-contain [aspect-ratio:265/336] !w-10 sm:!w-12 md:!w-14"
                 decoding="async"
                 fetchPriority="high"

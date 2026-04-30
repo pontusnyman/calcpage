@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const CookieConsent: React.FC = () => {
-  const [showBanner, setShowBanner] = useState(false);
-
-  useEffect(() => {
-    // Check if user has already made a choice
-    const consent = localStorage.getItem('cookieConsent');
-    if (!consent) {
-      setShowBanner(true);
+  const [showBanner, setShowBanner] = useState(() => {
+    try {
+      return !localStorage.getItem('cookieConsent');
+    } catch {
+      return true;
     }
-  }, []);
+  });
 
   const acceptCookies = () => {
     localStorage.setItem('cookieConsent', 'accepted');

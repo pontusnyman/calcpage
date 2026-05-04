@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Timer, Trophy, Medal } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowLeft, Trophy, Medal } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCalculatorShare } from '../hooks/useCalculatorShare';
+import ShareButton from '../components/ShareButton';
+import { getNumberParam, getUrlParams } from '../utils/urlParams';
 
 interface RaceResult {
   finishTime: {
@@ -12,14 +15,23 @@ interface RaceResult {
     minutes: number;
     seconds: number;
   };
+  distanceKm: number;
   speedKmh: number;
 }
 
 const RaceFinishPredictor = () => {
-  const [targetPaceMinutes, setTargetPaceMinutes] = useState<number>(4);
-  const [targetPaceSeconds, setTargetPaceSeconds] = useState<number>(30);
-  const [distance, setDistance] = useState<number>(21.1);
+  const [targetPaceMinutesInput, setTargetPaceMinutesInput] = useState<string>('4');
+  const [targetPaceSecondsInput, setTargetPaceSecondsInput] = useState<string>('30');
+  const [distanceInput, setDistanceInput] = useState<string>('21.1');
   const [result, setResult] = useState<RaceResult | null>(null);
+
+  const { handleShare } = useCalculatorShare({
+    params: {
+      targetPaceMinutes: targetPaceMinutesInput,
+      targetPaceSeconds: targetPaceSecondsInput,
+      distance: distanceInput,
+    },
+  });
 
   const commonDistances = [
     { name: '5K', distance: 5 },
@@ -28,30 +40,69 @@ const RaceFinishPredictor = () => {
     { name: 'Maraton', distance: 42.2 }
   ];
 
-  const calculateFinishTime = () => {
-    // Convert pace to seconds per kilometer
-    const paceInSeconds = (targetPaceMinutes * 60) + targetPaceSeconds;
-    
-    // Calculate total seconds for the race
-    const totalSeconds = paceInSeconds * distance;
-    
-    // Convert to hours, minutes, seconds
+  const buildRaceResult = (paceMinutes: number, paceSeconds: number, runDistance: number): RaceResult => {
+    const paceInSeconds = (paceMinutes * 60) + paceSeconds;
+    const totalSeconds = paceInSeconds * runDistance;
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = Math.round(totalSeconds % 60);
-    
-    // Calculate speed in km/h
     const speedKmh = (3600 / paceInSeconds);
 
-    setResult({
+    return {
       finishTime: { hours, minutes, seconds },
       pacePerKm: {
-        minutes: targetPaceMinutes,
-        seconds: targetPaceSeconds
+        minutes: paceMinutes,
+        seconds: paceSeconds
       },
+      distanceKm: runDistance,
       speedKmh
-    });
+    };
   };
+
+  const parsePaceInput = (value: string): number | null => {
+    if (value === '') return null;
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return null;
+    return Math.max(0, Math.min(59, Math.floor(parsed)));
+  };
+
+  const parseDistanceInput = (value: string): number | null => {
+    if (value === '') return null;
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return null;
+    return Math.max(0.1, parsed);
+  };
+
+  const calculateFinishTime = () => {
+    const paceMinutes = parsePaceInput(targetPaceMinutesInput);
+    const paceSeconds = parsePaceInput(targetPaceSecondsInput);
+    const runDistance = parseDistanceInput(distanceInput);
+
+    if (paceMinutes === null || paceSeconds === null || runDistance === null) {
+      setResult(null);
+      return;
+    }
+
+    setTargetPaceMinutesInput(String(paceMinutes));
+    setTargetPaceSecondsInput(String(paceSeconds));
+    setDistanceInput(String(runDistance));
+    setResult(buildRaceResult(paceMinutes, paceSeconds, runDistance));
+  };
+
+  useEffect(() => {
+    const params = getUrlParams();
+    if (!params.has('targetPaceMinutes') && !params.has('targetPaceSeconds') && !params.has('distance')) return;
+
+    const paceMinutes = Math.max(0, Math.min(59, Math.floor(getNumberParam(params, 'targetPaceMinutes', 4))));
+    const paceSeconds = Math.max(0, Math.min(59, Math.floor(getNumberParam(params, 'targetPaceSeconds', 30))));
+    const runDistance = Math.max(0.1, getNumberParam(params, 'distance', 21.1));
+
+    setTargetPaceMinutesInput(String(paceMinutes));
+    setTargetPaceSecondsInput(String(paceSeconds));
+    setDistanceInput(String(runDistance));
+    setResult(buildRaceResult(paceMinutes, paceSeconds, runDistance));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration from share URL
+  }, []);
 
   const formatTime = (time: { hours: number; minutes: number; seconds: number }): string => {
     return `${time.hours > 0 ? `${time.hours}:` : ''}${time.minutes.toString().padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}`;
@@ -68,10 +119,10 @@ const RaceFinishPredictor = () => {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
             <Trophy className="w-12 h-12 text-amber-600 mr-3" />
-            <h1 className="text-4xl font-bold text-gray-900">Måltidsprediktor</h1>
+            <h1 className="text-4xl font-bold text-gray-900">Löparkalkylator</h1>
           </div>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Beräkna din förväntade måltid baserat på tempo och distans
+            Beräkna din förväntade sluttid baserat på tempo och distans
           </p>
         </div>
 
@@ -79,15 +130,25 @@ const RaceFinishPredictor = () => {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Måltempo (min/km)
+                Löptempo (min/km)
               </label>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs text-gray-500 mb-1">Minuter</label>
                   <input
                     type="number"
-                    value={targetPaceMinutes}
-                    onChange={(e) => setTargetPaceMinutes(Math.max(0, Math.min(59, Number(e.target.value))))}
+                    value={targetPaceMinutesInput}
+                    onChange={(e) => {
+                      const nextValue = e.target.value;
+                      if (nextValue === '') {
+                        setTargetPaceMinutesInput('');
+                        return;
+                      }
+
+                      const parsed = Number(nextValue);
+                      if (Number.isNaN(parsed)) return;
+                      setTargetPaceMinutesInput(String(Math.max(0, Math.min(59, Math.floor(parsed)))));
+                    }}
                     min="0"
                     max="59"
                     className="w-full border-2 border-amber-200 rounded-lg px-4 py-2 focus:border-amber-500 focus:ring-amber-500"
@@ -97,8 +158,18 @@ const RaceFinishPredictor = () => {
                   <label className="block text-xs text-gray-500 mb-1">Sekunder</label>
                   <input
                     type="number"
-                    value={targetPaceSeconds}
-                    onChange={(e) => setTargetPaceSeconds(Math.max(0, Math.min(59, Number(e.target.value))))}
+                    value={targetPaceSecondsInput}
+                    onChange={(e) => {
+                      const nextValue = e.target.value;
+                      if (nextValue === '') {
+                        setTargetPaceSecondsInput('');
+                        return;
+                      }
+
+                      const parsed = Number(nextValue);
+                      if (Number.isNaN(parsed)) return;
+                      setTargetPaceSecondsInput(String(Math.max(0, Math.min(59, Math.floor(parsed)))));
+                    }}
                     min="0"
                     max="59"
                     className="w-full border-2 border-amber-200 rounded-lg px-4 py-2 focus:border-amber-500 focus:ring-amber-500"
@@ -113,8 +184,18 @@ const RaceFinishPredictor = () => {
               </label>
               <input
                 type="number"
-                value={distance}
-                onChange={(e) => setDistance(Math.max(0.1, Number(e.target.value)))}
+                value={distanceInput}
+                onChange={(e) => {
+                  const nextValue = e.target.value;
+                  if (nextValue === '') {
+                    setDistanceInput('');
+                    return;
+                  }
+
+                  const parsed = Number(nextValue);
+                  if (Number.isNaN(parsed)) return;
+                  setDistanceInput(String(Math.max(0.1, parsed)));
+                }}
                 step="0.1"
                 className="w-full border-2 border-amber-200 rounded-lg px-4 py-2 focus:border-amber-500 focus:ring-amber-500"
               />
@@ -124,9 +205,9 @@ const RaceFinishPredictor = () => {
               {commonDistances.map((dist) => (
                 <button
                   key={dist.name}
-                  onClick={() => setDistance(dist.distance)}
+                  onClick={() => setDistanceInput(String(dist.distance))}
                   className={`p-3 rounded-lg text-center transition-colors ${
-                    distance === dist.distance
+                    Number(distanceInput) === dist.distance
                       ? 'bg-amber-500 text-white'
                       : 'bg-amber-50 text-gray-700 hover:bg-amber-100'
                   }`}
@@ -140,14 +221,14 @@ const RaceFinishPredictor = () => {
               onClick={calculateFinishTime}
               className="w-full bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
             >
-              Beräkna måltid
+              Beräkna sluttid
             </button>
 
             {result && (
               <div className="mt-8 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="bg-amber-50 rounded-xl p-6">
-                    <div className="text-amber-600 text-sm font-medium mb-1">Måltempo</div>
+                    <div className="text-amber-600 text-sm font-medium mb-1">Löptempo</div>
                     <div className="text-3xl font-bold text-gray-900">
                       {result.pacePerKm.minutes}:{result.pacePerKm.seconds.toString().padStart(2, '0')} /km
                     </div>
@@ -157,12 +238,12 @@ const RaceFinishPredictor = () => {
                   </div>
 
                   <div className="bg-amber-500 rounded-xl p-6 text-white">
-                    <div className="text-amber-100 text-sm font-medium mb-1">Förväntad måltid</div>
+                    <div className="text-amber-100 text-sm font-medium mb-1">Förväntad sluttid</div>
                     <div className="text-3xl font-bold">
                       {formatTime(result.finishTime)}
                     </div>
                     <div className="text-sm text-amber-100 mt-2">
-                      För {distance} km
+                      För {result.distanceKm} km
                     </div>
                   </div>
                 </div>
@@ -171,8 +252,8 @@ const RaceFinishPredictor = () => {
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Mellantider</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     {[5, 10, 15, 20].map(km => {
-                      if (km <= distance) {
-                        const splitSeconds = km * ((targetPaceMinutes * 60) + targetPaceSeconds);
+                      if (km <= result.distanceKm) {
+                        const splitSeconds = km * ((result.pacePerKm.minutes * 60) + result.pacePerKm.seconds);
                         const splitHours = Math.floor(splitSeconds / 3600);
                         const splitMinutes = Math.floor((splitSeconds % 3600) / 60);
                         const splitSecondsRem = Math.round(splitSeconds % 60);
@@ -195,6 +276,7 @@ const RaceFinishPredictor = () => {
                 </div>
               </div>
             )}
+            <ShareButton onShare={handleShare} color="amber" className="mt-6" />
           </div>
         </div>
 

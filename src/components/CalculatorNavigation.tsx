@@ -124,7 +124,7 @@ const calculators: Calculator[] = [
   {
     icon: <Trophy />,
     title: "Måltidsprediktor",
-    path: "/maltidsprediktor"
+    path: "/loparkalkylator"
   },
   {
     icon: <Heart />,

@@ -3,7 +3,7 @@ import { Share2 } from 'lucide-react';
 
 interface ShareButtonProps {
   onShare: () => Promise<boolean>;
-  color?: 'rose' | 'teal' | 'yellow' | 'violet' | 'indigo' | 'blue' | 'green' | 'red' | 'orange';
+  color?: 'rose' | 'teal' | 'yellow' | 'violet' | 'indigo' | 'blue' | 'green' | 'red' | 'orange' | 'amber';
   className?: string;
 }
 
@@ -52,6 +52,11 @@ const colorClasses = {
     bg: 'bg-orange-100 hover:bg-orange-200',
     text: 'text-orange-700',
     icon: 'text-orange-600'
+  },
+  amber: {
+    bg: 'bg-amber-100 hover:bg-amber-200',
+    text: 'text-amber-700',
+    icon: 'text-amber-600'
   }
 };
 

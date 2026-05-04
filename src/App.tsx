@@ -230,7 +230,7 @@ function App() {
       'jet-lag': false,
       'caffeine': false,
       'running-pace': true,
-      'race-finish': false,
+      'race-finish': true,
       'heart-rate-zones': false,
       'measurement-converter': true,
       'cup-converter': true,
@@ -261,7 +261,7 @@ function App() {
           <Route path="/agglossningskalkylator" element={<PremiumAccessControl calculatorId="ovulation"><OvulationCalculator /></PremiumAccessControl>} />
           <Route path="/bmrkalkylator" element={<PremiumAccessControl calculatorId="bmr"><BMRCalculator /></PremiumAccessControl>} />
           <Route path="/mattomvandlare" element={<MeasurementConverter />} />
-          <Route path="/maltidsprediktor" element={<PremiumAccessControl calculatorId="race-finish"><RaceFinishPredictor /></PremiumAccessControl>} />
+          <Route path="/loparkalkylator" element={<RaceFinishPredictor />} />
           <Route path="/pulszoner" element={<PremiumAccessControl calculatorId="heart-rate-zones"><HeartRateZonesCalculator /></PremiumAccessControl>} />
           <Route path="/deadlinekalkylator" element={<PremiumAccessControl calculatorId="deadline"><DeadlineCalculator /></PremiumAccessControl>} />
           <Route path="/jetlagkalkylator" element={<PremiumAccessControl calculatorId="jet-lag"><JetLagCalculator /></PremiumAccessControl>} />

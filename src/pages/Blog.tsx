@@ -16,6 +16,16 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    id: 'loparkalkylator-sluttid-och-tempo',
+    title: 'Löparkalkylator: beräkna sluttid, tempo per km och mellantider inför ditt lopp',
+    description: 'Lär dig hur du räknar ut förväntad sluttid på 5 km, 10 km, halvmaraton eller maraton baserat på ditt tempo. Testa direkt i vår Löparkalkylator.',
+    date: '2026-05-04',
+    readTime: '7 min',
+    category: 'Träning',
+    image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/loparkalkylator-sluttid-och-tempo'
+  },
+  {
     id: 'fasta-24-till-96-timmar',
     title: 'Fasta från 24 till 96 timmar: vad händer i kroppen och vilka kan fördelarna vara?',
     description: 'En översikt av kort till medellång fasta — från ett dygn upp till fyra dygn — och vanliga hälsovinster diskuterade i forskning. Planera din fasta med vår Fastekalkylator.',

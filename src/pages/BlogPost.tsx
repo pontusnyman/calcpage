@@ -19,6 +19,71 @@ interface BlogPost {
 // Blog post data with full content
 const blogPosts: BlogPost[] = [
   {
+    id: 'loparkalkylator-sluttid-och-tempo',
+    title: 'Löparkalkylator: beräkna sluttid, tempo per km och mellantider inför ditt lopp',
+    description: 'Lär dig hur du räknar ut förväntad sluttid på 5 km, 10 km, halvmaraton eller maraton baserat på ditt tempo. Testa direkt i vår Löparkalkylator.',
+    date: '2026-05-04',
+    readTime: '7 min',
+    category: 'Träning',
+    image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/loparkalkylator-sluttid-och-tempo',
+    author: 'Pontus',
+    content: `
+      <p><b>Vill du veta din sannolika sluttid innan loppdagen?</b> Med en tydlig beräkning av tempo och distans blir det enklare att planera rätt fart från start till mål. Oavsett om du springer 5 km, 10 km, halvmaraton eller maraton kan du använda vår <a href="/loparkalkylator" class="text-blue-600 underline hover:text-blue-800">Löparkalkylator</a> för att få en snabb uppskattning av sluttid och mellantider.</p>
+
+      <p>Den här guiden går igenom hur beräkningen fungerar, hur du använder resultaten i praktiken och hur du undviker vanliga pacing-misstag.</p>
+
+      <h2>Så räknas förväntad sluttid ut</h2>
+
+      <p>Grunden är enkel: om du har ett planerat löptempo i minuter och sekunder per kilometer multipliceras det med total distans i kilometer. Då får du en uppskattad sluttid.</p>
+
+      <p><strong>Formel:</strong> sluttid i sekunder = tempo (sek/km) × distans (km)</p>
+
+      <p>I vår <a href="/loparkalkylator" class="text-blue-600 underline hover:text-blue-800">Löparkalkylator</a> fyller du i tempo och distans, och får direkt:</p>
+
+      <ul>
+        <li><strong>Förväntad sluttid</strong> för vald distans</li>
+        <li><strong>Tempo per kilometer</strong> i min:sek</li>
+        <li><strong>Genomsnittshastighet</strong> i km/h</li>
+        <li><strong>Mellantider</strong> på utvalda checkpoint-kilometrar</li>
+      </ul>
+
+      <h2>Exempel: halvmaraton på 4:30 min/km</h2>
+
+      <p>Om du siktar på 4 minuter 30 sekunder per kilometer över 21,1 km kan du snabbt få fram en rimlig sluttid och använda den som pacingmål. Då blir det lättare att avgöra om du behöver öppna lugnare, hålla jämn fart eller spara tryck till sista delen av loppet.</p>
+
+      <p>Just den typen av planering gör ofta större skillnad än att bara "springa på känsla" i starten.</p>
+
+      <h2>Varför mellantider är viktiga</h2>
+
+      <p>Många löpare tappar tid för att första kilometrarna går för snabbt. När du vet dina mellantider i förväg får du en konkret check under loppet: ligger du rätt, för fort eller för långsamt?</p>
+
+      <p>För längre distanser som halvmaraton och maraton är jämn fart ofta mer effektivt än stora fartsvängningar. Därför visar kalkylatorn mellantider som hjälper dig hålla planen.</p>
+
+      <h2>Vanliga misstag vid tempoplanering</h2>
+
+      <ul>
+        <li><strong>För optimistiskt ingångstempo:</strong> ett för högt måltempo ger ofta kraftigt farttapp i slutet.</li>
+        <li><strong>Ingen hänsyn till bana och väder:</strong> kupering, vind och värme påverkar tempot mer än många tror.</li>
+        <li><strong>Ingen plan B:</strong> ha gärna ett alternativt tempo om dagen inte känns perfekt.</li>
+      </ul>
+
+      <h2>Bygg en bättre loppstrategi</h2>
+
+      <p>Ett bra upplägg är att först testa realistiskt tempo från träning eller tidigare lopp, sedan mata in det i <a href="/loparkalkylator" class="text-blue-600 underline hover:text-blue-800">Löparkalkylatorn</a> och jämföra scenarier. Du kan till exempel testa skillnaden mellan 4:50 och 4:40 min/km för att se hur mycket sluttiden påverkas.</p>
+
+      <p>Om du också vill räkna om tid och distans till tempo i efterhand kan du använda vår <a href="/tempokalkylator" class="text-blue-600 underline hover:text-blue-800">Tempokalkylator</a> som komplement.</p>
+
+      <h2>Testa Löparkalkylatorn</h2>
+
+      <p><a href="/loparkalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna Löparkalkylatorn</a> och fyll i ditt målfartstempo och din distans. På några sekunder får du en tydlig prognos för sluttid och en enkel pacingplan att ta med till nästa lopp.</p>
+
+      <h2>Slutsats</h2>
+
+      <p>En löparkalkylator gör loppplanering konkret: du ser direkt kopplingen mellan tempo och sluttid, får bättre kontroll över mellantider och kan fatta smartare beslut under loppet. Med rätt plan ökar chansen att springa jämnt, starkt och nära ditt mål.</p>
+    `
+  },
+  {
     id: 'kaloribehov-bmr-och-tdee',
     title: 'Kaloribehov: vad är BMR och TDEE — och hur räknar du ut dem?',
     description: 'Så funkar basalmetabolism och total energiförbrukning enligt Mifflin–St Jeor, vilka aktivitetsnivåer som används — och hur du kan räkna ut ditt eget dagliga behov med kalorikalkylatorn.',

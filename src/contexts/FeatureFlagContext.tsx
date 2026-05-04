@@ -42,7 +42,7 @@ export const ALL_CALCULATORS: CalculatorInfo[] = [
 
   // Training
   { id: 'running-pace', title: 'Tempokalkylator', path: '/tempokalkylator', category: 'Träning', description: 'Beräkna ditt löptempo och hastighet baserat på distans och tid', premium: false },
-  { id: 'race-finish', title: 'Måltidsprediktor', path: '/maltidsprediktor', category: 'Träning', description: 'Beräkna din förväntade måltid baserat på tempo och distans', premium: true },
+  { id: 'race-finish', title: 'Löparkalkylator', path: '/loparkalkylator', category: 'Träning', description: 'Beräkna din förväntade sluttid baserat på tempo och distans', premium: false },
   { id: 'heart-rate-zones', title: 'Pulszoner Kalkylator', path: '/pulszoner', category: 'Träning', description: 'Beräkna dina optimala pulszoner för effektiv träning', premium: true },
 
   // Cooking

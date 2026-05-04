@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, Book } from 'lucide-react';
 import TopNav from '../components/TopNav';
+import SEO from '../components/SEO';
 
 interface BlogPost {
   id: string;
@@ -916,8 +917,69 @@ const BlogPost: React.FC = () => {
     );
   }
 
+  const postUrl = `https://www.kalkylatorn.com${post.link}`;
+  const postSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article',
+        headline: post.title,
+        description: post.description,
+        image: post.image,
+        datePublished: post.date,
+        dateModified: post.date,
+        inLanguage: 'sv-SE',
+        author: {
+          '@type': 'Person',
+          name: post.author
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Kalkylatorn.com',
+          url: 'https://www.kalkylatorn.com'
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': postUrl
+        },
+        url: postUrl
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Hem',
+            item: 'https://www.kalkylatorn.com/'
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Blogg',
+            item: 'https://www.kalkylatorn.com/blog'
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.title,
+            item: postUrl
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title={post.title}
+        description={post.description}
+        canonicalUrl={postUrl}
+        type="article"
+        imageUrl={post.image}
+        schema={postSchema}
+      />
       <TopNav currentPage="blog" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

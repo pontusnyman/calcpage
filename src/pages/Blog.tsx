@@ -2,6 +2,7 @@ import React from 'react';
 import { Calendar, Book, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TopNav from '../components/TopNav';
+import SEO from '../components/SEO';
 
 interface BlogPost {
   id: string;
@@ -158,8 +159,31 @@ const blogPosts: BlogPost[] = [
 ];
 
 const Blog: React.FC = () => {
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Kalkylatorn.com Blogg',
+    description: 'Artiklar om ekonomi, hälsa, träning och smartare vardagsberäkningar.',
+    url: 'https://www.kalkylatorn.com/blog',
+    inLanguage: 'sv-SE',
+    blogPost: blogPosts.map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      image: post.image,
+      url: `https://www.kalkylatorn.com${post.link}`
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Blogg"
+        description="Läs guider och artiklar om kalkyler, ekonomi, hälsa och träning på Kalkylatorn.com."
+        canonicalUrl="https://www.kalkylatorn.com/blog"
+        schema={blogSchema}
+      />
       <TopNav currentPage="blog" />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

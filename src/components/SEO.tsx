@@ -13,12 +13,12 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({
   title,
   description,
-  canonicalUrl = 'https://kalkulatorn.se',
+  canonicalUrl = 'https://www.kalkylatorn.com',
   type = 'website',
-  imageUrl = 'https://kalkulatorn.se/og-image.jpg',
+  imageUrl = 'https://www.kalkylatorn.com/og-image.jpg',
   schema
 }) => {
-  const fullTitle = `${title} | Kalkulatorn.se`;
+  const fullTitle = `${title} | Kalkylatorn.com`;
 
   return (
     <Helmet>
@@ -33,7 +33,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={imageUrl} />
-      <meta property="og:site_name" content="Kalkulatorn.se" />
+      <meta property="og:site_name" content="Kalkylatorn.com" />
 
       {/* Twitter Card meta tags */}
       <meta name="twitter:card" content="summary_large_image" />

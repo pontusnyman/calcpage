@@ -48,7 +48,7 @@ const blogPosts: BlogPost[] = [
   {
     id: 'bmi-vad-det-ar-och-kalkylatorn',
     title: 'BMI: vad det är, hur det räknas — och hur vår kalkylator tolkar resultatet',
-    description: 'Så här fungerar Body Mass Index, vilka gränser som används för undervikt till fetma — och hur du kan prova själv med BMI-kalkylatorn på Kalkulatorn.se.',
+    description: 'Så här fungerar Body Mass Index, vilka gränser som används för undervikt till fetma — och hur du kan prova själv med BMI-kalkylatorn på Kalkylatorn.com.',
     date: '2026-04-20',
     readTime: '6 min',
     category: 'Hälsa',

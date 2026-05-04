@@ -1,34 +1,4 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, Book } from 'lucide-react';
-import TopNav from '../components/TopNav';
-
-interface BlogPost {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  readTime: string;
-  category: string;
-  image: string;
-  link: string;
-  content: string;
-  author: string;
-}
-
-// Blog post data with full content
-const blogPosts: BlogPost[] = [
-  {
-    id: 'loparkalkylator-sluttid-och-tempo',
-    title: 'Löparkalkylator: beräkna sluttid, tempo per km och mellantider inför ditt lopp',
-    description: 'Lär dig hur du räknar ut förväntad sluttid på 5 km, 10 km, halvmaraton eller maraton baserat på ditt tempo. Testa direkt i vår Löparkalkylator.',
-    date: '2026-05-04',
-    readTime: '7 min',
-    category: 'Träning',
-    image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/loparkalkylator-sluttid-och-tempo',
-    author: 'Pontus',
-    content: `
+import{u as s,j as t,T as e,L as a}from"./index-B0-lQJ4n.js";import{s as n,b as o,d,q as k}from"./lucide-Co6CbEbm.js";const g=[{id:"loparkalkylator-sluttid-och-tempo",title:"Löparkalkylator: beräkna sluttid, tempo per km och mellantider inför ditt lopp",description:"Lär dig hur du räknar ut förväntad sluttid på 5 km, 10 km, halvmaraton eller maraton baserat på ditt tempo. Testa direkt i vår Löparkalkylator.",date:"2026-05-04",readTime:"7 min",category:"Träning",image:"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800",link:"/blog/loparkalkylator-sluttid-och-tempo",author:"Pontus",content:`
       <p><b>Vill du veta din sannolika sluttid innan loppdagen?</b> Med en tydlig beräkning av tempo och distans blir det enklare att planera rätt fart från start till mål. Oavsett om du springer 5 km, 10 km, halvmaraton eller maraton kan du använda vår <a href="/loparkalkylator" class="text-blue-600 underline hover:text-blue-800">Löparkalkylator</a> för att få en snabb uppskattning av sluttid och mellantider.</p>
 
       <p>Den här guiden går igenom hur beräkningen fungerar, hur du använder resultaten i praktiken och hur du undviker vanliga pacing-misstag.</p>
@@ -81,19 +51,7 @@ const blogPosts: BlogPost[] = [
       <h2>Slutsats</h2>
 
       <p>En löparkalkylator gör loppplanering konkret: du ser direkt kopplingen mellan tempo och sluttid, får bättre kontroll över mellantider och kan fatta smartare beslut under loppet. Med rätt plan ökar chansen att springa jämnt, starkt och nära ditt mål.</p>
-    `
-  },
-  {
-    id: 'kaloribehov-bmr-och-tdee',
-    title: 'Kaloribehov: vad är BMR och TDEE — och hur räknar du ut dem?',
-    description: 'Så funkar basalmetabolism och total energiförbrukning enligt Mifflin–St Jeor, vilka aktivitetsnivåer som används — och hur du kan räkna ut ditt eget dagliga behov med kalorikalkylatorn.',
-    date: '2026-04-30',
-    readTime: '7 min',
-    category: 'Hälsa',
-    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/kaloribehov-bmr-och-tdee',
-    author: 'Pontus',
-    content: `
+    `},{id:"kaloribehov-bmr-och-tdee",title:"Kaloribehov: vad är BMR och TDEE — och hur räknar du ut dem?",description:"Så funkar basalmetabolism och total energiförbrukning enligt Mifflin–St Jeor, vilka aktivitetsnivåer som används — och hur du kan räkna ut ditt eget dagliga behov med kalorikalkylatorn.",date:"2026-04-30",readTime:"7 min",category:"Hälsa",image:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800",link:"/blog/kaloribehov-bmr-och-tdee",author:"Pontus",content:`
       <p><b>Kaloribehov</b> är den energi (kilokalorier, kcal) som kroppen behöver per dag för att hålla igång basfunktioner — andning, cirkulation, temperatur, hjärna — och för att täcka rörelse och vardagsaktivitet. På vår sajt uttrycks det som två tal: <strong>basalmetabolism (BMR)</strong> och <strong>totalt dagligt energibehov (TDEE)</strong>, precis som i vår kalorikalkylator.</p>
 
       <p>Här går vi igenom vad skillnaden är, vilken formel kalkylatorn använder, hur aktivitetsnivåerna är tänkta — och varför resultatet alltid är en <strong>uppskattning</strong> som kan skilja sig åt mellan individer.</p>
@@ -158,19 +116,7 @@ const blogPosts: BlogPost[] = [
       <h2>Slutsats</h2>
 
       <p>Kaloribehov handlar om att förstå <strong>basbehov i vila (BMR)</strong> och <strong>total förbrukning med aktivitet (TDEE)</strong>. Med samma metod som i vår kalkylator får du en begriplig och reproducerbar uppskattning — och sedan finjusterar du utifrån verkliga resultat, inte bara formeln.</p>
-    `
-  },
-  {
-    id: 'ranta-pa-ranta',
-    title: 'Ränta på ränta – den enkla principen som bygger stora förmögenheter över tid',
-    description: 'Ränta på ränta brukar kallas världens åttonde underverk – och det är lätt att förstå varför. Upptäck hur denna kraftfulla princip kan hjälpa dig bygga förmögenhet över tid.',
-    date: '2024-12-15',
-    readTime: '6 min',
-    category: 'Ekonomi',
-    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/ranta-pa-ranta',
-    author: 'Pontus',
-    content: `
+    `},{id:"ranta-pa-ranta",title:"Ränta på ränta – den enkla principen som bygger stora förmögenheter över tid",description:"Ränta på ränta brukar kallas världens åttonde underverk – och det är lätt att förstå varför. Upptäck hur denna kraftfulla princip kan hjälpa dig bygga förmögenhet över tid.",date:"2024-12-15",readTime:"6 min",category:"Ekonomi",image:"https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=800",link:"/blog/ranta-pa-ranta",author:"Pontus",content:`
       <p><b>Ränta på ränta brukar kallas världens åttonde underverk</b> – och det är lätt att förstå varför. Det är nämligen en av de starkaste ekonomiska krafterna som finns, och en av de enklaste att dra nytta av. Genom att låta dina pengar växa vidare på tidigare avkastning kan du skapa en snöbollseffekt som, över tid, blir allt större.</p>
 
       <p>Men hur fungerar ränta på ränta egentligen, och varför är det så kraftfullt? Låt oss gå igenom grunderna – och hur du själv kan testa effekten med hjälp av vår egen ränta-på-ränta-kalkylator.</p>
@@ -222,19 +168,7 @@ const blogPosts: BlogPost[] = [
       <p>Kalkylatorn visar sedan hur sparandet växer år för år och hur stor del som faktiskt består av ren avkastning — den magiska snöbollseffekten.</p>
 
       <p>Det här är ett perfekt verktyg för att utforska olika scenarier och se vad även små justeringar i tid eller sparande kan innebära för slutresultatet.</p>
-    `
-  },
-  {
-    id: 'personal-finance-101',
-    title: 'Grunderna i privatekonomi: En nybörjarguide',
-    description: 'Lär dig grunderna i privatekonomi, från budgetering till investeringar. Vi går igenom de viktigaste verktygen för att ta kontroll över din ekonomi.',
-    date: '2024-03-15',
-    readTime: '8 min',
-    category: 'Ekonomi',
-    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/personal-finance-101',
-    author: 'Pontus',
-    content: `
+    `},{id:"personal-finance-101",title:"Grunderna i privatekonomi: En nybörjarguide",description:"Lär dig grunderna i privatekonomi, från budgetering till investeringar. Vi går igenom de viktigaste verktygen för att ta kontroll över din ekonomi.",date:"2024-03-15",readTime:"8 min",category:"Ekonomi",image:"https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=800",link:"/blog/personal-finance-101",author:"Pontus",content:`
       <h2>Välkommen till din resa mot ekonomisk frihet</h2>
       
       <p>Privatekonomi kan verka överväldigande, men med rätt kunskap och verktyg kan du ta kontroll över din ekonomi och bygga en trygg framtid. I denna guide går vi igenom grunderna som alla bör känna till.</p>
@@ -284,19 +218,7 @@ const blogPosts: BlogPost[] = [
       <p>Privatekonomi handlar om att ta små, konsekventa steg. Börja med en budget, bygg en nödkassa, och börja sedan investera regelbundet. Kom ihåg att det aldrig är för sent att börja, och varje liten förändring kan göra stor skillnad över tid.</p>
 
       <p>Vill du lära dig mer? Utforska våra andra artiklar om ekonomi och använd våra kalkylatorer för att planera din ekonomiska framtid.</p>
-    `
-  },
-  {
-    id: 'healthy-sleep-habits',
-    title: 'Så optimerar du din sömn för bättre hälsa',
-    description: 'Upptäck vetenskapen bakom god sömn och hur du kan använda sömnkalkylatorn för att förbättra din sömnkvalitet.',
-    date: '2024-03-12',
-    readTime: '6 min',
-    category: 'Hälsa',
-    image: 'https://images.unsplash.com/photo-1541199249251-f713e6145474?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/healthy-sleep-habits',
-    author: 'Maria Svensson',
-    content: `
+    `},{id:"healthy-sleep-habits",title:"Så optimerar du din sömn för bättre hälsa",description:"Upptäck vetenskapen bakom god sömn och hur du kan använda sömnkalkylatorn för att förbättra din sömnkvalitet.",date:"2024-03-12",readTime:"6 min",category:"Hälsa",image:"https://images.unsplash.com/photo-1541199249251-f713e6145474?auto=format&fit=crop&q=80&w=800",link:"/blog/healthy-sleep-habits",author:"Maria Svensson",content:`
       <h2>Varför sömn är grunden för all hälsa</h2>
       
       <p>Sömn är inte bara en paus från vardagen - det är en aktiv process där kroppen reparerar sig själv, konsoliderar minnen och förbereder sig för nästa dag. Utan tillräcklig sömn påverkas allt från ditt immunförsvar till din förmåga att fatta beslut.</p>
@@ -333,19 +255,7 @@ const blogPosts: BlogPost[] = [
       <h3>När ska du söka hjälp?</h3>
       
       <p>Om du regelbundet har problem med sömn i mer än tre veckor, överväg att konsultera en läkare. Sömnstörningar kan påverka din hälsa och livskvalitet avsevärt.</p>
-    `
-  },
-  {
-    id: 'lanekostnad-guide',
-    title: 'Vad kostar ditt privatlån – och hur räknar du ut det?',
-    description: 'Lär dig hur lånekostnader fungerar och testa själv med vår Lånekostnadskalkylator.',
-    date: '2025-12-02',
-    readTime: '7 min',
-    category: 'Ekonomi',
-    image: 'https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    link: '/blog/lanekostnad-guide',
-    author: 'Pontus',
-    content: `
+    `},{id:"lanekostnad-guide",title:"Vad kostar ditt privatlån – och hur räknar du ut det?",description:"Lär dig hur lånekostnader fungerar och testa själv med vår Lånekostnadskalkylator.",date:"2025-12-02",readTime:"7 min",category:"Ekonomi",image:"https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",link:"/blog/lanekostnad-guide",author:"Pontus",content:`
       <p><b>När du tar ett privatlån är det viktigt att förstå den verkliga kostnaden</b> – inte bara räntan, utan alla avgifter och kostnader som kommer med lånet. Många fokuserar enbart på räntesatsen, men den totala lånekostnaden kan vara betydligt högre än du tror.</p>
 
       <p>I denna guide går vi igenom vad som faktiskt ingår i kostnaden för ett privatlån, hur du beräknar den totala kostnaden och hur du kan använda vår lånekostnadskalkylator för att jämföra olika alternativ.</p>
@@ -458,19 +368,7 @@ const blogPosts: BlogPost[] = [
       <p>Att förstå den verkliga kostnaden för ett privatlån är avgörande för att fatta rätt ekonomiska beslut. Genom att titta på mer än bara räntan och inkludera alla avgifter får du en rättvis bild av vad lånet faktiskt kostar.</p>
 
       <p>Använd vår lånekostnadskalkylator för att utforska olika scenarier och hitta det lån som passar dig bäst. Kom ihåg att även små skillnader i ränta eller avgifter kan göra stor skillnad över tid.</p>
-    `
-  },
-  {
-    id: 'savings-strategies',
-    title: 'Smarta sparstrategier för olika livssituationer',
-    description: 'Upptäck olika sparstrategier och hur du kan använda våra sparkalkylatorer för att nå dina ekonomiska mål.',
-    date: '2025-12-03',
-    readTime: '9 min',
-    category: 'Ekonomi',
-    image: 'https://images.unsplash.com/photo-1579621970795-87facc2f976d?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/savings-strategies',
-    author: 'Pontus',
-    content: `
+    `},{id:"savings-strategies",title:"Smarta sparstrategier för olika livssituationer",description:"Upptäck olika sparstrategier och hur du kan använda våra sparkalkylatorer för att nå dina ekonomiska mål.",date:"2025-12-03",readTime:"9 min",category:"Ekonomi",image:"https://images.unsplash.com/photo-1579621970795-87facc2f976d?auto=format&fit=crop&q=80&w=800",link:"/blog/savings-strategies",author:"Pontus",content:`
       <p><b>Sparande är en av de viktigaste grundpelarna för ekonomisk trygghet</b> – men rätt strategi varierar beroende på var du befinner dig i livet. En student har andra behov än en familj med barn, och någon som närmar sig pensionen behöver en annan approach än en ung professionell som precis börjat arbeta.</p>
 
       <p>I denna guide går vi igenom smarta sparstrategier för olika livssituationer och hur du kan använda våra sparkalkylatorer för att planera och nå dina ekonomiska mål.</p>
@@ -611,19 +509,7 @@ const blogPosts: BlogPost[] = [
       <p>Oavsett din livssituation kan våra sparkalkylatorer hjälpa dig att planera och visualisera dina ekonomiska mål. Använd dem för att utforska olika scenarier, förstå vad som krävs för att nå dina mål och hitta en sparstrategi som fungerar för just dig.</p>
 
       <p>Kom ihåg att varje resa börjar med ett första steg. Börja spara idag, även om det är ett litet belopp, och låt tiden och ränta-på-ränta effekten arbeta för dig.</p>
-    `
-  },
-  {
-    id: 'fasta-24-till-96-timmar',
-    title: 'Fasta från 24 till 96 timmar: vad händer i kroppen och vilka kan fördelarna vara?',
-    description: 'En översikt av kort till medellång fasta — från ett dygn upp till fyra dygn — och vanliga hälsovinster diskuterade i forskning. Planera din fasta med vår Fastekalkylator.',
-    date: '2026-04-30',
-    readTime: '8 min',
-    category: 'Hälsa',
-    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/fasta-24-till-96-timmar',
-    author: 'Pontus',
-    content: `
+    `},{id:"fasta-24-till-96-timmar",title:"Fasta från 24 till 96 timmar: vad händer i kroppen och vilka kan fördelarna vara?",description:"En översikt av kort till medellång fasta — från ett dygn upp till fyra dygn — och vanliga hälsovinster diskuterade i forskning. Planera din fasta med vår Fastekalkylator.",date:"2026-04-30",readTime:"8 min",category:"Hälsa",image:"https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800",link:"/blog/fasta-24-till-96-timmar",author:"Pontus",content:`
       <p><b>Fasta är en av mänsklighetens äldsta vanor</b> — och intresset för strukturerade fasteperioder har vuxit kraftigt. Här fokuserar vi på fastor från cirka 24 timmar upp till 96 timmar (fyra dygn): vad som ofta beskrivs i vetenskaplig litteratur, vilka effekter som kan uppstå vid olika längder, och hur du kan planera tiderna praktiskt.</p>
 
       <p>Det här är <strong>inte medicinsk rådgivning</strong>. Längre fastor passar inte alla; rådfråga alltid vård vid sjukdom, graviditet, amning, diabetes eller mediciner som påverkar blodsocker. Stoppa om du mår illa, yr eller osäker.</p>
@@ -682,19 +568,7 @@ const blogPosts: BlogPost[] = [
       <p>Fastor mellan ett och fyra dygn kan för vissa friska vuxna vara ett sätt att utforska metabol hälsa och enkelhet kring måltider — samtidigt som längre spann kräver mer förberedelse, respekt för kroppens signaler och oftast kontakt med vårdpersonal. Utforska tidsintervallet först på kortare nivåer, dokumentera hur du mår och anpassa sedan.</p>
 
       <p><a href="/fastekalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna Fastekalkylatorn</a> och planera din nästa fasta med tydliga tider.</p>
-    `
-  },
-  {
-    id: 'bmi-vad-det-ar-och-kalkylatorn',
-    title: 'BMI: vad det är, hur det räknas — och hur vår kalkylator tolkar resultatet',
-    description: 'Så här fungerar Body Mass Index, vilka gränser som används för undervikt till fetma — och hur du kan prova själv med BMI-kalkylatorn på Kalkylatorn.com.',
-    date: '2026-04-20',
-    readTime: '6 min',
-    category: 'Hälsa',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/bmi-vad-det-ar-och-kalkylatorn',
-    author: 'Pontus',
-    content: `
+    `},{id:"bmi-vad-det-ar-och-kalkylatorn",title:"BMI: vad det är, hur det räknas — och hur vår kalkylator tolkar resultatet",description:"Så här fungerar Body Mass Index, vilka gränser som används för undervikt till fetma — och hur du kan prova själv med BMI-kalkylatorn på Kalkylatorn.com.",date:"2026-04-20",readTime:"6 min",category:"Hälsa",image:"https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=800",link:"/blog/bmi-vad-det-ar-och-kalkylatorn",author:"Pontus",content:`
       <p><b>Body Mass Index (BMI)</b> är ett enkelt mått som sätter ihop din vikt och din längd till ett enda tal. Det används ofta som riktlinje för att bedöma om vikten i förhållande till längden ligger i ett spann som klassas som undervikt, normalvikt, övervikt eller fetma — samma gränser som i vår <a href="/bmikalkylator" class="text-blue-600 underline hover:text-blue-800">BMI-kalkylator</a>.</p>
 
       <p>Här går vi igenom formeln, vad kategorierna betyder, varför BMI inte säger allt om hälsa — och vad du får utöver själva siffran när du använder vårt verktyg.</p>
@@ -745,19 +619,7 @@ const blogPosts: BlogPost[] = [
       <h2>Slutsats</h2>
 
       <p>BMI är ett välkänt och lättberäknat mått på vikt i förhållande till längd. Det hjälper många att orientera sig — men ersätter inte klinisk bedömning. Använd vår kalkylator som ett pedagogiskt verktyg och komplettera med professionell rådgivning om du funderar på större livsstilsförändringar eller har medicinska frågor.</p>
-    `
-  },
-  {
-    id: 'svenska-mattomvandlaren',
-    title: 'Måttomvandlare: så räknar du om svenska vikt- och volymmått i köket',
-    description: 'Från kilogram till gram, liter till matsked och kryddmått — så hänger de svenska köksmåtten ihop och hur du kan konvertera snabbt med måttomvandlaren.',
-    date: '2026-04-15',
-    readTime: '5 min',
-    category: 'Matlagning',
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/svenska-mattomvandlaren',
-    author: 'Pontus',
-    content: `
+    `},{id:"svenska-mattomvandlaren",title:"Måttomvandlare: så räknar du om svenska vikt- och volymmått i köket",description:"Från kilogram till gram, liter till matsked och kryddmått — så hänger de svenska köksmåtten ihop och hur du kan konvertera snabbt med måttomvandlaren.",date:"2026-04-15",readTime:"5 min",category:"Matlagning",image:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=800",link:"/blog/svenska-mattomvandlaren",author:"Pontus",content:`
       <p><b>Svenska recept och matlagningsrutiner bygger på en tågordning av enheter</b> som de flesta lär sig utantill: deciliter till koppen, matsked mot tesked, gram när det handlar om vikt. När du ska hälva eller dubbla ett recept, eller när något bara finns angivet i en annan enhet än du tänker, räcker det med några fasta omräkningsregler — eller ett klick i <a href="/mattomvandlare" class="text-blue-600 underline hover:text-blue-800">måttomvandlaren</a>.</p>
 
       <p>Här går vi igenom hur <strong>vikt</strong> och <strong>volym</strong> hänger ihop i svenska kök, och vad som skiljer volym i milliliter från vikt i gram när du bakar.</p>
@@ -783,19 +645,7 @@ const blogPosts: BlogPost[] = [
       <h2>Använd måttomvandlaren i vardagen</h2>
 
       <p>Sammanfattningsvis: svenska köksmått är byggda så att du kan hoppa mellan kg–hg–g och l–dl–cl–ml samt msk–tsk–krm utan att memorera allt. <a href="/mattomvandlare" class="text-blue-600 underline hover:text-blue-800">Måttomvandlaren</a> gör samma jobb på sekunder när du står med en sked i ena handen och receptet i den andra.</p>
-    `
-  },
-  {
-    id: 'amerikansk-mattomvandlaren',
-    title: 'Amerikansk måttomvandlare: cups, pints och fluid ounces till deciliter',
-    description: 'Amerikanska recept använder andra enheter. Här är skillnaden mellan cup, pint och fluid ounce — och hur du får rätt volym i deciliter med kopparkalkylatorn.',
-    date: '2026-04-12',
-    readTime: '6 min',
-    category: 'Matlagning',
-    image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/amerikansk-mattomvandlaren',
-    author: 'Pontus',
-    content: `
+    `},{id:"amerikansk-mattomvandlaren",title:"Amerikansk måttomvandlare: cups, pints och fluid ounces till deciliter",description:"Amerikanska recept använder andra enheter. Här är skillnaden mellan cup, pint och fluid ounce — och hur du får rätt volym i deciliter med kopparkalkylatorn.",date:"2026-04-12",readTime:"6 min",category:"Matlagning",image:"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&q=80&w=800",link:"/blog/amerikansk-mattomvandlaren",author:"Pontus",content:`
       <p><b>Översätter du recept från USA till svenska mått stöter du snabbt på cup, tablespoon och fluid ounce</b> — enheter som inte alls motsvarar ”en kopp” från köksskåpet eller en svensk matsked rakt av. Amerikanska volymenheter är definierade utifrån US customary system, och en vanlig kopp i bakrecept (”cup”) är ett fast mått, inte valfri kaffemugg.</p>
 
       <p>Med <a href="/kopparkalkylator" class="text-blue-600 underline hover:text-blue-800">amerikansk måttomvandlare (kopparkalkylatorn)</a> får du omräkning direkt till <strong>deciliter</strong>, så du kan mäta med det du redan har hemma.</p>
@@ -829,19 +679,7 @@ const blogPosts: BlogPost[] = [
       <p>Vill du bara konvertera mellan svenska enheter (kg, dl, msk) använder du i stället <a href="/mattomvandlare" class="text-blue-600 underline hover:text-blue-800">måttomvandlaren för svenska mått</a>. Tillsammans täcker de två verktygen de vanligaste situationerna när recept och kökslåda inte talar samma språk.</p>
 
       <p><a href="/kopparkalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna amerikansk måttomvandlare</a> och prova med ditt nästa recept.</p>
-    `
-  },
-  {
-    id: 'lopning-var-tempo-och-mal',
-    title: 'Vår och löprunda: sätt rätt tempo när säsongen vänder',
-    description: 'Ljusare kvällar lockar många ut – men spring för snabbt för tidigt gör ofta mer skada än nytta. Tips för mjuk start, vad löptempo betyder – och hur du räknar ut minuter per kilometer och km/h med temporäknaren.',
-    date: '2026-04-10',
-    readTime: '6 min',
-    category: 'Träning',
-    image: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=800',
-    link: '/blog/lopning-var-tempo-och-mal',
-    author: 'Pontus',
-    content: `
+    `},{id:"lopning-var-tempo-och-mal",title:"Vår och löprunda: sätt rätt tempo när säsongen vänder",description:"Ljusare kvällar lockar många ut – men spring för snabbt för tidigt gör ofta mer skada än nytta. Tips för mjuk start, vad löptempo betyder – och hur du räknar ut minuter per kilometer och km/h med temporäknaren.",date:"2026-04-10",readTime:"6 min",category:"Träning",image:"https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=800",link:"/blog/lopning-var-tempo-och-mal",author:"Pontus",content:`
       <p><b>När våren närmar sig</b> märker du det ofta inte bara på temperaturen utan på humöret och kvällarna: ljusare längre och en känsla av att vilja ”bara sticka iväg lite”. Samtidigt har många inte sprungit regelbundet sedan hösten – eller så är det första säsongen på asfalt eller grus för länge sedan. Tyvärr är just det ett vanligt tillfälle att öka för snabbt, vilket ofta ger värk eller att motivationen tar slut innan rutinen är etablerad.</p>
 
       <p>Här är en enkel riktlinje: <strong>långsiktig löpning vinner oftast på rimlig puls och tolerabel ansträngning</strong>, inte på att första månaden kännas som en tävling. Och för att konkret förstå hur hårt du faktiskt sprang – eller vill springa nästa tur – hjälper det att sätta tempo i konkreta siffror: tid per kilometer och hastighet i km/h.</p>
@@ -886,131 +724,5 @@ const blogPosts: BlogPost[] = [
       <h2>Slutsats</h2>
 
       <p>Vår och sommar gör det lätt att vilja sätta igång – och det är härligt – men säsongens bästa resultat är ofta den som inte bränner dig i april. Använd <a href="/tempokalkylator" class="text-blue-600 underline hover:text-blue-800">Tempokalkylatorn</a> för att göra löptempot begripligt, planera mjuka steg framåt och hålla kollen på hur din snittid och hastighet faktiskt utvecklas.</p>
-    `
-  }
-];
-
-const BlogPost: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  
-  const post = blogPosts.find(p => p.id === id);
-
-  if (!post) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <TopNav currentPage="blog" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Bloggpost hittades inte</h1>
-            <p className="text-gray-600 mb-8">Den bloggpost du letar efter finns inte.</p>
-            <Link 
-              to="/blog" 
-              className="inline-flex items-center text-indigo-600 hover:text-indigo-500"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Tillbaka till bloggen
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <TopNav currentPage="blog" />
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Back button */}
-        <Link 
-          to="/blog" 
-          className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8"
-        >
-          <ArrowLeft className="w-5 h-5 mr-2" />
-          Tillbaka till bloggen
-        </Link>
-
-        {/* Article header */}
-        <header className="mb-8">
-          <div className="flex items-center text-sm text-gray-500 mb-4">
-            <Calendar className="w-4 h-4 mr-1" />
-            <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString('sv-SE')}
-            </time>
-            <span className="mx-2">•</span>
-            <Clock className="w-4 h-4 mr-1" />
-            <span>{post.readTime}</span>
-            <span className="mx-2">•</span>
-            <span>Av {post.author}</span>
-          </div>
-          
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {post.title}
-          </h1>
-          
-          <p className="text-xl text-gray-600 mb-6">
-            {post.description}
-          </p>
-          
-          <div className="flex items-center justify-between">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-              {post.category}
-            </span>
-          </div>
-        </header>
-
-        {/* Featured image */}
-        <div className="mb-8">
-          <img
-            src={post.image}
-            alt={post.title}
-            width={800}
-            height={533}
-            fetchPriority="high"
-            decoding="async"
-            className="w-full h-64 md:h-96 object-cover rounded-2xl shadow-lg"
-          />
-        </div>
-
-        {/* Article content */}
-        <article className="max-w-none blog-content">
-          <div 
-            dangerouslySetInnerHTML={{ __html: post.content }}
-            className="text-gray-700 leading-relaxed"
-          />
-        </article>
-
-        {/* Author info */}
-        <div className="mt-12 pt-8 border-t border-gray-200">
-          <div className="flex items-center">
-            <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
-              <Book className="w-6 h-6 text-indigo-600" />
-            </div>
-            <div className="ml-4">
-              <h3 className="text-lg font-semibold text-gray-900">{post.author}</h3>
-              <p className="text-gray-600">Skribent på Kalkylatorn.com</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Related articles or CTA */}
-        <div className="mt-12 p-6 bg-indigo-50 rounded-2xl">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">
-            Vill du lära dig mer?
-          </h3>
-          <p className="text-gray-600 mb-4">
-            Utforska våra kalkylatorer för att planera din ekonomi, hälsa och vardag.
-          </p>
-          <Link 
-            to="/" 
-            className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-          >
-            Se alla kalkylatorer
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default BlogPost;
+    `}],v=()=>{const{id:l}=s(),r=g.find(i=>i.id===l);return r?t.jsxs("div",{className:"min-h-screen bg-gray-50",children:[t.jsx(e,{currentPage:"blog"}),t.jsxs("div",{className:"max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12",children:[t.jsxs(a,{to:"/blog",className:"inline-flex items-center text-gray-600 hover:text-gray-900 mb-8",children:[t.jsx(n,{className:"w-5 h-5 mr-2"}),"Tillbaka till bloggen"]}),t.jsxs("header",{className:"mb-8",children:[t.jsxs("div",{className:"flex items-center text-sm text-gray-500 mb-4",children:[t.jsx(o,{className:"w-4 h-4 mr-1"}),t.jsx("time",{dateTime:r.date,children:new Date(r.date).toLocaleDateString("sv-SE")}),t.jsx("span",{className:"mx-2",children:"•"}),t.jsx(d,{className:"w-4 h-4 mr-1"}),t.jsx("span",{children:r.readTime}),t.jsx("span",{className:"mx-2",children:"•"}),t.jsxs("span",{children:["Av ",r.author]})]}),t.jsx("h1",{className:"text-4xl font-bold text-gray-900 mb-4",children:r.title}),t.jsx("p",{className:"text-xl text-gray-600 mb-6",children:r.description}),t.jsx("div",{className:"flex items-center justify-between",children:t.jsx("span",{className:"inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800",children:r.category})})]}),t.jsx("div",{className:"mb-8",children:t.jsx("img",{src:r.image,alt:r.title,width:800,height:533,fetchPriority:"high",decoding:"async",className:"w-full h-64 md:h-96 object-cover rounded-2xl shadow-lg"})}),t.jsx("article",{className:"max-w-none blog-content",children:t.jsx("div",{dangerouslySetInnerHTML:{__html:r.content},className:"text-gray-700 leading-relaxed"})}),t.jsx("div",{className:"mt-12 pt-8 border-t border-gray-200",children:t.jsxs("div",{className:"flex items-center",children:[t.jsx("div",{className:"w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center",children:t.jsx(k,{className:"w-6 h-6 text-indigo-600"})}),t.jsxs("div",{className:"ml-4",children:[t.jsx("h3",{className:"text-lg font-semibold text-gray-900",children:r.author}),t.jsx("p",{className:"text-gray-600",children:"Skribent på Kalkylatorn.com"})]})]})}),t.jsxs("div",{className:"mt-12 p-6 bg-indigo-50 rounded-2xl",children:[t.jsx("h3",{className:"text-xl font-bold text-gray-900 mb-4",children:"Vill du lära dig mer?"}),t.jsx("p",{className:"text-gray-600 mb-4",children:"Utforska våra kalkylatorer för att planera din ekonomi, hälsa och vardag."}),t.jsx(a,{to:"/",className:"inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors",children:"Se alla kalkylatorer"})]})]})]}):t.jsxs("div",{className:"min-h-screen bg-gray-50",children:[t.jsx(e,{currentPage:"blog"}),t.jsx("div",{className:"max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12",children:t.jsxs("div",{className:"text-center",children:[t.jsx("h1",{className:"text-2xl font-bold text-gray-900 mb-4",children:"Bloggpost hittades inte"}),t.jsx("p",{className:"text-gray-600 mb-8",children:"Den bloggpost du letar efter finns inte."}),t.jsxs(a,{to:"/blog",className:"inline-flex items-center text-indigo-600 hover:text-indigo-500",children:[t.jsx(n,{className:"w-4 h-4 mr-2"}),"Tillbaka till bloggen"]})]})})]})};export{v as default};
+//# sourceMappingURL=BlogPost-CqHU9gSK.js.map

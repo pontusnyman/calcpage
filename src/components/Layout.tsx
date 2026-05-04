@@ -29,15 +29,15 @@ const Layout: React.FC<LayoutProps> = ({ children, seo }) => {
 
   // Default SEO values for homepage
   const defaultSEO = {
-    title: isHomePage ? 'Gratis onlinekalkylatorer' : 'Kalkulatorn.se',
+    title: isHomePage ? 'Gratis onlinekalkylatorer' : 'Kalkylatorn.com',
     description: 'Upptäck våra gratis onlinekalkylatorer för ekonomi, hälsa, träning och vardagliga beräkningar. Enkla och användarvänliga verktyg för smartare beslut.',
-    canonicalUrl: `https://kalkulatorn.se${location.pathname}`,
+    canonicalUrl: `https://www.kalkylatorn.com${location.pathname}`,
     type: 'website' as const,
     schema: {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Kalkulatorn.se",
-      "url": "https://kalkulatorn.se",
+      "name": "Kalkylatorn.com",
+      "url": "https://www.kalkylatorn.com",
       "description": "Gratis onlinekalkylatorer för vardagliga beräkningar"
     }
   };

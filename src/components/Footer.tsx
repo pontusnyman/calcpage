@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-sm font-semibold text-gray-600 tracking-wider uppercase">Om oss</h3>
             <p className="mt-4 text-base text-gray-600">
-              Kalkylatorn.se erbjuder gratis onlinekalkylatorer för olika vardagliga beräkningar och omvandlingar.
+              Kalkylatorn.com erbjuder gratis onlinekalkylatorer för olika vardagliga beräkningar och omvandlingar.
             </p>
           </div>
           {showFooterCalculators && (
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
             </Link>
           </div>
           <p className="text-base text-gray-600 text-center mt-4">
-            © {new Date().getFullYear()} Kalkulatorn.se. Alla rättigheter förbehållna.
+            © {new Date().getFullYear()} Kalkylatorn.com. Alla rättigheter förbehållna.
           </p>
         </div>
       </div>

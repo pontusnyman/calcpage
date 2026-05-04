@@ -7,7 +7,7 @@ const PrivacyPolicy: React.FC = () => {
       seo={{
         title: 'Integritetspolicy',
         description: 'Läs vår integritetspolicy för att förstå hur vi samlar in, använder och skyddar din personliga information.',
-        canonicalUrl: 'https://kalkulatorn.se/integritetspolicy',
+        canonicalUrl: 'https://www.kalkylatorn.com/integritetspolicy',
       }}
     >
       <div className="min-h-screen bg-gray-50 py-12">
@@ -22,7 +22,7 @@ const PrivacyPolicy: React.FC = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Introduktion</h2>
                 <p className="text-gray-700 mb-4">
-                  Kalkulatorn.se ("vi", "oss", "vår") respekterar din integritet och är engagerade i att skydda dina personuppgifter. 
+                  Kalkylatorn.com ("vi", "oss", "vår") respekterar din integritet och är engagerade i att skydda dina personuppgifter. 
                   Denna integritetspolicy förklarar hur vi samlar in, använder, delar och skyddar din information när du använder vår webbplats.
                 </p>
               </section>

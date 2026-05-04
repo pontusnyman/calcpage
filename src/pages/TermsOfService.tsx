@@ -6,8 +6,8 @@ const TermsOfService: React.FC = () => {
     <Layout
       seo={{
         title: 'Användarvillkor',
-        description: 'Läs våra användarvillkor för att förstå reglerna och villkoren för användning av Kalkulatorn.se.',
-        canonicalUrl: 'https://kalkulatorn.se/anvandarvillkor',
+        description: 'Läs våra användarvillkor för att förstå reglerna och villkoren för användning av Kalkylatorn.com.',
+        canonicalUrl: 'https://www.kalkylatorn.com/anvandarvillkor',
       }}
     >
       <div className="min-h-screen bg-gray-50 py-12">
@@ -22,7 +22,7 @@ const TermsOfService: React.FC = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Godkännande av villkor</h2>
                 <p className="text-gray-700 mb-4">
-                  Genom att komma åt och använda Kalkulatorn.se ("webbplatsen") godkänner du att vara bunden av dessa användarvillkor. 
+                  Genom att komma åt och använda Kalkylatorn.com ("webbplatsen") godkänner du att vara bunden av dessa användarvillkor. 
                   Om du inte godkänner dessa villkor, vänligen använd inte webbplatsen.
                 </p>
               </section>
@@ -30,7 +30,7 @@ const TermsOfService: React.FC = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Användning av tjänsten</h2>
                 <p className="text-gray-700 mb-4">
-                  Kalkulatorn.se tillhandahåller gratis onlinekalkylatorer för olika vardagliga beräkningar. Du får använda dessa kalkylatorer 
+                  Kalkylatorn.com tillhandahåller gratis onlinekalkylatorer för olika vardagliga beräkningar. Du får använda dessa kalkylatorer 
                   för personliga eller kommersiella ändamål, under förutsättning att:
                 </p>
                 <ul className="list-disc pl-6 text-gray-700 mb-4">
@@ -43,8 +43,8 @@ const TermsOfService: React.FC = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. Intellektuell egendom</h2>
                 <p className="text-gray-700 mb-4">
-                  Allt innehåll på Kalkulatorn.se, inklusive men inte begränsat till text, grafik, logotyper, ikoner, bilder och programvara, 
-                  är ägda av eller licensierad till Kalkulatorn.se och är skyddat av svensk och internationell upphovsrättslagstiftning.
+                  Allt innehåll på Kalkylatorn.com, inklusive men inte begränsat till text, grafik, logotyper, ikoner, bilder och programvara, 
+                  är ägda av eller licensierad till Kalkylatorn.com och är skyddat av svensk och internationell upphovsrättslagstiftning.
                 </p>
               </section>
 
@@ -63,7 +63,7 @@ const TermsOfService: React.FC = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Ansvar och garantier</h2>
                 <p className="text-gray-700 mb-4">
-                  Kalkulatorn.se tillhandahålls "som det är" utan garantier av något slag, vare sig uttryckliga eller underförstådda. 
+                  Kalkylatorn.com tillhandahålls "som det är" utan garantier av något slag, vare sig uttryckliga eller underförstådda. 
                   Vi garanterar inte att:
                 </p>
                 <ul className="list-disc pl-6 text-gray-700 mb-4">
@@ -80,7 +80,7 @@ const TermsOfService: React.FC = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Begränsning av ansvar</h2>
                 <p className="text-gray-700 mb-4">
-                  I den utsträckning som tillåts enligt lag, ska Kalkulatorn.se inte vara ansvarig för några direkta, indirekta, 
+                  I den utsträckning som tillåts enligt lag, ska Kalkylatorn.com inte vara ansvarig för några direkta, indirekta, 
                   tillfälliga, följdskador eller förlust av vinst som uppstår från användning av eller oförmåga att använda webbplatsen.
                 </p>
               </section>
@@ -96,7 +96,7 @@ const TermsOfService: React.FC = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Annonser</h2>
                 <p className="text-gray-700 mb-4">
-                  Kalkulatorn.se visar annonser via Google AdSense. Vi ansvarar inte för innehållet i dessa annonser. 
+                  Kalkylatorn.com visar annonser via Google AdSense. Vi ansvarar inte för innehållet i dessa annonser. 
                   Annonserna visas baserat på dina tidigare besök och andra faktorer. Du kan välja bort personaliserade annonser 
                   genom att besöka <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800">Google's annonsinställningar</a>.
                 </p>

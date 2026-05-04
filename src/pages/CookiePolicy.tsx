@@ -7,7 +7,7 @@ const CookiePolicy: React.FC = () => {
       seo={{
         title: 'Cookie Policy',
         description: 'Läs vår cookie policy för att förstå hur vi använder cookies och liknande tekniker på vår webbplats.',
-        canonicalUrl: 'https://kalkulatorn.se/cookiepolicy',
+        canonicalUrl: 'https://www.kalkylatorn.com/cookiepolicy',
       }}
     >
       <div className="min-h-screen bg-gray-50 py-12">
@@ -31,7 +31,7 @@ const CookiePolicy: React.FC = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Hur använder vi cookies?</h2>
                 <p className="text-gray-700 mb-4">
-                  Kalkulatorn.se använder cookies för följande ändamål:
+                  Kalkylatorn.com använder cookies för följande ändamål:
                 </p>
                 <ul className="list-disc pl-6 text-gray-700 mb-4">
                   <li>För att förbättra användarupplevelsen</li>

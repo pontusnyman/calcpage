@@ -1,3 +1,5 @@
 # https://www.kalkylatorn.com/
 User-agent: *
 Allow: /
+
+Sitemap: https://www.kalkylatorn.com/sitemap.xml

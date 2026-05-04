@@ -244,37 +244,37 @@ function App() {
         <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<BlogPost />} />
-          <Route path="/sovkalkylator" element={<SleepCalculator />} />
-          <Route path="/alkoholkalkylator" element={<AlcoholCalculator />} />
-          <Route path="/kopparkalkylator" element={<CupCalculator />} />
+          <Route path="/blog" element={<Layout><Blog /></Layout>} />
+          <Route path="/blog/:id" element={<Layout><BlogPost /></Layout>} />
+          <Route path="/sovkalkylator" element={<Layout><SleepCalculator /></Layout>} />
+          <Route path="/alkoholkalkylator" element={<Layout><AlcoholCalculator /></Layout>} />
+          <Route path="/kopparkalkylator" element={<Layout><CupCalculator /></Layout>} />
           <Route path="/bmikalkylator" element={<BMICalculator />} />
           <Route path="/kalorikalkylator" element={<CalorieCalculator />} />
           <Route path="/viktminskningskalkylator" element={<PremiumAccessControl calculatorId="weight-reduce"><WeightReduceCalculator /></PremiumAccessControl>} />
-          <Route path="/tempokalkylator" element={<RunningPaceCalculator />} />
-          <Route path="/rantakalkylator" element={<PremiumAccessControl calculatorId="compound-interest"><CompoundInterestCalculator /></PremiumAccessControl>} />
-          <Route path="/lanekalkylator" element={<LoanCalculator />} />
-          <Route path="/bolanekalkylator" element={<MortgageCalculator />} />
-          <Route path="/momskalkylator" element={<VATCalculator />} />
-          <Route path="/fastekalkylator" element={<FastingCalculator />} />
-          <Route path="/agglossningskalkylator" element={<PremiumAccessControl calculatorId="ovulation"><OvulationCalculator /></PremiumAccessControl>} />
+          <Route path="/tempokalkylator" element={<Layout><RunningPaceCalculator /></Layout>} />
+          <Route path="/rantakalkylator" element={<Layout><PremiumAccessControl calculatorId="compound-interest"><CompoundInterestCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/lanekalkylator" element={<Layout><LoanCalculator /></Layout>} />
+          <Route path="/bolanekalkylator" element={<Layout><MortgageCalculator /></Layout>} />
+          <Route path="/momskalkylator" element={<Layout><VATCalculator /></Layout>} />
+          <Route path="/fastekalkylator" element={<Layout><FastingCalculator /></Layout>} />
+          <Route path="/agglossningskalkylator" element={<Layout><PremiumAccessControl calculatorId="ovulation"><OvulationCalculator /></PremiumAccessControl></Layout>} />
           <Route path="/bmrkalkylator" element={<PremiumAccessControl calculatorId="bmr"><BMRCalculator /></PremiumAccessControl>} />
-          <Route path="/mattomvandlare" element={<MeasurementConverter />} />
-          <Route path="/loparkalkylator" element={<RaceFinishPredictor />} />
-          <Route path="/pulszoner" element={<PremiumAccessControl calculatorId="heart-rate-zones"><HeartRateZonesCalculator /></PremiumAccessControl>} />
-          <Route path="/deadlinekalkylator" element={<PremiumAccessControl calculatorId="deadline"><DeadlineCalculator /></PremiumAccessControl>} />
-          <Route path="/jetlagkalkylator" element={<PremiumAccessControl calculatorId="jet-lag"><JetLagCalculator /></PremiumAccessControl>} />
-          <Route path="/nedrakning" element={<CountdownCalculator />} />
-          <Route path="/alderkalkylator" element={<AgeCalculator />} />
-          <Route path="/billeasingkalkylator" element={<PremiumAccessControl calculatorId="car-lease"><CarLeaseCalculator /></PremiumAccessControl>} />
-          <Route path="/rabattkalkylator" element={<DiscountCalculator />} />
-          <Route path="/energikalkylator" element={<PremiumAccessControl calculatorId="energy-savings"><EnergySavingsCalculator /></PremiumAccessControl>} />
-          <Route path="/timtaxekalkylator" element={<PremiumAccessControl calculatorId="hourly-rate"><HourlyRateCalculator /></PremiumAccessControl>} />
-          <Route path="/moteskostnadskalkylator" element={<PremiumAccessControl calculatorId="meeting-cost"><MeetingCostCalculator /></PremiumAccessControl>} />
-          <Route path="/sparmalskalkylator" element={<PremiumAccessControl calculatorId="savings-goal"><SavingsGoalCalculator /></PremiumAccessControl>} />
-          <Route path="/koffeinkalkylator" element={<PremiumAccessControl calculatorId="caffeine"><CaffeineCalculator /></PremiumAccessControl>} />
-          <Route path="/kryptokalkylator" element={<PremiumAccessControl calculatorId="crypto-profit"><CryptoProfitCalculator /></PremiumAccessControl>} />
+          <Route path="/mattomvandlare" element={<Layout><MeasurementConverter /></Layout>} />
+          <Route path="/loparkalkylator" element={<Layout><RaceFinishPredictor /></Layout>} />
+          <Route path="/pulszoner" element={<Layout><PremiumAccessControl calculatorId="heart-rate-zones"><HeartRateZonesCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/deadlinekalkylator" element={<Layout><PremiumAccessControl calculatorId="deadline"><DeadlineCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/jetlagkalkylator" element={<Layout><PremiumAccessControl calculatorId="jet-lag"><JetLagCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/nedrakning" element={<Layout><CountdownCalculator /></Layout>} />
+          <Route path="/alderkalkylator" element={<Layout><AgeCalculator /></Layout>} />
+          <Route path="/billeasingkalkylator" element={<Layout><PremiumAccessControl calculatorId="car-lease"><CarLeaseCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/rabattkalkylator" element={<Layout><DiscountCalculator /></Layout>} />
+          <Route path="/energikalkylator" element={<Layout><PremiumAccessControl calculatorId="energy-savings"><EnergySavingsCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/timtaxekalkylator" element={<Layout><PremiumAccessControl calculatorId="hourly-rate"><HourlyRateCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/moteskostnadskalkylator" element={<Layout><PremiumAccessControl calculatorId="meeting-cost"><MeetingCostCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/sparmalskalkylator" element={<Layout><PremiumAccessControl calculatorId="savings-goal"><SavingsGoalCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/koffeinkalkylator" element={<Layout><PremiumAccessControl calculatorId="caffeine"><CaffeineCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/kryptokalkylator" element={<Layout><PremiumAccessControl calculatorId="crypto-profit"><CryptoProfitCalculator /></PremiumAccessControl></Layout>} />
           <Route path="/integritetspolicy" element={<PrivacyPolicy />} />
           <Route path="/cookiepolicy" element={<CookiePolicy />} />
           <Route path="/anvandarvillkor" element={<TermsOfService />} />

@@ -48,12 +48,11 @@ const JetLagCalculator = () => {
 
     // Generate sleep schedule
     const sleepSchedule = [];
-    const [departureHour] = departureTime.split(':').map(Number);
     
     for (let day = 1; day <= adjustmentDays; day++) {
       const adjustment = (timeDifference / adjustmentDays) * day;
-      let newSleepTime = (22 + adjustment) % 24;
-      let newWakeTime = (6 + adjustment) % 24;
+      const newSleepTime = (22 + adjustment) % 24;
+      const newWakeTime = (6 + adjustment) % 24;
 
       sleepSchedule.push({
         day,

@@ -15,6 +15,7 @@ import {
   Filler,
   Legend,
 } from 'chart.js';
+import type { TooltipItem } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -136,6 +137,7 @@ const CompoundInterestCalculator = () => {
 
   useEffect(() => {
     calculateCompoundInterest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- calculation depends on primitive inputs above
   }, [initialAmount, monthlyContribution, years, interestRate]);
 
   const chartData = {
@@ -159,7 +161,7 @@ const CompoundInterestCalculator = () => {
       },
       tooltip: {
         callbacks: {
-          label: function(context: any) {
+          label: function(context: TooltipItem<'line'>) {
             return `${context.parsed.y.toLocaleString('sv-SE')} kr`;
           }
         }
@@ -168,8 +170,8 @@ const CompoundInterestCalculator = () => {
     scales: {
       y: {
         ticks: {
-          callback: function(value: any) {
-            return value.toLocaleString('sv-SE') + ' kr';
+          callback: function(value: string | number) {
+            return Number(value).toLocaleString('sv-SE') + ' kr';
           }
         }
       }

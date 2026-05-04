@@ -83,7 +83,6 @@ const DiscountCalculator = () => {
       // Auto-calculate with parsed values directly
       calculateDiscountWithValues(parsedPrice, parsedType, parsedValue);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleShare = async () => {

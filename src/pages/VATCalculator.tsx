@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Calculator, Info, Percent } from 'lucide-react';
+import { ArrowLeft, Info, Percent } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface VATResult {

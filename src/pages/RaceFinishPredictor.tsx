@@ -101,7 +101,6 @@ const RaceFinishPredictor = () => {
     setTargetPaceSecondsInput(String(paceSeconds));
     setDistanceInput(String(runDistance));
     setResult(buildRaceResult(paceMinutes, paceSeconds, runDistance));
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration from share URL
   }, []);
 
   const formatTime = (time: { hours: number; minutes: number; seconds: number }): string => {

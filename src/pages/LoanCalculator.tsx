@@ -150,7 +150,6 @@ const LoanCalculator = () => {
       // Auto-calculate with parsed values directly
       calculateLoanWithValues(parsedLoanAmount, parsedYears, parsedInterestRate, parsedSetupFee, parsedAnnualFee);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -25,4 +25,15 @@ export default tseslint.config(
       ],
     },
   }
+  ,
+  {
+    files: [
+      'src/components/SEO.tsx',
+      'src/contexts/FeatureFlagContext.tsx',
+      'src/contexts/PremiumContext.tsx',
+    ],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  }
 );

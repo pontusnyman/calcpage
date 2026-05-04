@@ -137,7 +137,6 @@ const BMICalculator = () => {
     setHeight(sharedHeight);
     setWeight(sharedWeight);
     setResult(getBMICategory(sharedBmi));
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration from share URL
   }, []);
 
   return (

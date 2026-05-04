@@ -125,6 +125,7 @@ const AlcoholCalculator = () => {
 
       calculateResult();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration from share URL
   }, []);
 
   if (showResults && calculationResult) {

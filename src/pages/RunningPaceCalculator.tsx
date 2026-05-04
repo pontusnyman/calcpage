@@ -59,7 +59,6 @@ const RunningPaceCalculator = () => {
       totalSeconds: secondsPerKm,
       speedKmh,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration from share URL
   }, []);
 
   const calculatePace = () => {

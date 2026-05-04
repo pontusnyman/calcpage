@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Home, Calculator, Info, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Home, Calculator, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface MortgageResult {

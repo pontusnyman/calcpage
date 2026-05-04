@@ -115,7 +115,6 @@ const SavingsGoalCalculator = () => {
       // Auto-calculate with parsed values directly
       calculateSavingsWithValues(parsedTarget, parsedTime, parsedRate, parsedInitial);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleShare = async () => {

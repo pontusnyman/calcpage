@@ -2,5 +2,5 @@
 
 // Google AdSense types
 interface Window {
-  adsbygoogle?: any[];
+  adsbygoogle?: unknown[];
 }

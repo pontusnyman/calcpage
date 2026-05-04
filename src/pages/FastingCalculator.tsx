@@ -15,6 +15,86 @@ interface FastingStage {
   processes: string[];
 }
 
+const FASTING_STAGES: FastingStage[] = [
+  {
+    hours: 12,
+    title: 'Ketogenesis börjar',
+    description: 'Din kropp börjar övergå från glukos till ketoner som energikälla',
+    processes: [
+      'Insulinnivåerna sjunker',
+      'Glykogenlagren börjar tömmas',
+      'Fettförbränningen ökar',
+      'Autofagi-processen påbörjas',
+    ],
+  },
+  {
+    hours: 18,
+    title: 'Ketoner ökar',
+    description: 'Ketonnivåerna i blodet stiger markant',
+    processes: [
+      'Ökad fettförbränning',
+      'Förbättrad mental skärpa',
+      'Minskad inflammation',
+      'HGH (tillväxthormon) börjar öka',
+    ],
+  },
+  {
+    hours: 24,
+    title: 'Autofagi accelererar',
+    description: 'Cellernas självrenande process är i full gång',
+    processes: [
+      'Maximal autofagi',
+      'Immunsystemet börjar förnya sig',
+      'Insulinkänsligheten förbättras',
+      'Betydande minskning av inflammation',
+    ],
+  },
+  {
+    hours: 36,
+    title: 'Optimal ketosläge',
+    description: 'Kroppen är nu fullt anpassad till fettförbränning',
+    processes: [
+      'Maximal ketonnivå uppnås',
+      'HGH-nivåer ökar med upp till 300%',
+      'Betydande cellulärt reparationsarbete',
+      'BDNF (hjärnans tillväxtfaktor) ökar',
+    ],
+  },
+  {
+    hours: 48,
+    title: 'Immunförnyelse',
+    description: 'Immunsystemet genomgår betydande förnyelse',
+    processes: [
+      'Stamcellsaktivering',
+      'Immunsystemet börjar förnya sig',
+      'Maximal fettförbränning',
+      'Insulinkänsligheten på topp',
+    ],
+  },
+  {
+    hours: 72,
+    title: 'Stamcellsaktivering',
+    description: 'Omfattande cellförnyelse och reparation',
+    processes: [
+      'Maximal stamcellsproduktion',
+      'Omfattande vävnadsreparation',
+      'Betydande minskning av inflammation',
+      'Optimerad hormonbalans',
+    ],
+  },
+  {
+    hours: 96,
+    title: 'Maximal cellförnyelse',
+    description: 'Kroppen genomgår omfattande cellförnyelse',
+    processes: [
+      'Maximal cellförnyelse',
+      'Omfattande vävnadsreparation',
+      'Immunsystemet helt förnyat',
+      'Optimal hormonbalans uppnådd',
+    ],
+  },
+];
+
 const FastingCalculator = () => {
   const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
   const [startHour, setStartHour] = useState(new Date().getHours().toString().padStart(2, '0'));
@@ -65,86 +145,6 @@ const FastingCalculator = () => {
     );
   }, []);
 
-  const fastingStages: FastingStage[] = [
-    {
-      hours: 12,
-      title: "Ketogenesis börjar",
-      description: "Din kropp börjar övergå från glukos till ketoner som energikälla",
-      processes: [
-        "Insulinnivåerna sjunker",
-        "Glykogenlagren börjar tömmas",
-        "Fettförbränningen ökar",
-        "Autofagi-processen påbörjas"
-      ]
-    },
-    {
-      hours: 18,
-      title: "Ketoner ökar",
-      description: "Ketonnivåerna i blodet stiger markant",
-      processes: [
-        "Ökad fettförbränning",
-        "Förbättrad mental skärpa",
-        "Minskad inflammation",
-        "HGH (tillväxthormon) börjar öka"
-      ]
-    },
-    {
-      hours: 24,
-      title: "Autofagi accelererar",
-      description: "Cellernas självrenande process är i full gång",
-      processes: [
-        "Maximal autofagi",
-        "Immunsystemet börjar förnya sig",
-        "Insulinkänsligheten förbättras",
-        "Betydande minskning av inflammation"
-      ]
-    },
-    {
-      hours: 36,
-      title: "Optimal ketosläge",
-      description: "Kroppen är nu fullt anpassad till fettförbränning",
-      processes: [
-        "Maximal ketonnivå uppnås",
-        "HGH-nivåer ökar med upp till 300%",
-        "Betydande cellulärt reparationsarbete",
-        "BDNF (hjärnans tillväxtfaktor) ökar"
-      ]
-    },
-    {
-      hours: 48,
-      title: "Immunförnyelse",
-      description: "Immunsystemet genomgår betydande förnyelse",
-      processes: [
-        "Stamcellsaktivering",
-        "Immunsystemet börjar förnya sig",
-        "Maximal fettförbränning",
-        "Insulinkänsligheten på topp"
-      ]
-    },
-    {
-      hours: 72,
-      title: "Stamcellsaktivering",
-      description: "Omfattande cellförnyelse och reparation",
-      processes: [
-        "Maximal stamcellsproduktion",
-        "Omfattande vävnadsreparation",
-        "Betydande minskning av inflammation",
-        "Optimerad hormonbalans"
-      ]
-    },
-    {
-      hours: 96,
-      title: "Maximal cellförnyelse",
-      description: "Kroppen genomgår omfattande cellförnyelse",
-      processes: [
-        "Maximal cellförnyelse",
-        "Omfattande vävnadsreparation",
-        "Immunsystemet helt förnyat",
-        "Optimal hormonbalans uppnådd"
-      ]
-    }
-  ];
-
   useEffect(() => {
     const timer = setInterval(() => {
       const start = new Date(`${startDate}T${startHour}:${startMinute}`);
@@ -175,7 +175,7 @@ const FastingCalculator = () => {
         setTimeLeft('Fastan är avslutad!');
         setProgress(100);
         const elapsedHours = duration;
-        const completedStage = [...fastingStages]
+        const completedStage = [...FASTING_STAGES]
           .reverse()
           .find(stage => elapsedHours >= stage.hours);
         setCurrentStage(completedStage || null);
@@ -191,7 +191,7 @@ const FastingCalculator = () => {
       const elapsedHours = (nowMs - startMs) / (1000 * 60 * 60);
       setProgress((elapsedHours / duration) * 100);
 
-      const activeStage = [...fastingStages]
+      const activeStage = [...FASTING_STAGES]
         .reverse()
         .find(stage => elapsedHours >= stage.hours);
 
@@ -335,7 +335,7 @@ const FastingCalculator = () => {
           </h2>
           
           <div className="space-y-6">
-            {fastingStages.map((stage, index) => (
+            {FASTING_STAGES.map((stage, index) => (
               <div key={index} className="relative">
                 <div className="flex items-start">
                   <div className="flex items-center justify-center w-8 h-8 bg-teal-100 rounded-full mr-4 flex-shrink-0">
@@ -354,7 +354,7 @@ const FastingCalculator = () => {
                     </ul>
                   </div>
                 </div>
-                {index < fastingStages.length - 1 && (
+                {index < FASTING_STAGES.length - 1 && (
                   <div className="absolute left-4 top-12 bottom-0 w-0.5 bg-teal-100" />
                 )}
               </div>

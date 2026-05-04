@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Clock, Users, DollarSign, Calculator } from 'lucide-react';
+import { ArrowLeft, Clock, Users, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface MeetingResult {

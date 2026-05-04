@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Car, Calculator, DollarSign, Info } from 'lucide-react';
+import { ArrowLeft, Car, DollarSign, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface LeaseOption {

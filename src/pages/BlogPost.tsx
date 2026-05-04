@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, Book } from 'lucide-react';
 import TopNav from '../components/TopNav';
 import SEO from '../components/SEO';
+import { useFeatureFlags } from '../contexts/FeatureFlagContext';
 
 interface BlogPost {
   id: string;
@@ -891,8 +892,12 @@ const blogPosts: BlogPost[] = [
   }
 ];
 
+const extractInternalLinks = (html: string): string[] =>
+  Array.from(html.matchAll(/href="(\/[^"]+)"/g)).map((match) => match[1]);
+
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const { getVisibleCalculators } = useFeatureFlags();
   
   const post = blogPosts.find(p => p.id === id);
 
@@ -918,6 +923,42 @@ const BlogPost: React.FC = () => {
   }
 
   const postUrl = `https://www.kalkylatorn.com${post.link}`;
+  const visibleCalculators = getVisibleCalculators();
+  const visibleCalculatorByPath = new Map(visibleCalculators.map((calculator) => [calculator.path, calculator]));
+  const linkedCalculatorPaths = Array.from(
+    new Set(
+      extractInternalLinks(post.content).filter((path) => visibleCalculatorByPath.has(path))
+    )
+  );
+
+  const relatedCalculators = [
+    ...linkedCalculatorPaths
+      .map((path) => visibleCalculatorByPath.get(path))
+      .filter((calculator): calculator is (typeof visibleCalculators)[number] => Boolean(calculator)),
+    ...visibleCalculators.filter(
+      (calculator) =>
+        !linkedCalculatorPaths.includes(calculator.path) &&
+        calculator.category === post.category
+    ),
+    ...visibleCalculators.filter(
+      (calculator) =>
+        !linkedCalculatorPaths.includes(calculator.path) &&
+        calculator.category !== post.category
+    ),
+  ].slice(0, 4);
+
+  const relatedPosts = blogPosts
+    .filter((candidate) => candidate.id !== post.id)
+    .sort((a, b) => {
+      const aSameCategory = a.category === post.category ? 1 : 0;
+      const bSameCategory = b.category === post.category ? 1 : 0;
+      if (aSameCategory !== bSameCategory) {
+        return bSameCategory - aSameCategory;
+      }
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    })
+    .slice(0, 3);
+
   const postSchema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -1041,6 +1082,40 @@ const BlogPost: React.FC = () => {
             className="text-gray-700 leading-relaxed"
           />
         </article>
+
+        <section className="mt-12 rounded-2xl border border-gray-200 bg-transparent p-6">
+          <h2 className="text-xl font-bold text-gray-900">Relaterade kalkylatorer</h2>
+          <p className="mt-2 text-gray-600">
+            Testa fler verktyg som hjälper dig att räkna vidare på samma tema.
+          </p>
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {relatedCalculators.map((calculator) => (
+              <Link
+                key={calculator.id}
+                to={calculator.path}
+                className="rounded-lg border border-indigo-200 bg-white px-4 py-3 text-sm font-medium text-indigo-700 transition-colors hover:bg-indigo-100"
+              >
+                {calculator.title}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-6">
+          <h2 className="text-xl font-bold text-gray-900">Relaterade inlägg</h2>
+          <div className="mt-4 space-y-3">
+            {relatedPosts.map((relatedPost) => (
+              <Link
+                key={relatedPost.id}
+                to={relatedPost.link}
+                className="block rounded-lg border border-gray-200 p-4 transition-colors hover:border-indigo-200 hover:bg-indigo-50"
+              >
+                <p className="text-sm text-indigo-700">{relatedPost.category}</p>
+                <p className="mt-1 font-semibold text-gray-900">{relatedPost.title}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* Author info */}
         <div className="mt-12 pt-8 border-t border-gray-200">

@@ -31,6 +31,7 @@ export default tseslint.config(
       'src/components/SEO.tsx',
       'src/contexts/FeatureFlagContext.tsx',
       'src/contexts/PremiumContext.tsx',
+      'src/pages/BlogPost.tsx',
     ],
     rules: {
       'react-refresh/only-export-components': 'off',

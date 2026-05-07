@@ -4,8 +4,12 @@ import { ArrowLeft, Calendar, Clock, Book } from 'lucide-react';
 import TopNav from '../components/TopNav';
 import SEO from '../components/SEO';
 import { useFeatureFlags } from '../contexts/FeatureFlagContext';
+import {
+  getRelatedBlogPostsForCalculator,
+  getRelatedCalculatorPathsForBlogPost,
+} from '../seo/contentRelations';
 
-interface BlogPost {
+export interface BlogPost {
   id: string;
   title: string;
   description: string;
@@ -19,7 +23,7 @@ interface BlogPost {
 }
 
 // Blog post data with full content
-const blogPosts: BlogPost[] = [
+export const BLOG_POSTS: BlogPost[] = [
   {
     id: 'loparkalkylator-sluttid-och-tempo',
     title: 'Löparkalkylator: beräkna sluttid, tempo per km och mellantider inför ditt lopp',
@@ -899,7 +903,7 @@ const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { getVisibleCalculators } = useFeatureFlags();
   
-  const post = blogPosts.find(p => p.id === id);
+  const post = BLOG_POSTS.find(p => p.id === id);
 
   if (!post) {
     return (
@@ -925,30 +929,59 @@ const BlogPost: React.FC = () => {
   const postUrl = `https://www.kalkylatorn.com${post.link}`;
   const visibleCalculators = getVisibleCalculators();
   const visibleCalculatorByPath = new Map(visibleCalculators.map((calculator) => [calculator.path, calculator]));
+  const relationCalculatorPaths = getRelatedCalculatorPathsForBlogPost(post.id).filter((path) =>
+    visibleCalculatorByPath.has(path)
+  );
   const linkedCalculatorPaths = Array.from(
     new Set(
       extractInternalLinks(post.content).filter((path) => visibleCalculatorByPath.has(path))
     )
   );
+  const prioritizedCalculatorPaths = Array.from(
+    new Set([...relationCalculatorPaths, ...linkedCalculatorPaths])
+  );
 
   const relatedCalculators = [
-    ...linkedCalculatorPaths
+    ...prioritizedCalculatorPaths
       .map((path) => visibleCalculatorByPath.get(path))
       .filter((calculator): calculator is (typeof visibleCalculators)[number] => Boolean(calculator)),
     ...visibleCalculators.filter(
       (calculator) =>
-        !linkedCalculatorPaths.includes(calculator.path) &&
+        !prioritizedCalculatorPaths.includes(calculator.path) &&
         calculator.category === post.category
     ),
     ...visibleCalculators.filter(
       (calculator) =>
-        !linkedCalculatorPaths.includes(calculator.path) &&
+        !prioritizedCalculatorPaths.includes(calculator.path) &&
         calculator.category !== post.category
     ),
   ].slice(0, 4);
 
-  const relatedPosts = blogPosts
-    .filter((candidate) => candidate.id !== post.id)
+  const relationRelatedPosts = Array.from(
+    new Map(
+      prioritizedCalculatorPaths
+        .flatMap((path) => getRelatedBlogPostsForCalculator(path))
+        .filter((candidate) => candidate.id !== post.id)
+        .map((candidate) => [candidate.id, candidate])
+    ).values()
+  );
+
+  const relatedPosts = [
+    ...relationRelatedPosts
+      .map((relationPost) => BLOG_POSTS.find((candidate) => candidate.id === relationPost.id))
+      .filter((candidate): candidate is BlogPost => Boolean(candidate)),
+    ...BLOG_POSTS
+      .filter((candidate) => candidate.id !== post.id)
+      .filter((candidate) => !relationRelatedPosts.some((relationPost) => relationPost.id === candidate.id))
+      .sort((a, b) => {
+        const aSameCategory = a.category === post.category ? 1 : 0;
+        const bSameCategory = b.category === post.category ? 1 : 0;
+        if (aSameCategory !== bSameCategory) {
+          return bSameCategory - aSameCategory;
+        }
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      }),
+  ]
     .sort((a, b) => {
       const aSameCategory = a.category === post.category ? 1 : 0;
       const bSameCategory = b.category === post.category ? 1 : 0;

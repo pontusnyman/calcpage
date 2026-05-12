@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, Scale, Calendar, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
@@ -10,20 +10,44 @@ interface WeightResult {
   currentCalories: number;
   targetCalories: number;
   dailyDeficit: number;
+  totalWeightLoss: number;
+  weeklyWeightLoss: number;
 }
 
+const DEFAULT_WEIGHT = 100;
+const DEFAULT_HEIGHT = 188;
+const DEFAULT_AGE = 39;
+const DEFAULT_TARGET_WEIGHT = 88;
+const DEFAULT_DAYS_TO_TARGET = 100;
+
+const parseClampedNumber = (
+  value: string,
+  min: number,
+  max: number,
+  fallback: number
+): number => {
+  if (value.trim() === '') return fallback;
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.max(min, Math.min(max, parsed));
+};
+
 const WeightReduceCalculator = () => {
-  const [weight, setWeight] = useState<number>(100);
-  const [height, setHeight] = useState<number>(188);
-  const [age, setAge] = useState<number>(39);
+  const [weight, setWeight] = useState<string>(String(DEFAULT_WEIGHT));
+  const [height, setHeight] = useState<string>(String(DEFAULT_HEIGHT));
+  const [age, setAge] = useState<string>(String(DEFAULT_AGE));
   const [gender, setGender] = useState<'man' | 'woman'>('man');
-  const [targetWeight, setTargetWeight] = useState<number>(88);
-  const [daysToTarget, setDaysToTarget] = useState<number>(100);
+  const [targetWeight, setTargetWeight] = useState<string>(String(DEFAULT_TARGET_WEIGHT));
+  const [daysToTarget, setDaysToTarget] = useState<string>(String(DEFAULT_DAYS_TO_TARGET));
   const [activityLevel, setActivityLevel] = useState<number>(1.375);
   const [result, setResult] = useState<WeightResult | null>(null);
-
-  // Get SEO configuration for Weight Reduction Calculator
   const seo = calculatorSEO['/viktminskningskalkylator'];
+
+  const parsedWeight = parseClampedNumber(weight, 1, 300, DEFAULT_WEIGHT);
+  const parsedHeight = parseClampedNumber(height, 1, 300, DEFAULT_HEIGHT);
+  const parsedAge = parseClampedNumber(age, 1, 120, DEFAULT_AGE);
+  const parsedTargetWeight = parseClampedNumber(targetWeight, 1, 300, DEFAULT_TARGET_WEIGHT);
+  const parsedDaysToTarget = parseClampedNumber(daysToTarget, 1, Number.MAX_SAFE_INTEGER, DEFAULT_DAYS_TO_TARGET);
 
   const activityLevels = [
     { value: 1.2, label: 'Lite till ingen träning', description: 'Stillasittande livsstil' },
@@ -35,26 +59,29 @@ const WeightReduceCalculator = () => {
 
   const calculateWeightLoss = () => {
     // Calculate BMR using Mifflin-St Jeor Equation
-    let bmr = 10 * weight + 6.25 * height - 5 * age;
+    let bmr = 10 * parsedWeight + 6.25 * parsedHeight - 5 * parsedAge;
     bmr = gender === 'man' ? bmr + 5 : bmr - 161;
     
     // Calculate TDEE (Total Daily Energy Expenditure)
     const currentCalories = Math.round(bmr * activityLevel);
     
     // Calculate required daily deficit
-    const totalWeightLoss = weight - targetWeight; // kg
+    const totalWeightLoss = parsedWeight - parsedTargetWeight; // kg
     const totalCaloriesNeeded = totalWeightLoss * 7700; // 7700 calories per kg of fat
-    const dailyDeficit = Math.round(totalCaloriesNeeded / daysToTarget);
+    const dailyDeficit = Math.round(totalCaloriesNeeded / parsedDaysToTarget);
     
     // Calculate target calories
     const targetCalories = Math.round(currentCalories - dailyDeficit);
+    const weeklyWeightLoss = (parsedWeight - parsedTargetWeight) / (parsedDaysToTarget / 7);
 
     setResult({
-      targetWeight,
-      daysToTarget,
+      targetWeight: parsedTargetWeight,
+      daysToTarget: parsedDaysToTarget,
       currentCalories,
       targetCalories,
-      dailyDeficit
+      dailyDeficit,
+      totalWeightLoss,
+      weeklyWeightLoss,
     });
   };
 
@@ -86,7 +113,7 @@ const WeightReduceCalculator = () => {
                 <input
                   type="number"
                   value={weight}
-                  onChange={(e) => setWeight(Math.max(1, Math.min(300, Number(e.target.value))))}
+                  onChange={(e) => setWeight(e.target.value)}
                   className="w-full border-2 border-purple-200 rounded-lg px-4 py-2 focus:border-purple-500 focus:ring-purple-500"
                 />
               </div>
@@ -98,7 +125,7 @@ const WeightReduceCalculator = () => {
                 <input
                   type="number"
                   value={targetWeight}
-                  onChange={(e) => setTargetWeight(Math.max(1, Math.min(300, Number(e.target.value))))}
+                  onChange={(e) => setTargetWeight(e.target.value)}
                   className="w-full border-2 border-purple-200 rounded-lg px-4 py-2 focus:border-purple-500 focus:ring-purple-500"
                 />
               </div>
@@ -110,7 +137,7 @@ const WeightReduceCalculator = () => {
                 <input
                   type="number"
                   value={height}
-                  onChange={(e) => setHeight(Math.max(1, Math.min(300, Number(e.target.value))))}
+                  onChange={(e) => setHeight(e.target.value)}
                   className="w-full border-2 border-purple-200 rounded-lg px-4 py-2 focus:border-purple-500 focus:ring-purple-500"
                 />
               </div>
@@ -122,7 +149,7 @@ const WeightReduceCalculator = () => {
                 <input
                   type="number"
                   value={age}
-                  onChange={(e) => setAge(Math.max(1, Math.min(120, Number(e.target.value))))}
+                  onChange={(e) => setAge(e.target.value)}
                   className="w-full border-2 border-purple-200 rounded-lg px-4 py-2 focus:border-purple-500 focus:ring-purple-500"
                 />
               </div>
@@ -163,7 +190,7 @@ const WeightReduceCalculator = () => {
                   <input
                     type="number"
                     value={daysToTarget}
-                    onChange={(e) => setDaysToTarget(Math.max(1, Number(e.target.value)))}
+                    onChange={(e) => setDaysToTarget(e.target.value)}
                     className="w-full border-2 border-purple-200 rounded-lg px-4 py-2 focus:border-purple-500 focus:ring-purple-500"
                   />
                   <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -233,12 +260,12 @@ const WeightReduceCalculator = () => {
                     </div>
                     <div>
                       <div className="text-gray-500 text-sm">Total viktminskning</div>
-                      <div className="text-2xl font-bold text-purple-600">{(weight - targetWeight).toFixed(1)} kg</div>
+                      <div className="text-2xl font-bold text-purple-600">{result.totalWeightLoss.toFixed(1)} kg</div>
                     </div>
                     <div>
                       <div className="text-gray-500 text-sm">Genomsnittlig viktminskning/vecka</div>
                       <div className="text-2xl font-bold text-purple-600">
-                        {((weight - targetWeight) / (daysToTarget / 7)).toFixed(1)} kg
+                        {result.weeklyWeightLoss.toFixed(1)} kg
                       </div>
                     </div>
                   </div>

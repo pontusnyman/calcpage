@@ -6,6 +6,8 @@ import SEO from '../components/SEO';
 import { BLOG_POSTS, type BlogPost } from '../content/blogPosts';
 
 const BLOG_INDEX_POST_IDS = [
+  'viktminskningskalkylator-guide',
+  'bmrkalkylator-guide',
   'loparkalkylator-sluttid-och-tempo',
   'fasta-24-till-96-timmar',
   'kaloribehov-bmr-och-tdee',

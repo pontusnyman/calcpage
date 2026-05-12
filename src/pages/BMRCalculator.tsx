@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, Activity, Scale, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
@@ -15,11 +15,27 @@ interface BMRResult {
   };
 }
 
+const DEFAULT_AGE = 30;
+const DEFAULT_WEIGHT = 70;
+const DEFAULT_HEIGHT = 170;
+
+const parseClampedNumber = (
+  value: string,
+  min: number,
+  max: number,
+  fallback: number
+): number => {
+  if (value.trim() === '') return fallback;
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.max(min, Math.min(max, parsed));
+};
+
 const BMRCalculator = () => {
-  const [age, setAge] = useState<number>(30);
+  const [age, setAge] = useState<string>(String(DEFAULT_AGE));
   const [gender, setGender] = useState<'man' | 'woman'>('man');
-  const [weight, setWeight] = useState<number>(70);
-  const [height, setHeight] = useState<number>(170);
+  const [weight, setWeight] = useState<string>(String(DEFAULT_WEIGHT));
+  const [height, setHeight] = useState<string>(String(DEFAULT_HEIGHT));
   const [result, setResult] = useState<BMRResult | null>(null);
 
   // Get SEO configuration for BMR calculator
@@ -33,9 +49,13 @@ const BMRCalculator = () => {
     { level: 'extraActive' as const, factor: 1.9, title: 'Extra aktiv', description: 'Hård träning 2 ggr/dag' }
   ];
 
+  const parsedAge = parseClampedNumber(age, 1, 120, DEFAULT_AGE);
+  const parsedWeight = parseClampedNumber(weight, 1, 300, DEFAULT_WEIGHT);
+  const parsedHeight = parseClampedNumber(height, 1, 300, DEFAULT_HEIGHT);
+
   const calculateBMR = () => {
     // Mifflin-St Jeor Equation
-    let bmr = 10 * weight + 6.25 * height - 5 * age;
+    let bmr = 10 * parsedWeight + 6.25 * parsedHeight - 5 * parsedAge;
     bmr = gender === 'man' ? bmr + 5 : bmr - 161;
 
     const dailyCalories = {
@@ -99,7 +119,7 @@ const BMRCalculator = () => {
                 <input
                   type="number"
                   value={age}
-                  onChange={(e) => setAge(Math.max(1, Math.min(120, Number(e.target.value))))}
+                  onChange={(e) => setAge(e.target.value)}
                   className="w-full border-2 border-violet-200 rounded-lg px-4 py-2 focus:border-violet-500 focus:ring-violet-500"
                 />
               </div>
@@ -139,7 +159,7 @@ const BMRCalculator = () => {
                 <input
                   type="number"
                   value={weight}
-                  onChange={(e) => setWeight(Math.max(1, Math.min(300, Number(e.target.value))))}
+                  onChange={(e) => setWeight(e.target.value)}
                   className="w-full border-2 border-violet-200 rounded-lg px-4 py-2 focus:border-violet-500 focus:ring-violet-500"
                 />
               </div>
@@ -151,7 +171,7 @@ const BMRCalculator = () => {
                 <input
                   type="number"
                   value={height}
-                  onChange={(e) => setHeight(Math.max(1, Math.min(300, Number(e.target.value))))}
+                  onChange={(e) => setHeight(e.target.value)}
                   className="w-full border-2 border-violet-200 rounded-lg px-4 py-2 focus:border-violet-500 focus:ring-violet-500"
                 />
               </div>

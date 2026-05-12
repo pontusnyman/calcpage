@@ -25,6 +25,84 @@ export interface BlogPost {
 // Blog post data with full content
 export const BLOG_POSTS: BlogPost[] = [
   {
+    id: 'viktminskningskalkylator-guide',
+    title: 'Viktminskningskalkylator: sätta kalorimål för hållbar viktnedgång',
+    description: 'Så funkar en viktminskningskalkylator, hur stort kaloriunderskott som är rimligt och hur du använder resultatet i vardagen.',
+    date: '2026-05-12',
+    readTime: '7 min',
+    category: 'Hälsa',
+    image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/viktminskningskalkylator-guide',
+    author: 'Pontus',
+    content: `
+      <p><b>En viktminskningskalkylator hjälper dig att sätta ett tydligt kalorimål</b> baserat på dina uppgifter och din målvikt över tid. Istället för att gissa kan du få en mer strukturerad plan för hur mycket du bör äta per dag. Testa direkt i vår <a href="/viktminskningskalkylator" class="text-blue-600 underline hover:text-blue-800">Viktminskningskalkylator</a>.</p>
+
+      <p>Målet är inte att skapa en extrem diet, utan att hitta ett underskott som fungerar i praktiken vecka efter vecka.</p>
+
+      <h2>Varför ett rimligt underskott är viktigt</h2>
+
+      <p>För stort kaloriunderskott kan ge onödig trötthet, sämre träningskvalitet och svagare hållbarhet. Ett mer moderat underskott är ofta enklare att följa långsiktigt och kan ge stabil utveckling över tid.</p>
+
+      <h2>Så använder du viktminskningskalkylatorn</h2>
+
+      <ul>
+        <li>Ange grunddata som vikt, längd, ålder och aktivitetsnivå</li>
+        <li>Välj måltempo för viktnedgång</li>
+        <li>Få ett uppskattat dagligt kaloriintag att utgå från</li>
+      </ul>
+
+      <p><a href="/viktminskningskalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna Viktminskningskalkylatorn</a> och prova olika måltempo för att se hur det påverkar ditt föreslagna intag.</p>
+
+      <h2>Följa upp och justera</h2>
+
+      <p>Resultatet är en uppskattning, så det är smart att följa vikttrenden över flera veckor. Om utvecklingen går snabbare eller långsammare än tänkt kan du justera intaget stegvis istället för att göra stora hopp.</p>
+
+      <h2>Slutsats</h2>
+
+      <p>En bra viktnedgångsplan bör vara tydlig och hållbar. Med vår <a href="/viktminskningskalkylator" class="text-blue-600 underline hover:text-blue-800">Viktminskningskalkylator</a> får du ett konkret startvärde som gör det enklare att planera och följa upp.</p>
+    `
+  },
+  {
+    id: 'bmrkalkylator-guide',
+    title: 'BMR-kalkylator: så får du fram din basalmetabolism',
+    description: 'En enkel guide till vad BMR betyder, hur uträkningen fungerar och hur du använder BMR-kalkylatorn för att få ett bra startvärde.',
+    date: '2026-05-09',
+    readTime: '6 min',
+    category: 'Hälsa',
+    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/bmrkalkylator-guide',
+    author: 'Pontus',
+    content: `
+      <p><b>BMR står för basalmetabolism</b> och beskriver hur mycket energi kroppen gör av med i full vila. Det är energi som går till grundläggande funktioner som andning, cirkulation och temperaturreglering. Om du vill få en snabb uppskattning kan du använda vår <a href="/bmrkalkylator" class="text-blue-600 underline hover:text-blue-800">BMR-kalkylator</a>.</p>
+
+      <p>Resultatet är inte en exakt sanning, men ett bra startvärde för att förstå ditt dagliga energibehov och planera kost eller träning med bättre precision.</p>
+
+      <h2>Vad visar BMR i praktiken?</h2>
+
+      <p>BMR är den lägsta energinivå kroppen behöver under ett dygn om du ligger helt i vila. I vardagen förbrukar du nästan alltid mer än så, eftersom rörelse, arbete och träning tillkommer.</p>
+
+      <p>Därför används BMR ofta som grund för att sedan uppskatta totalt dagligt behov med aktivitetsfaktorer.</p>
+
+      <h2>Hur du använder BMR-kalkylatorn</h2>
+
+      <ul>
+        <li>Fyll i vikt, längd, ålder och kön</li>
+        <li>Klicka på beräkna</li>
+        <li>Läs av uppskattat BMR-värde i kcal per dag</li>
+      </ul>
+
+      <p><a href="/bmrkalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna BMR-kalkylatorn</a> för att testa med dina egna siffror och jämföra olika scenarier.</p>
+
+      <h2>När är BMR extra användbart?</h2>
+
+      <p>BMR är ett bra underlag när du vill gå ner i vikt, behålla vikt eller öka energiintag för prestation. Genom att utgå från en rimlig bas blir det lättare att undvika för stora justeringar direkt.</p>
+
+      <h2>Slutsats</h2>
+
+      <p>BMR ger dig ett tydligt utgångsläge för kroppens energibehov i vila. Använd <a href="/bmrkalkylator" class="text-blue-600 underline hover:text-blue-800">BMR-kalkylatorn</a> för att få en snabb uppskattning och bygg vidare därifrån med dina egna mål.</p>
+    `
+  },
+  {
     id: 'loparkalkylator-sluttid-och-tempo',
     title: 'Löparkalkylator: beräkna sluttid, tempo per km och mellantider inför ditt lopp',
     description: 'Lär dig hur du räknar ut förväntad sluttid på 5 km, 10 km, halvmaraton eller maraton baserat på ditt tempo. Testa direkt i vår Löparkalkylator.',

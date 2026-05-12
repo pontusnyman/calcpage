@@ -260,9 +260,9 @@ function App() {
       'energy-savings': false,
       'meeting-cost': false,
       'bmi': true,
-      'bmr': false,
+      'bmr': true,
       'calorie': true,
-      'weight-reduce': false,
+      'weight-reduce': true,
       'fasting': true,
       'ovulation': false,
       'sleep': false,
@@ -292,8 +292,8 @@ function App() {
           <Route path="/alkoholkalkylator" element={<Layout seo={getCalculatorSeo('/alkoholkalkylator')}><AlcoholCalculator /></Layout>} />
           <Route path="/kopparkalkylator" element={<Layout seo={getCalculatorSeo('/kopparkalkylator')}><CupCalculator /></Layout>} />
           <Route path="/bmikalkylator" element={<Layout seo={getCalculatorSeo('/bmikalkylator')}><BMICalculator /></Layout>} />
-          <Route path="/kalorikalkylator" element={<Layout seo={getCalculatorSeo('/kalorikalkylator')}><CalorieCalculator /></Layout>} />
-          <Route path="/viktminskningskalkylator" element={<Layout seo={getCalculatorSeo('/viktminskningskalkylator')}><PremiumAccessControl calculatorId="weight-reduce"><WeightReduceCalculator /></PremiumAccessControl></Layout>} />
+          <Route path="/kalorikalkylator" element={<CalorieCalculator />} />
+          <Route path="/viktminskningskalkylator" element={<PremiumAccessControl calculatorId="weight-reduce"><WeightReduceCalculator /></PremiumAccessControl>} />
           <Route path="/tempokalkylator" element={<Layout seo={getCalculatorSeo('/tempokalkylator')}><RunningPaceCalculator /></Layout>} />
           <Route path="/rantakalkylator" element={<Layout seo={getCalculatorSeo('/rantakalkylator')}><PremiumAccessControl calculatorId="compound-interest"><CompoundInterestCalculator /></PremiumAccessControl></Layout>} />
           <Route path="/lanekalkylator" element={<Layout seo={getCalculatorSeo('/lanekalkylator')}><LoanCalculator /></Layout>} />

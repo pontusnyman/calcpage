@@ -8,6 +8,20 @@ export interface BlogPostLinkMeta {
 
 export const BLOG_POST_LINKS: BlogPostLinkMeta[] = [
   {
+    id: 'viktminskningskalkylator-guide',
+    title: 'Viktminskningskalkylator: sätta kalorimål för hållbar viktnedgång',
+    link: '/blog/viktminskningskalkylator-guide',
+    category: 'Hälsa',
+    date: '2026-05-12',
+  },
+  {
+    id: 'bmrkalkylator-guide',
+    title: 'BMR-kalkylator: så får du fram din basalmetabolism',
+    link: '/blog/bmrkalkylator-guide',
+    category: 'Hälsa',
+    date: '2026-05-09',
+  },
+  {
     id: 'loparkalkylator-sluttid-och-tempo',
     title: 'Löparkalkylator: beräkna sluttid, tempo per km och mellantider inför ditt lopp',
     link: '/blog/loparkalkylator-sluttid-och-tempo',
@@ -94,6 +108,8 @@ export const BLOG_POST_LINKS: BlogPostLinkMeta[] = [
 ];
 
 const BLOG_TO_CALCULATORS: Record<string, string[]> = {
+  'viktminskningskalkylator-guide': ['/viktminskningskalkylator', '/kalorikalkylator'],
+  'bmrkalkylator-guide': ['/bmrkalkylator', '/kalorikalkylator'],
   'loparkalkylator-sluttid-och-tempo': ['/loparkalkylator', '/tempokalkylator'],
   'kaloribehov-bmr-och-tdee': ['/kalorikalkylator', '/bmrkalkylator'],
   'ranta-pa-ranta': ['/rantakalkylator', '/sparmalskalkylator'],

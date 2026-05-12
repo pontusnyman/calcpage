@@ -14,27 +14,44 @@ interface CalorieResult {
 }
 
 const ACTIVITY_LEVEL_VALUES = [1.2, 1.375, 1.55, 1.725, 1.9] as const;
+const DEFAULT_WEIGHT = 70;
+const DEFAULT_HEIGHT = 170;
+const DEFAULT_AGE = 30;
+
+const parseClampedNumber = (
+  value: string,
+  min: number,
+  max: number,
+  fallback: number
+): number => {
+  if (value.trim() === '') return fallback;
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.max(min, Math.min(max, parsed));
+};
 
 const CalorieCalculator = () => {
-  const [weight, setWeight] = useState<number>(70);
-  const [height, setHeight] = useState<number>(170);
-  const [age, setAge] = useState<number>(30);
+  const [weight, setWeight] = useState<string>(String(DEFAULT_WEIGHT));
+  const [height, setHeight] = useState<string>(String(DEFAULT_HEIGHT));
+  const [age, setAge] = useState<string>(String(DEFAULT_AGE));
   const [gender, setGender] = useState<'man' | 'woman'>('man');
   const [activityLevel, setActivityLevel] = useState<number>(1.2);
   const [result, setResult] = useState<CalorieResult | null>(null);
+  const seo = calculatorSEO['/kalorikalkylator'];
+
+  const parsedWeight = parseClampedNumber(weight, 1, 300, DEFAULT_WEIGHT);
+  const parsedHeight = parseClampedNumber(height, 1, 300, DEFAULT_HEIGHT);
+  const parsedAge = parseClampedNumber(age, 1, 120, DEFAULT_AGE);
 
   const { handleShare } = useCalculatorShare({
     params: {
-      weight,
-      height,
-      age,
+      weight: parsedWeight,
+      height: parsedHeight,
+      age: parsedAge,
       gender,
       activityLevel,
     },
   });
-
-  // Get SEO configuration for Calorie Calculator
-  const seo = calculatorSEO['/kalorikalkylator'];
 
   const activityLevels = [
     { value: 1.2, label: 'Lite till ingen träning', description: 'Stillasittande livsstil' },
@@ -48,9 +65,9 @@ const CalorieCalculator = () => {
     const params = getUrlParams();
     if (!params.has('weight')) return;
 
-    const w = Math.max(1, Math.min(300, getNumberParam(params, 'weight', 70)));
-    const h = Math.max(1, Math.min(300, getNumberParam(params, 'height', 170)));
-    const a = Math.max(1, Math.min(120, getNumberParam(params, 'age', 30)));
+    const w = Math.max(1, Math.min(300, getNumberParam(params, 'weight', DEFAULT_WEIGHT)));
+    const h = Math.max(1, Math.min(300, getNumberParam(params, 'height', DEFAULT_HEIGHT)));
+    const a = Math.max(1, Math.min(120, getNumberParam(params, 'age', DEFAULT_AGE)));
     const gParam = getStringParam(params, 'gender', 'man');
     const g: 'man' | 'woman' = gParam === 'woman' ? 'woman' : 'man';
     const alRaw = getNumberParam(params, 'activityLevel', 1.2);
@@ -58,9 +75,9 @@ const CalorieCalculator = () => {
       ? alRaw
       : 1.2;
 
-    setWeight(w);
-    setHeight(h);
-    setAge(a);
+    setWeight(String(w));
+    setHeight(String(h));
+    setAge(String(a));
     setGender(g);
     setActivityLevel(al);
 
@@ -77,7 +94,7 @@ const CalorieCalculator = () => {
 
   const calculateCalories = () => {
     // Mifflin-St Jeor Equation
-    let bmr = 10 * weight + 6.25 * height - 5 * age;
+    let bmr = 10 * parsedWeight + 6.25 * parsedHeight - 5 * parsedAge;
     bmr = gender === 'man' ? bmr + 5 : bmr - 161;
     
     const tdee = bmr * activityLevel;
@@ -117,7 +134,7 @@ const CalorieCalculator = () => {
                 <input
                   type="number"
                   value={weight}
-                  onChange={(e) => setWeight(Math.max(1, Math.min(300, Number(e.target.value))))}
+                  onChange={(e) => setWeight(e.target.value)}
                   className="w-full border-2 border-orange-200 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500"
                 />
               </div>
@@ -129,7 +146,7 @@ const CalorieCalculator = () => {
                 <input
                   type="number"
                   value={height}
-                  onChange={(e) => setHeight(Math.max(1, Math.min(300, Number(e.target.value))))}
+                  onChange={(e) => setHeight(e.target.value)}
                   className="w-full border-2 border-orange-200 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500"
                 />
               </div>
@@ -141,7 +158,7 @@ const CalorieCalculator = () => {
                 <input
                   type="number"
                   value={age}
-                  onChange={(e) => setAge(Math.max(1, Math.min(120, Number(e.target.value))))}
+                  onChange={(e) => setAge(e.target.value)}
                   className="w-full border-2 border-orange-200 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500"
                 />
               </div>

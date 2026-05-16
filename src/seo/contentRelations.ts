@@ -8,6 +8,13 @@ export interface BlogPostLinkMeta {
 
 export const BLOG_POST_LINKS: BlogPostLinkMeta[] = [
   {
+    id: 'goteborgsvarvet-2026-guide',
+    title: 'Göteborgsvarvet 2026: guide till halvmaraton 21,1 km den 23 maj i Göteborg',
+    link: '/blog/goteborgsvarvet-2026-guide',
+    category: 'Träning',
+    date: '2026-05-16',
+  },
+  {
     id: 'viktminskningskalkylator-guide',
     title: 'Viktminskningskalkylator: sätta kalorimål för hållbar viktnedgång',
     link: '/blog/viktminskningskalkylator-guide',
@@ -108,6 +115,7 @@ export const BLOG_POST_LINKS: BlogPostLinkMeta[] = [
 ];
 
 const BLOG_TO_CALCULATORS: Record<string, string[]> = {
+  'goteborgsvarvet-2026-guide': ['/loparkalkylator', '/tempokalkylator'],
   'viktminskningskalkylator-guide': ['/viktminskningskalkylator', '/kalorikalkylator'],
   'bmrkalkylator-guide': ['/bmrkalkylator', '/kalorikalkylator'],
   'loparkalkylator-sluttid-och-tempo': ['/loparkalkylator', '/tempokalkylator'],

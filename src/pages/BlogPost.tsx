@@ -25,6 +25,91 @@ export interface BlogPost {
 // Blog post data with full content
 export const BLOG_POSTS: BlogPost[] = [
   {
+    id: 'goteborgsvarvet-2026-guide',
+    title: 'Göteborgsvarvet 2026: guide till halvmaraton 21,1 km den 23 maj i Göteborg',
+    description: 'Göteborgsvarvet 2026 i Göteborg den 23 maj: komplett guide till halvmaraton 21,1 km med tempo, sluttid, energiplan och race strategy med våra löparkalkylatorer.',
+    date: '2026-05-16',
+    readTime: '8 min',
+    category: 'Träning',
+    image: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=800',
+    link: '/blog/goteborgsvarvet-2026-guide',
+    author: 'Pontus',
+    content: `
+      <p><b>Göteborgsvarvet 2026 går av lördagen den 23 maj i Göteborg</b> och är ett av årets största löplopp över <strong>21,1 km (halvmaraton)</strong>. Oavsett om du jagar personbästa eller vill ta dig i mål med en stark upplevelse är en tydlig plan för tempo, energi och disponering ofta det som gör störst skillnad.</p>
+
+      <p>Här får du en praktisk race guide för Göteborgsvarvet, plus hur du använder våra kalkylatorer för att sätta realistisk sluttid och hålla rätt fart hela vägen.</p>
+
+      <p>Officiell information om loppet, startgrupper och bana hittar du på arrangörens sida: <a href="https://www.goteborgsvarvet.se/" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">Göteborgsvarvet</a>.</p>
+
+      <h2>Varför 21,1 km kräver en plan</h2>
+
+      <p>Halvmaraton är tillräckligt långt för att tidig springa för snabbt som ofta kostar mycket de sista 5–7 kilometrarna. Många öppnar för hårt första delen, tappar rytm och får kämpa onödigt mycket mot slutet.</p>
+
+      <p>Målet bör vara att springa så jämnt som möjligt, gärna med en liten fartökning sista delen om kroppen svarar bra. Det ger oftast bättre totalupplevelse och bättre sluttid än en aggressiv öppning.</p>
+
+      <h2>Sätt realistisk måltid inför Göteborgsvarvet</h2>
+
+      <p>Börja med senaste träningspass eller tidigare lopp över 10 km till halvmaraton. Utifrån det kan du testa olika scenarier i vår <a href="/loparkalkylator" class="text-blue-600 underline hover:text-blue-800">Löparkalkylator</a> för att få en realistisk prognos.</p>
+
+      <ul>
+        <li>Testa ett konservativt tempo som du vet att du klarar</li>
+        <li>Testa ett ambitionsscenario för bra dagsform</li>
+        <li>Jämför skillnaden i sluttid mellan till exempel 5:30 och 5:20 min/km</li>
+      </ul>
+
+      <p>När du ser hur små tempoförändringar påverkar sluttiden blir det enklare att välja en plan som håller hela 21,1 km.</p>
+
+      <h2>Bygg din pacingplan kilometer för kilometer</h2>
+
+      <p>Använd vår <a href="/tempokalkylator" class="text-blue-600 underline hover:text-blue-800">Tempokalkylator</a> för att räkna om distans och tid till tempo, samt för att verifiera hur ditt tänkta race-tempo faktiskt känns i siffror.</p>
+
+      <p>En enkel strategi för Göteborgsvarvet halvmaraton:</p>
+      <ul>
+        <li><strong>Km 1-5:</strong> öppna kontrollerat, något lugnare än målfart</li>
+        <li><strong>Km 6-15:</strong> hitta jämn fart och håll tekniken avslappnad</li>
+        <li><strong>Km 16-21,1:</strong> håll fokus, försök öka om du har marginal</li>
+      </ul>
+
+      <p>Det viktiga är att första halvan inte går snabbare än vad du kan bära hela vägen. En hållbar plan slår nästan alltid en chansning.</p>
+
+      <h2>Energiplan och vätska inför loppdagen</h2>
+
+      <p>För ett halvmaraton i tävlingsfart kan det vara klokt att ha en enkel energiplan:</p>
+      <ul>
+        <li>Ät en beprövad frukost 2-3 timmar före start</li>
+        <li>Drick lagom, undvik att testa nya rutiner på tävlingsdagen</li>
+        <li>Om du brukar ta gel: gör det enligt plan du testat på långpass</li>
+      </ul>
+
+      <p>Undvik experiment sista veckan. Det som är testat i träning är oftast det säkraste kortet på race day.</p>
+
+      <h2>Mentala checkpoints för Göteborgsvarvet</h2>
+
+      <p>Dela upp loppet i mindre block istället för att tänka på hela 21,1 km på en gång. Fokusera på rytm, andning och nästa delmål. När det börjar bli tungt: återgå till planerat tempo och undvik ryck.</p>
+
+      <h2>Snabb checklista veckan innan</h2>
+
+      <ul>
+        <li>Bestäm huvudplan och reservplan för tempo</li>
+        <li>Kontrollera utrustning: skor, strumpor, nummerlapp och säkerhetsnålar</li>
+        <li>Prioritera sömn och lugnare pass</li>
+        <li>Bekräfta starttid, startgrupp och logistik via <a href="https://www.goteborgsvarvet.se/" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">officiella Göteborgsvarvet</a></li>
+      </ul>
+
+      <h2>Använd kalkylatorerna inför Göteborgsvarvet 2026</h2>
+
+      <p>Inför den 23 maj kan du förbereda dig smart med två verktyg:</p>
+      <ul>
+        <li><a href="/loparkalkylator" class="text-blue-600 underline hover:text-blue-800">Löparkalkylatorn</a> för att räkna ut sannolik sluttid på 21,1 km</li>
+        <li><a href="/tempokalkylator" class="text-blue-600 underline hover:text-blue-800">Tempokalkylatorn</a> för att finjustera ditt tempo och kontrollera racefart</li>
+      </ul>
+
+      <h2>Slutsats</h2>
+
+      <p>Göteborgsvarvet är en fantastisk halvmaratonfest i Göteborg, men 21,1 km belönar löpare som planerar smart. Sätt en realistisk måltid, håll jämn fart och använd våra kalkylatorer för att komma väl förberedd till start den 23 maj.</p>
+    `
+  },
+  {
     id: 'viktminskningskalkylator-guide',
     title: 'Viktminskningskalkylator: sätta kalorimål för hållbar viktnedgång',
     description: 'Så funkar en viktminskningskalkylator, hur stort kaloriunderskott som är rimligt och hur du använder resultatet i vardagen.',
@@ -157,6 +242,8 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Ett bra upplägg är att först testa realistiskt tempo från träning eller tidigare lopp, sedan mata in det i <a href="/loparkalkylator" class="text-blue-600 underline hover:text-blue-800">Löparkalkylatorn</a> och jämföra scenarier. Du kan till exempel testa skillnaden mellan 4:50 och 4:40 min/km för att se hur mycket sluttiden påverkas.</p>
 
       <p>Om du också vill räkna om tid och distans till tempo i efterhand kan du använda vår <a href="/tempokalkylator" class="text-blue-600 underline hover:text-blue-800">Tempokalkylator</a> som komplement.</p>
+
+      <p>Ska du springa Göteborgsvarvet? Läs även vår lokala race guide: <a href="/blog/goteborgsvarvet-2026-guide" class="text-blue-600 underline hover:text-blue-800">Göteborgsvarvet 2026 – guide till 21,1 km i Göteborg den 23 maj</a>.</p>
 
       <h2>Testa Löparkalkylatorn</h2>
 
@@ -950,6 +1037,8 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>då visas ditt tempo per kilometer och din snitthastighet. Vill du förbereda ett nytt mål på samma sätt – till exempel hur det känns att gå nedåt eller uppåt från förra säsongens tider – gör du på samma sätt och jämför siffrorna.</p>
 
       <p><a href="/tempokalkylator" class="text-blue-600 underline hover:text-blue-800">Öppna Tempokalkylatorn</a>, fyll i dina egna mått och tryck på ”Beräkna tempo” för att se resultatet direkt på skärmen – inklusive exempeltider för lite längre sträckor utifrån samma fart.</p>
+
+      <p>Om du planerar ett specifikt halvmaraton i vår rekommenderar vi också: <a href="/blog/goteborgsvarvet-2026-guide" class="text-blue-600 underline hover:text-blue-800">Göteborgsvarvet 2026 – tempo, race plan och checklista</a>.</p>
 
       <h2>Dela länken med träningskompisar</h2>
 

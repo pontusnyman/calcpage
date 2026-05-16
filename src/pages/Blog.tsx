@@ -6,6 +6,7 @@ import SEO from '../components/SEO';
 import { BLOG_POSTS, type BlogPost } from '../content/blogPosts';
 
 const BLOG_INDEX_POST_IDS = [
+  'goteborgsvarvet-2026-guide',
   'viktminskningskalkylator-guide',
   'bmrkalkylator-guide',
   'loparkalkylator-sluttid-och-tempo',

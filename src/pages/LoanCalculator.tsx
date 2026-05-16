@@ -3,7 +3,6 @@ import { ArrowLeft, Wallet, AlertTriangle, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCalculatorShare } from '../hooks/useCalculatorShare';
 import ShareButton from '../components/ShareButton';
-import AdBanner from '../components/AdBanner';
 import { getUrlParams, getNumberParam } from '../utils/urlParams';
 
 interface LoanResult {
@@ -361,9 +360,6 @@ const LoanCalculator = () => {
                   </table>
                 </div>
 
-                <div className="mt-8">
-                  <AdBanner position="bottom" />
-                </div>
               </div>
             </div>
           )}

@@ -36,7 +36,6 @@ const CookiePolicy: React.FC = () => {
                 <ul className="list-disc pl-6 text-gray-700 mb-4">
                   <li>För att förbättra användarupplevelsen</li>
                   <li>För att analysera webbplatstrafik och användningsmönster</li>
-                  <li>För att visa relevanta annonser via Google AdSense</li>
                   <li>För att komma ihåg dina preferenser</li>
                 </ul>
               </section>
@@ -54,15 +53,13 @@ const CookiePolicy: React.FC = () => {
                   Dessa cookies hjälper oss att förstå hur besökare interagerar med vår webbplats genom att samla in och rapportera information anonymt.
                 </p>
 
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">3.3 Marknadsföringscookies</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">3.3 Funktionscookies</h3>
                 <p className="text-gray-700 mb-4">
-                  Dessa cookies används för att spåra besökare på olika webbplatser. Målet är att visa annonser som är relevanta 
-                  och engagerande för den enskilda användaren och därmed mer värdefulla för utgivare och tredjepartsannonsörer.
+                  Dessa cookies används för att spara val och inställningar, till exempel samtycke till cookies och andra preferenser
+                  som gör webbplatsen enklare att använda.
                 </p>
                 <p className="text-gray-700 mb-4">
-                  Vi använder Google AdSense, som använder cookies för att visa annonser baserat på dina tidigare besök på vår webbplats 
-                  eller andra webbplatser. Du kan välja bort personaliserade annonser genom att besöka 
-                  <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800"> Google's annonsinställningar</a>.
+                  De används endast för webbplatsfunktioner och innehåller inte känsliga personuppgifter.
                 </p>
               </section>
 
@@ -72,7 +69,7 @@ const CookiePolicy: React.FC = () => {
                   Vissa cookies placeras av tredje part som visas på vår webbplats. Dessa inkluderar:
                 </p>
                 <ul className="list-disc pl-6 text-gray-700 mb-4">
-                  <li><strong>Google AdSense:</strong> Används för att visa annonser. Läs mer i <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800">Google's integritetspolicy</a></li>
+                  <li>Analystjänster för anonym trafikmätning och prestandaförbättring</li>
                 </ul>
               </section>
 

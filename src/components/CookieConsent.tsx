@@ -13,9 +13,6 @@ const CookieConsent: React.FC = () => {
   const acceptCookies = () => {
     localStorage.setItem('cookieConsent', 'accepted');
     setShowBanner(false);
-    // Reload page to initialize AdSense ads after consent
-    // This ensures all ad components properly load
-    window.location.reload();
   };
 
   const rejectCookies = () => {
@@ -31,7 +28,7 @@ const CookieConsent: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex-1">
             <p className="text-sm text-gray-700">
-              Vi använder cookies för att förbättra din upplevelse, analysera trafik och visa annonser. 
+              Vi använder cookies för att förbättra din upplevelse och analysera trafik.
               Genom att fortsätta använda vår webbplats godkänner du vår användning av cookies. 
               Läs mer i vår <Link to="/cookiepolicy" className="text-indigo-600 hover:text-indigo-800 underline">Cookie Policy</Link>.
             </p>

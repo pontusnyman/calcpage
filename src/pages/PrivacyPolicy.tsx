@@ -44,7 +44,7 @@ const PrivacyPolicy: React.FC = () => {
 
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">2.2 Cookies och liknande tekniker</h3>
                 <p className="text-gray-700 mb-4">
-                  Vi använder cookies och liknande spårningstekniker för att förbättra din upplevelse, analysera trafik och visa annonser. 
+                  Vi använder cookies och liknande spårningstekniker för att förbättra din upplevelse och analysera trafik.
                   Mer information finns i vår <a href="/cookiepolicy" className="text-indigo-600 hover:text-indigo-800">Cookie Policy</a>.
                 </p>
               </section>
@@ -55,7 +55,6 @@ const PrivacyPolicy: React.FC = () => {
                 <ul className="list-disc pl-6 text-gray-700 mb-4">
                   <li>Förbättra och underhålla vår webbplats</li>
                   <li>Analysera användningsmönster och trafik</li>
-                  <li>Visa relevanta annonser via Google AdSense</li>
                   <li>Förbättra användarupplevelsen</li>
                   <li>Följa lagliga skyldigheter</li>
                 </ul>
@@ -63,13 +62,9 @@ const PrivacyPolicy: React.FC = () => {
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Tredjepartstjänster</h2>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">4.1 Google AdSense</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">4.1 Analystjänster</h3>
                 <p className="text-gray-700 mb-4">
-                  Vår webbplats använder Google AdSense för att visa annonser. Google använder cookies för att visa annonser baserat på dina tidigare besök på vår webbplats eller andra webbplatser. 
-                  Du kan välja bort personaliserade annonser genom att besöka <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800">Google's annonsinställningar</a>.
-                </p>
-                <p className="text-gray-700 mb-4">
-                  Google's användning av reklamcookies regleras av <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800">Google's integritetspolicy</a>.
+                  Vi kan använda tredjepartstjänster för analys och prestandamätning för att förstå hur webbplatsen används och hur tjänsten kan förbättras.
                 </p>
               </section>
 

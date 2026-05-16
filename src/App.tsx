@@ -10,7 +10,6 @@ import CrownIcon from './components/CrownIcon';
 import PremiumAccessControl from './components/PremiumAccessControl';
 import PremiumToggle from './components/PremiumToggle';
 import CookieConsent from './components/CookieConsent';
-import AdSenseBootstrap from './components/AdSenseBootstrap';
 
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
@@ -264,7 +263,7 @@ function App() {
       'calorie': true,
       'weight-reduce': true,
       'fasting': true,
-      'ovulation': false,
+      'ovulation': true,
       'sleep': false,
       'alcohol': false,
       'countdown': false,
@@ -322,7 +321,6 @@ function App() {
           <Route path="/anvandarvillkor" element={<TermsOfService />} />
         </Routes>
         </Suspense>
-        <AdSenseBootstrap />
         <CookieConsent />
         {!import.meta.env.PROD && <PremiumToggle />}
       </PremiumProvider>

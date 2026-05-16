@@ -94,20 +94,7 @@ const TermsOfService: React.FC = () => {
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Annonser</h2>
-                <p className="text-gray-700 mb-4">
-                  Kalkylatorn.com visar annonser via Google AdSense. Vi ansvarar inte för innehållet i dessa annonser. 
-                  Annonserna visas baserat på dina tidigare besök och andra faktorer. Du kan välja bort personaliserade annonser 
-                  genom att besöka <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800">Google's annonsinställningar</a>.
-                </p>
-                <p className="text-gray-700 mb-4">
-                  <strong>VIKTIGT:</strong> Klicka aldrig på annonser med avsikt att generera intäkter för oss. 
-                  Detta är strängt förbjudet enligt Google AdSense policy och kan leda till permanent avstängning.
-                </p>
-              </section>
-
-              <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Ändringar av villkor</h2>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Ändringar av villkor</h2>
                 <p className="text-gray-700 mb-4">
                   Vi förbehåller oss rätten att ändra dessa användarvillkor när som helst. Ändringar träder i kraft omedelbart 
                   efter publicering på webbplatsen. Din fortsatta användning av webbplatsen efter ändringar innebär att du godkänner de nya villkoren.
@@ -115,7 +102,7 @@ const TermsOfService: React.FC = () => {
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Tillämplig lag</h2>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Tillämplig lag</h2>
                 <p className="text-gray-700 mb-4">
                   Dessa användarvillkor regleras av och tolkas i enlighet med svensk lag. 
                   Eventuella tvister ska lösas i svenska domstolar.
@@ -123,7 +110,7 @@ const TermsOfService: React.FC = () => {
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Kontakt</h2>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Kontakt</h2>
                 <p className="text-gray-700 mb-4">
                   Om du har frågor om dessa användarvillkor, kontakta oss på:
                 </p>

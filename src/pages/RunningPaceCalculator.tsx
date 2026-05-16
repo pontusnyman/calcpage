@@ -13,10 +13,10 @@ interface PaceResult {
 }
 
 const RunningPaceCalculator = () => {
-  const [distance, setDistance] = useState<number>(5);
-  const [hours, setHours] = useState<number>(0);
-  const [minutes, setMinutes] = useState<number>(25);
-  const [seconds, setSeconds] = useState<number>(0);
+  const [distance, setDistance] = useState<number | ''>(5);
+  const [hours, setHours] = useState<number | ''>(0);
+  const [minutes, setMinutes] = useState<number | ''>(25);
+  const [seconds, setSeconds] = useState<number | ''>(0);
   const [result, setResult] = useState<PaceResult | null>(null);
 
   const { handleShare } = useCalculatorShare({
@@ -62,8 +62,17 @@ const RunningPaceCalculator = () => {
   }, []);
 
   const calculatePace = () => {
+    if (distance === '' || hours === '' || minutes === '' || seconds === '') {
+      setResult(null);
+      return;
+    }
+
     // Convert all time to seconds
     const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+    if (distance <= 0 || totalSeconds <= 0) {
+      setResult(null);
+      return;
+    }
     
     // Calculate pace (time per kilometer)
     const secondsPerKm = totalSeconds / distance;
@@ -108,7 +117,16 @@ const RunningPaceCalculator = () => {
               <input
                 type="number"
                 value={distance}
-                onChange={(e) => setDistance(Math.max(0.1, Number(e.target.value)))}
+                onChange={(e) => {
+                  if (e.target.value === '') {
+                    setDistance('');
+                    return;
+                  }
+
+                  const nextDistance = Number(e.target.value);
+                  if (Number.isNaN(nextDistance)) return;
+                  setDistance(Math.max(0.1, nextDistance));
+                }}
                 step="0.1"
                 className="w-full border-2 border-cyan-200 rounded-lg px-4 py-2 focus:border-cyan-500 focus:ring-cyan-500"
               />
@@ -124,7 +142,16 @@ const RunningPaceCalculator = () => {
                   <input
                     type="number"
                     value={hours}
-                    onChange={(e) => setHours(Math.max(0, Math.min(99, Number(e.target.value))))}
+                    onChange={(e) => {
+                      if (e.target.value === '') {
+                        setHours('');
+                        return;
+                      }
+
+                      const nextHours = Number(e.target.value);
+                      if (Number.isNaN(nextHours)) return;
+                      setHours(Math.max(0, Math.min(99, nextHours)));
+                    }}
                     min="0"
                     max="99"
                     className="w-full border-2 border-cyan-200 rounded-lg px-4 py-2 focus:border-cyan-500 focus:ring-cyan-500"
@@ -135,7 +162,16 @@ const RunningPaceCalculator = () => {
                   <input
                     type="number"
                     value={minutes}
-                    onChange={(e) => setMinutes(Math.max(0, Math.min(59, Number(e.target.value))))}
+                    onChange={(e) => {
+                      if (e.target.value === '') {
+                        setMinutes('');
+                        return;
+                      }
+
+                      const nextMinutes = Number(e.target.value);
+                      if (Number.isNaN(nextMinutes)) return;
+                      setMinutes(Math.max(0, Math.min(59, nextMinutes)));
+                    }}
                     min="0"
                     max="59"
                     className="w-full border-2 border-cyan-200 rounded-lg px-4 py-2 focus:border-cyan-500 focus:ring-cyan-500"
@@ -146,7 +182,16 @@ const RunningPaceCalculator = () => {
                   <input
                     type="number"
                     value={seconds}
-                    onChange={(e) => setSeconds(Math.max(0, Math.min(59, Number(e.target.value))))}
+                    onChange={(e) => {
+                      if (e.target.value === '') {
+                        setSeconds('');
+                        return;
+                      }
+
+                      const nextSeconds = Number(e.target.value);
+                      if (Number.isNaN(nextSeconds)) return;
+                      setSeconds(Math.max(0, Math.min(59, nextSeconds)));
+                    }}
                     min="0"
                     max="59"
                     className="w-full border-2 border-cyan-200 rounded-lg px-4 py-2 focus:border-cyan-500 focus:ring-cyan-500"

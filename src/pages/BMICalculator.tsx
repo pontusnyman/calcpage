@@ -25,14 +25,17 @@ const bmiSegments = [
 ];
 
 const BMICalculator = () => {
-  const [height, setHeight] = useState<number>(170);
-  const [weight, setWeight] = useState<number>(70);
+  const [height, setHeight] = useState<string>('170');
+  const [weight, setWeight] = useState<string>('70');
   const [result, setResult] = useState<BMIResult | null>(null);
   const location = useLocation();
   const seo = calculatorSEO[location.pathname];
   const healthyBmiMin = 18.5;
   const healthyBmiMax = 24.9;
-  const heightInMeters = height / 100;
+  const parsedHeight = Number(height);
+  const parsedWeight = Number(weight);
+  const hasValidInputs = Number.isFinite(parsedHeight) && Number.isFinite(parsedWeight) && parsedHeight > 0 && parsedWeight > 0;
+  const heightInMeters = hasValidInputs ? parsedHeight / 100 : 0;
   const healthyWeightMin = healthyBmiMin * heightInMeters * heightInMeters;
   const healthyWeightMax = healthyBmiMax * heightInMeters * heightInMeters;
   const { handleShare } = useCalculatorShare({
@@ -120,8 +123,13 @@ const BMICalculator = () => {
   };
 
   const calculateBMI = () => {
-    const heightInMeters = height / 100;
-    const bmi = weight / (heightInMeters * heightInMeters);
+    if (!hasValidInputs) {
+      setResult(null);
+      return;
+    }
+
+    const heightInMeters = parsedHeight / 100;
+    const bmi = parsedWeight / (heightInMeters * heightInMeters);
     setResult(getBMICategory(bmi));
   };
 
@@ -134,8 +142,8 @@ const BMICalculator = () => {
     const sharedHeightInMeters = sharedHeight / 100;
     const sharedBmi = sharedWeight / (sharedHeightInMeters * sharedHeightInMeters);
 
-    setHeight(sharedHeight);
-    setWeight(sharedWeight);
+    setHeight(String(sharedHeight));
+    setWeight(String(sharedWeight));
     setResult(getBMICategory(sharedBmi));
   }, []);
 
@@ -168,7 +176,16 @@ const BMICalculator = () => {
                   <input
                     type="number"
                     value={height}
-                    onChange={(e) => setHeight(Math.max(1, Math.min(300, Number(e.target.value))))}
+                    onChange={(e) => {
+                      if (e.target.value === '') {
+                        setHeight('');
+                        return;
+                      }
+
+                      const nextHeight = Number(e.target.value);
+                      if (Number.isNaN(nextHeight)) return;
+                      setHeight(String(Math.max(1, Math.min(300, nextHeight))));
+                    }}
                     className="w-full border-2 border-blue-200 rounded-lg px-4 py-2 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
@@ -180,7 +197,16 @@ const BMICalculator = () => {
                   <input
                     type="number"
                     value={weight}
-                    onChange={(e) => setWeight(Math.max(1, Math.min(500, Number(e.target.value))))}
+                    onChange={(e) => {
+                      if (e.target.value === '') {
+                        setWeight('');
+                        return;
+                      }
+
+                      const nextWeight = Number(e.target.value);
+                      if (Number.isNaN(nextWeight)) return;
+                      setWeight(String(Math.max(1, Math.min(500, nextWeight))));
+                    }}
                     className="w-full border-2 border-blue-200 rounded-lg px-4 py-2 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
@@ -267,7 +293,7 @@ const BMICalculator = () => {
                     <p className="text-sm text-gray-700 bg-green-50 border border-green-100 rounded-lg p-4">
                       För att nå grön nivå (normalvikt) behöver du väga cirka{' '}
                       <span className="font-semibold text-green-700">{healthyWeightMax.toFixed(1)} kg</span>, vilket
-                      är ungefär <span className="font-semibold">{(weight - healthyWeightMax).toFixed(1)} kg</span>{' '}
+                      är ungefär <span className="font-semibold">{(parsedWeight - healthyWeightMax).toFixed(1)} kg</span>{' '}
                       mindre än nu.
                     </p>
                   )}
@@ -276,7 +302,7 @@ const BMICalculator = () => {
                     <p className="text-sm text-gray-700 bg-blue-50 border border-blue-100 rounded-lg p-4">
                       För att nå grön nivå (normalvikt) behöver du väga minst{' '}
                       <span className="font-semibold text-green-700">{healthyWeightMin.toFixed(1)} kg</span>, vilket
-                      är ungefär <span className="font-semibold">{(healthyWeightMin - weight).toFixed(1)} kg</span>{' '}
+                      är ungefär <span className="font-semibold">{(healthyWeightMin - parsedWeight).toFixed(1)} kg</span>{' '}
                       mer än nu.
                     </p>
                   )}

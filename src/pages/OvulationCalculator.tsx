@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, Calendar, Heart, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -11,11 +11,20 @@ interface OvulationResult {
 
 const OvulationCalculator = () => {
   const [lastPeriodDate, setLastPeriodDate] = useState<string>(new Date().toISOString().split('T')[0]);
-  const [cycleLength, setCycleLength] = useState<number>(28);
+  const [cycleLength, setCycleLength] = useState<number | ''>(28);
   const [result, setResult] = useState<OvulationResult | null>(null);
 
   const calculateOvulation = () => {
+    if (!lastPeriodDate || cycleLength === '') {
+      setResult(null);
+      return;
+    }
+
     const periodDate = new Date(lastPeriodDate);
+    if (Number.isNaN(periodDate.getTime())) {
+      setResult(null);
+      return;
+    }
     
     // Calculate ovulation date (typically 14 days before next period)
     const ovulationDate = new Date(periodDate);
@@ -119,9 +128,16 @@ const OvulationCalculator = () => {
               <input
                 type="number"
                 value={cycleLength}
-                onChange={(e) => setCycleLength(Math.max(21, Math.min(35, parseInt(e.target.value))))}
-                min="21"
-                max="35"
+                onChange={(e) => {
+                  if (e.target.value === '') {
+                    setCycleLength('');
+                    return;
+                  }
+
+                  const nextCycleLength = Number.parseInt(e.target.value, 10);
+                  if (Number.isNaN(nextCycleLength)) return;
+                  setCycleLength(nextCycleLength);
+                }}
                 className="w-full border-2 border-emerald-200 rounded-lg px-4 py-2 focus:border-emerald-500 focus:ring-emerald-500"
               />
               <p className="mt-1 text-sm text-gray-500">
